@@ -104,7 +104,7 @@ public class MovementController : MonoBehaviour
             subjectRb.AddForce(jumpForce,ForceMode.Impulse);
         }
 
-        //A chage occurs and new positions are set
+        //A lane change occurs and new positions are set
         if(changed)
         {
             Vector3 newPosition = new Vector3(0f,0f,0f); 
@@ -123,7 +123,7 @@ public class MovementController : MonoBehaviour
             subject.transform.position = newPosition;
             subject.transform.eulerAngles = lanes[currentLane].rotation;
             
-            //Keeping movement in the y and z axis, x is frozen as not strafe movement
+            //Keeping movement in the y and z axis, x is frozen as no strafe movement
             subjectRb.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionX;
             changed = false;
         }
