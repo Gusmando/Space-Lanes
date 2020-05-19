@@ -681,7 +681,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 812171090}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.63, z: -69.2}
+  m_LocalPosition: {x: 0, y: 0.63, z: -68.35}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1590675109}
@@ -707,9 +707,9 @@ MonoBehaviour:
   - {fileID: 427050368}
   - {fileID: 503387616}
   - {fileID: 4334381}
-  speed: 5
-  maxSpeed: 100
-  jumMult: 10
+  speed: 6
+  maxSpeed: 50
+  jumpMult: 8
   gravityForce: {x: 0, y: -9.8, z: 0}
   changed: 0
   pushing: 0
@@ -717,8 +717,10 @@ MonoBehaviour:
   falling: 0
   currentLane: 0
   anim: {fileID: 1590675111}
-  left: {fileID: 7400000, guid: 7cd2d858f674ad243b897e121db5bed0, type: 2}
-  right: {fileID: 7400000, guid: 0630652198e323546bbded767d38b11b, type: 2}
+  animOver: 0
+  laneChangeDelay: 0.3
+  leftRight: 0
+  animStateDisp: 0
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -796,7 +798,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   m_LocalRotation: {x: 0.13052616, y: 0, z: 0, w: 0.9914449}
-  m_LocalPosition: {x: 0.003909111, y: 5.3, z: -11.3}
+  m_LocalPosition: {x: 0.003909111, y: 3.04, z: -6.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 812171095}
@@ -858,7 +860,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1590675108}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 2.81, z: -6}
+  m_LocalPosition: {x: 0, y: 1.15, z: -0.165}
   m_LocalScale: {x: 5, y: 5, z: 5}
   m_Children: []
   m_Father: {fileID: 812171095}

@@ -18,7 +18,7 @@ public class MovementController : MonoBehaviour
     [Header("Physic Scalars")]
     public float speed;
     public float maxSpeed;
-    public float jumMult;
+    public float jumpMult;
     [Header("Force Vectors")]
     public Vector3 gravityForce;
     private Vector3 pushForce;
@@ -34,9 +34,10 @@ public class MovementController : MonoBehaviour
     //The rigid body of the object being controlled
     [Header("Animation Control")]
     public Animator anim;
-    public AnimationClip left;
-    public AnimationClip right;
-    
+    public bool animOver;
+    public float laneChangeDelay;
+    public bool leftRight;
+    public int animStateDisp;
     void Start() 
     {
        //Initial placement will be set in middle
@@ -44,10 +45,13 @@ public class MovementController : MonoBehaviour
        changed = false; 
        currentLane = (lanes.Length/2);
        subjectRb = subject.GetComponent<Rigidbody>();
+       animOver = true;
     }
 
     void Update()
     {
+        animStateDisp = anim.GetInteger("animState");
+
         if(pushing && !jumping)
         {
             anim.speed = (subjectRb.velocity.z/maxSpeed)*.3f;
@@ -62,12 +66,15 @@ public class MovementController : MonoBehaviour
         }
         //The force of gravity is constantly acting on the object
         subjectRb.AddForce(gravityForce);
+        
         pushForce = new Vector3(0,0,10*speed);
-        jumpForce = new Vector3(0,jumMult,0);
+        jumpForce = new Vector3(0,jumpMult,0);
         //If a left key press occurs and the left lane exists
         if(Input.GetKeyDown(KeyCode.LeftArrow) && (currentLane - 1) >= 0)
         {
             currentLane--;
+            StartCoroutine(animDelay(laneChangeDelay));
+            leftRight = false;;
             changed = true;
         }
 
@@ -75,6 +82,8 @@ public class MovementController : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.RightArrow) && (currentLane + 1) <= (lanes.Length-1))
         {
             currentLane++;
+            leftRight = true;
+            StartCoroutine(animDelay(laneChangeDelay));
             changed = true;
         }
 
@@ -128,12 +137,51 @@ public class MovementController : MonoBehaviour
             changed = false;
         }
         
+        if(!animOver)
+        {
+            if(!leftRight)
+            {
+                anim.SetInteger("animState",10);
+            }
+            else
+            {
+                anim.SetInteger("animState",1);
+            }
+        }
+        else
+        {
+            if(subjectRb.velocity.y > 0)
+            {
+                anim.SetInteger("animState",111);
+            }
+            else if(subjectRb.velocity.y < 0)
+            {
+                anim.SetInteger("animState",100);
+            }
+            else if(subjectRb.velocity.y == 0)
+            {
+                anim.SetInteger("animState",0);
+            }
+            
+        }
     }
+
     private void OnCollisionEnter(Collision other)
     {
         if(jumping)
         {
             jumping = false;
         }
+    }
+
+    private IEnumerator animDelay(float delayLength)
+    {
+        animOver = false;
+
+        yield return new WaitForSeconds(delayLength);
+
+        animOver = true;
+
+        yield return null;
     }
 }
