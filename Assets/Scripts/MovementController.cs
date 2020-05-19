@@ -50,30 +50,44 @@ public class MovementController : MonoBehaviour
 
     void Update()
     {
+        //Display for the animation state for debug
         animStateDisp = anim.GetInteger("animState");
 
+        //Depending on the velocity, the run speed is set
         if(pushing && !jumping)
         {
             anim.speed = (subjectRb.velocity.z/maxSpeed)*.3f;
         }
+
+        //Otherwise if there is no jumping then there should
+        //be no movement
         else
         {
             if(!jumping)
             {
-                subjectRb.velocity = new Vector3(0,0,0);
+                //Ensures that falling off stage conserves acceleration
+                if(!falling)
+                {
+                    subjectRb.velocity = new Vector3(0,0,0);
+                }
                 anim.speed = 0;
             } 
         }
+
         //The force of gravity is constantly acting on the object
-        subjectRb.AddForce(gravityForce);
+        subjectRb.AddForce(gravityForce,ForceMode.Acceleration);
         
+        //Push and jump force set in inspector
         pushForce = new Vector3(0,0,10*speed);
         jumpForce = new Vector3(0,jumpMult,0);
+
         //If a left key press occurs and the left lane exists
         if(Input.GetKeyDown(KeyCode.LeftArrow) && (currentLane - 1) >= 0)
         {
             currentLane--;
+            //Creates an animation delay so that animation plays clearly 
             StartCoroutine(animDelay(laneChangeDelay));
+            //Setting to left move
             leftRight = false;;
             changed = true;
         }
@@ -87,9 +101,11 @@ public class MovementController : MonoBehaviour
             changed = true;
         }
 
+        //This means that the player is pushing forward
         if(Input.GetKey(KeyCode.UpArrow))
         {
             pushing = true;
+            //Accelerate as lonng as top speed is not hit
             if(subjectRb.velocity.z < maxSpeed)
             {
                 subjectRb.AddForce(pushForce,ForceMode.Acceleration);   
@@ -97,19 +113,28 @@ public class MovementController : MonoBehaviour
 
             else
             {
-                subjectRb.velocity = new Vector3(0,0,maxSpeed);
-            }        
+                //Ensures no infinite jump
+                if(!jumping)
+                {
+                    subjectRb.velocity = new Vector3(0,0,maxSpeed);
+                } 
+            }     
         }
-
+        //If button isn't held, then not pushing 
         else
         {
             pushing = false;
         }
-
+        
+        //This will handle a space or jump push
         if(Input.GetKeyDown(KeyCode.Space) && !jumping)
         {
             jumping = true;
             falling = false;
+
+            //Stops the object before the jump happens
+            //Helps to make jump feel bouncy and respoonsive
+            subjectRb.velocity = new Vector3 (0,0,0);
             subjectRb.AddForce(jumpForce,ForceMode.Impulse);
         }
 
@@ -117,12 +142,15 @@ public class MovementController : MonoBehaviour
         if(changed)
         {
             Vector3 newPosition = new Vector3(0f,0f,0f); 
+
             //Z position is the only nonchanging value as it show progress through each lane
-            if(!jumping)
+            //also checks if current height is less than another lane
+            if(!jumping || (jumping && subject.transform.position.y < lanes[currentLane].position.y))
             {
                 newPosition = new Vector3(lanes[currentLane].position.x,lanes[currentLane].position.y,subject.transform.position.z);
             }
 
+            //
             else
             {
                 newPosition = new Vector3(lanes[currentLane].position.x,subject.transform.position.y,subject.transform.position.z);
@@ -137,6 +165,7 @@ public class MovementController : MonoBehaviour
             changed = false;
         }
         
+        //If a left or right dash should be happening, anim state vars change
         if(!animOver)
         {
             if(!leftRight)
@@ -148,9 +177,16 @@ public class MovementController : MonoBehaviour
                 anim.SetInteger("animState",1);
             }
         }
+
+        //Otherwise depending on the y velicty an another animation state is determined
         else
         {
-            if(subjectRb.velocity.y > 0)
+            if((subjectRb.velocity.y == 0 || pushing) && !jumping)
+            {
+                anim.SetInteger("animState",0);
+            }
+
+            else if(subjectRb.velocity.y > 0)
             {
                 anim.SetInteger("animState",111);
             }
@@ -158,22 +194,33 @@ public class MovementController : MonoBehaviour
             {
                 anim.SetInteger("animState",100);
             }
-            else if(subjectRb.velocity.y == 0)
-            {
-                anim.SetInteger("animState",0);
-            }
+            
             
         }
     }
 
+    //Essentially an onGround check
     private void OnCollisionEnter(Collision other)
     {
         if(jumping)
         {
             jumping = false;
         }
-    }
 
+        if(falling)
+        {
+            falling = false;
+        }
+    }
+    //To check for falls
+    private void OnCollisionExit(Collision other)
+    {
+        if(!falling)
+        {
+            falling = true;
+        }
+    }
+    //Aniamtion delay waits a few secondas for animation to finish
     private IEnumerator animDelay(float delayLength)
     {
         animOver = false;
