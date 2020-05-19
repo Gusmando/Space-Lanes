@@ -76,7 +76,6 @@ public class MovementController : MonoBehaviour
 
         //The force of gravity is constantly acting on the object
         subjectRb.AddForce(gravityForce,ForceMode.Acceleration);
-        
         //Push and jump force set in inspector
         pushForce = new Vector3(0,0,10*speed);
         jumpForce = new Vector3(0,jumpMult,0);
