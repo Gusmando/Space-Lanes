@@ -115,7 +115,9 @@ public class MovementController : MonoBehaviour
                 //Ensures no infinite jump
                 if(!jumping)
                 {
-                    subjectRb.velocity = new Vector3(0,0,maxSpeed);
+                    Vector3 temp = subjectRb.velocity;
+                    temp.z = maxSpeed;
+                    subjectRb.velocity = temp;
                 } 
             }     
         }
@@ -189,7 +191,7 @@ public class MovementController : MonoBehaviour
             {
                 anim.SetInteger("animState",111);
             }
-            else if(subjectRb.velocity.y < 0)
+            else if(subjectRb.velocity.y < -.05)
             {
                 anim.SetInteger("animState",100);
             }
