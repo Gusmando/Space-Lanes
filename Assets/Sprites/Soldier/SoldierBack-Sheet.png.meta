@@ -11,6 +11,9 @@ TextureImporter:
   - first:
       213: -4097434928848534021
     second: SoldierBack-Sheet_2
+  - first:
+      213: 1461966589160029894
+    second: SoldierBack-Sheet_3
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -116,7 +119,7 @@ TextureImporter:
         width: 30
         height: 64
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -137,7 +140,7 @@ TextureImporter:
         width: 30
         height: 63
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -158,7 +161,7 @@ TextureImporter:
         width: 30
         height: 64
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -166,6 +169,27 @@ TextureImporter:
       bones: []
       spriteID: bf584bf24acf227c0800000000000000
       internalID: -4097434928848534021
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SoldierBack-Sheet_3
+      rect:
+        serializedVersion: 2
+        x: 209
+        y: 0
+        width: 30
+        height: 63
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6ce7f54fdd2f94410800000000000000
+      internalID: 1461966589160029894
       vertices: []
       indices: 
       edges: []

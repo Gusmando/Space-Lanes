@@ -759,9 +759,9 @@ MonoBehaviour:
   - {fileID: 503387616}
   - {fileID: 4334381}
   speed: 6
-  maxSpeed: 50
+  maxSpeed: 25
   jumpMult: 8
-  gravityForce: {x: 0, y: -16, z: 0}
+  gravityForce: {x: 0, y: -5.4, z: 0}
   changed: 1
   pushing: 0
   jumping: 0

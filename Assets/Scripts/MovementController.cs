@@ -191,7 +191,7 @@ public class MovementController : MonoBehaviour
             {
                 anim.SetInteger("animState",111);
             }
-            else if(subjectRb.velocity.y < -.05)
+            else if(subjectRb.velocity.y < -.5)
             {
                 anim.SetInteger("animState",100);
             }

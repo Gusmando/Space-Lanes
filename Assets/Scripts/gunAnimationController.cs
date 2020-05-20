@@ -27,13 +27,13 @@ public class gunAnimationController : MonoBehaviour
                 AnimatorStateInfo stateInfo = playerAnim.GetCurrentAnimatorStateInfo(0);
 
                 time = stateInfo.normalizedTime % 1; 
-                if(time >= 0 && time < .33)
+                if(time >= 0 && time < .25)
                 {
                     gunRotation.eulerAngles = new Vector3(0,0,angleLeft);
                     break;
                 }
 
-                else if(time >= .66 && time <= 1)
+                else if(time >= .50 && time < .75)
                 {
                     gunRotation.eulerAngles = new Vector3(0,0,angleRight);
                     break;
@@ -44,6 +44,7 @@ public class gunAnimationController : MonoBehaviour
                     gunRotation.eulerAngles = new Vector3(0,0,0);
                     break;
                 }  
+                
             break;
 
             case 01:
