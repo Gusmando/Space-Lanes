@@ -327,10 +327,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerAnim: {fileID: 1590675111}
-  gunRotation: {fileID: 188369410}
+  gunTrans: {fileID: 188369410}
+  initLocation: {x: 0, y: 0, z: 0}
+  currentTrans: {fileID: 812171095}
   angleLeft: 7
   angleRight: -7
   time: 0
+  leftDashOffset: -0.5
+  rightDashOffset: 0.5
+  jumpOffset: 0.2
 --- !u!1 &427050363
 GameObject:
   m_ObjectHideFlags: 0
