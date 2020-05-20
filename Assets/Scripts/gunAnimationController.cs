@@ -31,7 +31,6 @@ public class gunAnimationController : MonoBehaviour
         {
             case 0:
                 gunTrans.localPosition = initLocation;
-                AnimatorClipInfo[] clipInfo = playerAnim.GetCurrentAnimatorClipInfo(0);
                 AnimatorStateInfo stateInfo = playerAnim.GetCurrentAnimatorStateInfo(0);
                 time = stateInfo.normalizedTime % 1; 
 
