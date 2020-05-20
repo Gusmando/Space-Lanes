@@ -52,34 +52,6 @@ public class MovementController : MonoBehaviour
     {
         //Display for the animation state for debug
         animStateDisp = anim.GetInteger("animState");
-
-        //Depending on the velocity, the run speed is set
-        if(pushing && !jumping)
-        {
-            anim.speed = (subjectRb.velocity.z/maxSpeed)*.3f;
-        }
-
-        //Otherwise if there is no jumping then there should
-        //be no movement
-        else
-        {
-            if(!jumping)
-            {
-                //Ensures that falling off stage conserves acceleration
-                if(!falling)
-                {
-                    subjectRb.velocity = new Vector3(0,0,0);
-                }
-                anim.speed = 0;
-            } 
-        }
-
-        //The force of gravity is constantly acting on the object
-        subjectRb.AddForce(gravityForce,ForceMode.Acceleration);
-        //Push and jump force set in inspector
-        pushForce = new Vector3(0,0,10*speed);
-        jumpForce = new Vector3(0,jumpMult,0);
-
         //If a left key press occurs and the left lane exists
         if(Input.GetKeyDown(KeyCode.LeftArrow) && (currentLane - 1) >= 0)
         {
@@ -103,23 +75,7 @@ public class MovementController : MonoBehaviour
         //This means that the player is pushing forward
         if(Input.GetKey(KeyCode.UpArrow))
         {
-            pushing = true;
-            //Accelerate as lonng as top speed is not hit
-            if(subjectRb.velocity.z < maxSpeed)
-            {
-                subjectRb.AddForce(pushForce,ForceMode.Acceleration);   
-            }
-
-            else
-            {
-                //Ensures no infinite jump
-                if(!jumping)
-                {
-                    Vector3 temp = subjectRb.velocity;
-                    temp.z = maxSpeed;
-                    subjectRb.velocity = temp;
-                } 
-            }     
+            pushing = true;     
         }
         //If button isn't held, then not pushing 
         else
@@ -151,7 +107,6 @@ public class MovementController : MonoBehaviour
                 newPosition = new Vector3(lanes[currentLane].position.x,lanes[currentLane].position.y,subject.transform.position.z);
             }
 
-            //
             else
             {
                 newPosition = new Vector3(lanes[currentLane].position.x,subject.transform.position.y,subject.transform.position.z);
@@ -165,8 +120,59 @@ public class MovementController : MonoBehaviour
             subjectRb.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionX;
             changed = false;
         }
+            
+    }
+
+    void FixedUpdate() 
+    {
+        //Push and jump force set in inspector
+        pushForce = new Vector3(0,0,10*speed);
+        jumpForce = new Vector3(0,jumpMult,0);
         
-        //If a left or right dash should be happening, anim state vars change
+        //Depending on the velocity, the run speed is set
+        if(pushing && !jumping)
+        {
+            anim.speed = (subjectRb.velocity.z/maxSpeed)*.3f;
+        }
+
+        //Otherwise if there is no jumping then there should
+        //be no movement
+        else
+        {
+            if(!jumping)
+            {
+                //Ensures that falling off stage conserves acceleration
+                if(!falling)
+                {
+                    subjectRb.velocity = new Vector3(0,0,0);
+                }
+                anim.speed = 0;
+            } 
+        }
+
+        if(pushing)
+        {
+            //Accelerate as lonng as top speed is not hit
+            if(subjectRb.velocity.z < maxSpeed)
+            {
+                subjectRb.AddForce(pushForce,ForceMode.Acceleration);   
+            }
+
+            else
+            {
+                //Ensures no infinite jump
+                if(!jumping)
+                {
+                    Vector3 temp = subjectRb.velocity;
+                    temp.z = maxSpeed;
+                    subjectRb.velocity = temp;
+                } 
+            }
+        }
+        //The force of gravity is constantly acting on the object
+        subjectRb.AddForce(gravityForce,ForceMode.Acceleration);
+
+         //If a left or right dash should be happening, anim state vars change
         if(!animOver)
         {
             if(!leftRight)
@@ -195,8 +201,6 @@ public class MovementController : MonoBehaviour
             {
                 anim.SetInteger("animState",100);
             }
-            
-            
         }
     }
 
