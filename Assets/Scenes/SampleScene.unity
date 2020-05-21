@@ -327,6 +327,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerAnim: {fileID: 1590675111}
+  animStateDisplay: 0
   gunTrans: {fileID: 188369410}
   initLocation: {x: 0, y: 0, z: 0}
   currentTrans: {fileID: 812171095}
@@ -766,7 +767,7 @@ MonoBehaviour:
   speed: 6
   maxSpeed: 25
   jumpMult: 8
-  gravityForce: {x: 0, y: -5.4, z: 0}
+  gravityForce: {x: 0, y: -9.8, z: 0}
   changed: 1
   pushing: 0
   jumping: 0

@@ -6,6 +6,7 @@ public class gunAnimationController : MonoBehaviour
 {
     [Header("Player Animation Controller")]
     public Animator playerAnim;
+    public int animStateDisplay;
 
     [Header("Gun Object")]
     public Transform gunTrans;
@@ -25,7 +26,8 @@ public class gunAnimationController : MonoBehaviour
     {
         initLocation = gunTrans.localPosition;
     }
-    void Update()
+    
+    void FixedUpdate()
     {
         switch(playerAnim.GetInteger("animState"))
         {
