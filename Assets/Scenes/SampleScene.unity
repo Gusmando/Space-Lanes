@@ -1029,7 +1029,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1314503824}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: Barrel Reference Object
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1079,8 +1079,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   auto: 1
-  bulletSpeed: 5
-  delayTime: 0
+  bulletSpeed: 15
+  delayTime: 0.3
   barrelLocation: {fileID: 1314503824}
   bullet: {fileID: 548238275}
   gunSprite: {fileID: 21300000, guid: 588d3f8f39bd69d4eacbb511302af2db, type: 3}
@@ -1114,7 +1114,7 @@ GameObject:
   - component: {fileID: 1590675110}
   - component: {fileID: 1590675111}
   m_Layer: 0
-  m_Name: SoldierBack-Sheet_0
+  m_Name: PlayerSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

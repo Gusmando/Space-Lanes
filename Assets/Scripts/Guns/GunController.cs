@@ -8,11 +8,20 @@ public class GunController : MonoBehaviour
     private bool reloading;
     public int reloadTime; 
     bool shooting;
-
+    bool input;
     // Update is called once per frame
     void Update()
     {
-        if(currentGun.canShoot && currentGun.clipSize!= 0 && currentGun.clipCount!= 0 && Input.GetMouseButtonDown(0))
+
+        if(currentGun.auto)
+        {
+            input = Input.GetMouseButton(0);
+        }
+        else
+        {
+            input = Input.GetMouseButtonDown(0);
+        }
+        if(currentGun.canShoot && currentGun.clipSize!= 0 && currentGun.clipCount!= 0 && input)
         {
             shooting = true;
         }

@@ -7,7 +7,6 @@ public class gunAssault : Gun
 
     private void Start() 
     {
-        auto = false;
         canShoot = true;
         fullClip = clipSize;
     }
