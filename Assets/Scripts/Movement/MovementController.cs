@@ -38,6 +38,7 @@ public class MovementController : MonoBehaviour
     public float laneChangeDelay;
     public bool leftRight;
     public int animStateDisp;
+    public GunController weapon;
     void Start() 
     {
        //Initial placement will be set in middle
@@ -53,7 +54,7 @@ public class MovementController : MonoBehaviour
         //Display for the animation state for debug
         animStateDisp = anim.GetInteger("animState");
         //If a left key press occurs and the left lane exists
-        if(Input.GetKeyDown(KeyCode.LeftArrow) && (currentLane - 1) >= 0)
+        if(Input.GetKeyDown(KeyCode.A) && (currentLane - 1) >= 0)
         {
             currentLane--;
             //Creates an animation delay so that animation plays clearly 
@@ -64,7 +65,7 @@ public class MovementController : MonoBehaviour
         }
 
         //If a right keypress occurs and the right lane exists
-        if(Input.GetKeyDown(KeyCode.RightArrow) && (currentLane + 1) <= (lanes.Length-1))
+        if(Input.GetKeyDown(KeyCode.D) && (currentLane + 1) <= (lanes.Length-1))
         {
             currentLane++;
             leftRight = true;
@@ -73,7 +74,7 @@ public class MovementController : MonoBehaviour
         }
 
         //This means that the player is pushing forward
-        if(Input.GetKey(KeyCode.UpArrow))
+        if(Input.GetKey(KeyCode.W))
         {
             pushing = true;     
         }
@@ -152,7 +153,7 @@ public class MovementController : MonoBehaviour
 
         if(pushing)
         {
-            //Accelerate as lonng as top speed is not hit
+            //Accelerate as long as top speed is not hit
             if(subjectRb.velocity.z < maxSpeed)
             {
                 subjectRb.AddForce(pushForce,ForceMode.Acceleration);   
@@ -185,7 +186,7 @@ public class MovementController : MonoBehaviour
             }
         }
 
-        //Otherwise depending on the y velicty an another animation state is determined
+        //Otherwise depending on the y veloicty an another animation state is determined
         else
         {
             if((subjectRb.velocity.y == 0 || pushing) && !jumping)
@@ -201,6 +202,15 @@ public class MovementController : MonoBehaviour
             {
                 anim.SetInteger("animState",100);
             }
+        }
+
+        if(weapon.shotAnim)
+        {
+            anim.SetBool("shooting",true);
+        }
+        else
+        {
+            anim.SetBool("shooting",false);
         }
     }
 

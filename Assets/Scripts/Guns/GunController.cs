@@ -7,7 +7,9 @@ public class GunController : MonoBehaviour
     public Gun currentGun;
     private bool reloading;
     public int reloadTime; 
-    bool shooting;
+    public bool shooting;
+    public bool shotAnim;
+    public float animDelayTime;
     bool input;
     // Update is called once per frame
     void Update()
@@ -16,13 +18,27 @@ public class GunController : MonoBehaviour
         if(currentGun.auto)
         {
             input = Input.GetMouseButton(0);
+
+            if(!input)
+            {
+                shotAnim = false;
+            }
         }
         else
         {
             input = Input.GetMouseButtonDown(0);
         }
+        
         if(currentGun.canShoot && currentGun.clipSize!= 0 && currentGun.clipCount!= 0 && input)
         {
+            if(!currentGun.auto)
+            {
+                StartCoroutine(shotAnimDelay(animDelayTime));
+            }
+            else
+            {
+                shotAnim = true;
+            }
             shooting = true;
         }
 
@@ -42,6 +58,16 @@ public class GunController : MonoBehaviour
         }
     }
 
+    private IEnumerator shotAnimDelay(float delayLength)
+    {
+        shotAnim = true;
+
+        yield return new WaitForSeconds(delayLength);
+
+        shotAnim = false;
+
+        yield return null;
+    }
     private IEnumerator reloadDelay(float delayLength)
     {
         reloading = true;
@@ -49,7 +75,5 @@ public class GunController : MonoBehaviour
         currentGun.clipSize = currentGun.fullClip;
         reloading = false;
         yield return null;
-
     }
-
 }
