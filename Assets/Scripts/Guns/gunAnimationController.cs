@@ -15,9 +15,11 @@ public class gunAnimationController : MonoBehaviour
     public Vector3 initLocation;
     [Header("Parent Rotation Object")]
     public Transform currentTrans;
+
     [Header("Asjustments")]
     public int angleLeft;
     public int angleRight;
+    public float shootAngle;
     public float time;
     public float leftDashOffset;
     public float rightDashOffset;
@@ -69,6 +71,13 @@ public class gunAnimationController : MonoBehaviour
             case 111:
                 gunTrans.localPosition = initLocation + new Vector3(0,jumpOffset,0);
             break;
+        }
+
+        if(gunController.shotAnim)
+        {
+            Vector3 temp  = gunTrans.localEulerAngles;
+            temp.y = shootAngle;
+            gunTrans.localEulerAngles = temp;
         }
     }
 }
