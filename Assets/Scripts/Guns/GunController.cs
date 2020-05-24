@@ -6,7 +6,7 @@ public class GunController : MonoBehaviour
 {
     public Gun currentGun;
     private bool reloading;
-    public int reloadTime; 
+    public float reloadTime; 
     public bool shooting;
     public bool shotAnim;
     public float animDelayTime;
@@ -43,7 +43,7 @@ public class GunController : MonoBehaviour
             shooting = true;
         }
 
-        if(currentGun.clipSize == 0 && currentGun.clipCount!=0 && !reloading)
+        if(Input.GetMouseButtonDown(1) && !reloading)
         {
             StartCoroutine(reloadDelay(reloadTime));
             currentGun.clipCount--;

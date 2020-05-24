@@ -354,7 +354,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentGun: {fileID: 1413766615}
-  reloadTime: 2
+  reloadTime: 0.5
   shooting: 0
   shotAnim: 0
   animDelayTime: 0.3
