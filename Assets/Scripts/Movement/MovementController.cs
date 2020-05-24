@@ -12,6 +12,7 @@ public class MovementController : MonoBehaviour
     //Array holding different lanes within the level
     [Header("Lane Assignment (Left to Right)")]
     public Lane[] lanes;
+    public float laneDiff;
     //The Force of gravity on the object
     //will have to be changed depending
     //on which lane is on
@@ -85,7 +86,7 @@ public class MovementController : MonoBehaviour
         }
         
         //This will handle a space or jump push
-        if(Input.GetKeyDown(KeyCode.Space) && !jumping)
+        if(Input.GetKeyDown(KeyCode.Space) && !jumping && !falling)
         {
             jumping = true;
             falling = false;
@@ -103,7 +104,7 @@ public class MovementController : MonoBehaviour
 
             //Z position is the only nonchanging value as it show progress through each lane
             //also checks if current height is less than another lane
-            if(!jumping || (jumping && subject.transform.position.y < lanes[currentLane].position.y))
+            if((!jumping && !falling) || (jumping && !falling) || (falling && lanes[currentLane].position.y - subject.transform.position.y < laneDiff))
             {
                 newPosition = new Vector3(lanes[currentLane].position.x,lanes[currentLane].position.y,subject.transform.position.z);
             }
@@ -172,6 +173,11 @@ public class MovementController : MonoBehaviour
         }
         //The force of gravity is constantly acting on the object
         subjectRb.AddForce(gravityForce,ForceMode.Acceleration);
+
+        if(subjectRb.velocity.y < -.05)
+        {
+            falling = true;
+        }
 
          //If a left or right dash should be happening, anim state vars change
         if(!animOver)

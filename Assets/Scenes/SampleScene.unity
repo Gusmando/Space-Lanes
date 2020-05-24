@@ -897,6 +897,7 @@ MonoBehaviour:
   - {fileID: 427050368}
   - {fileID: 503387616}
   - {fileID: 4334381}
+  laneDiff: 0.06
   speed: 6
   maxSpeed: 25
   jumpMult: 8
