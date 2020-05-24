@@ -10,6 +10,7 @@ public class GunController : MonoBehaviour
     public bool shooting;
     public bool shotAnim;
     public float animDelayTime;
+    public CameraController camFunc;
     bool input;
     // Update is called once per frame
     void Update()
@@ -47,6 +48,8 @@ public class GunController : MonoBehaviour
             StartCoroutine(reloadDelay(reloadTime));
             currentGun.clipCount--;
         }   
+        camFunc.setShakeIntensity(currentGun.shakeIntensity);
+        camFunc.setShakeLength(currentGun.shakeDelay);
     }
 
     void FixedUpdate() 
@@ -54,6 +57,7 @@ public class GunController : MonoBehaviour
         if(shooting)
         {
             currentGun.shoot();
+            camFunc.screenShake();
             shooting = false;
         }
     }

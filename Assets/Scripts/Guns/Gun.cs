@@ -14,6 +14,8 @@ public abstract class Gun : MonoBehaviour
     public int clipSize;
     public int fullClip;
     public int clipCount;
+    public float shakeIntensity;
+    public float shakeDelay;
     public abstract void shoot();
 
     protected IEnumerator shootingDelay(float delayLength)

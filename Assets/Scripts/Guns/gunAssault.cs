@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class gunAssault : Gun
 {
-
+    
     private void Start() 
     {
         canShoot = true;
