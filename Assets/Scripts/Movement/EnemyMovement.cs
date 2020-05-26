@@ -19,6 +19,7 @@ public class EnemyMovement : MonoBehaviour
     public float speed;
     public float maxSpeed;
     public float jumpMult;
+    public float rayCastOffset;
     [Header("Force Vectors")]
     public Vector3 gravityForce;
     private Vector3 pushForce;
@@ -92,6 +93,15 @@ public class EnemyMovement : MonoBehaviour
         //Push and jump force set in inspector
         pushForce = new Vector3(0,0,10*speed);
         jumpForce = new Vector3(0,jumpMult,0);
+
+        if(subjectRb.velocity.y < -.05)
+        {
+            falling = true;
+        }
+        else
+        {
+            falling = false;
+        }
         
         //Depending on the velocity, the run speed is set
         if(pushing && !jumping)
@@ -116,8 +126,19 @@ public class EnemyMovement : MonoBehaviour
 
         if(pushing)
         {
+            RaycastHit hit;
+            Vector3 highObject = subject.transform.position + new Vector3(0,5,0);
+            Vector3 inFront = subject.transform.position + new Vector3(0,lanes[currentLane].position.y,rayCastOffset);
+            Vector3 direction = inFront - highObject;
+            Debug.DrawRay(highObject, direction, Color.green);
+
+            if(!(Physics.Raycast(highObject,direction,out hit)) && !jump && !jumping && !falling)
+            {
+                jump = true;
+            }
+
             //Accelerate as long as top speed is not hit
-            if(subjectRb.velocity.z < maxSpeed)
+            if(subjectRb.velocity.z > maxSpeed)
             {
                 subjectRb.AddForce(pushForce,ForceMode.Acceleration);   
             }
@@ -139,6 +160,10 @@ public class EnemyMovement : MonoBehaviour
         if(subjectRb.velocity.y < -.05)
         {
             falling = true;
+        }
+        else
+        {
+            falling = false;
         }
     }
 
