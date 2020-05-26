@@ -8,6 +8,7 @@ public class EnemyMovement : MonoBehaviour
     public GameObject subject;
     public Rigidbody subjectRb;
     public GameObject player;
+    public float distanceToPlayer;
     //Array holding different lanes within the level
     [Header("Lane Assignment (Left to Right)")]
     public Lane[] lanes;
@@ -33,6 +34,7 @@ public class EnemyMovement : MonoBehaviour
     public bool stopped;
     public bool idle;
     public bool jump;
+    public bool choice;
     //An iterator keeping track of the current lane
     public int currentLane;
     //The rigid body of the object being controlled
@@ -45,13 +47,13 @@ public class EnemyMovement : MonoBehaviour
 
     void Start()
     {
-        changed = false;
+        changed = true;
         currentLane = Random.Range(0,lanes.Length); 
         subjectRb = subject.GetComponent<Rigidbody>();
         animOver = true;
     }
 
-    void Update()
+    virtual public void Update()
     {
         if(jump && !jumping && !falling)
         {
@@ -87,8 +89,10 @@ public class EnemyMovement : MonoBehaviour
             subjectRb.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionX;
             changed = false;
         }
+
+        distanceToPlayer = Vector3.Distance(player.transform.position,subject.transform.position);
     }
-    void FixedUpdate() 
+    virtual protected void FixedUpdate() 
     {
         //Push and jump force set in inspector
         pushForce = new Vector3(0,0,10*speed);
@@ -124,7 +128,7 @@ public class EnemyMovement : MonoBehaviour
             } 
         }
 
-        if(pushing)
+        if(pushing && !stopped)
         {
             RaycastHit hit;
             Vector3 highObject = subject.transform.position + new Vector3(0,5,0);
@@ -167,17 +171,17 @@ public class EnemyMovement : MonoBehaviour
         }
     }
 
-    public void changeLane(bool shifting)
+    public void changeLane(int shifting)
     {
         if(!stopped)
         {
-            if(!shifting && (currentLane - 1) >= 0)
+            if(shifting == 0 && (currentLane - 1) >= 0)
             {
                 currentLane --;
                 changed = true;
                 leftRight = false;
             }
-            else if(shifting && (currentLane + 1) <= (lanes.Length-1))
+            else if(shifting == 1 && (currentLane + 1) <= (lanes.Length-1))
             {
                 currentLane ++;
                 changed = true;
@@ -234,13 +238,13 @@ public class EnemyMovement : MonoBehaviour
     }
 
     //Aniamtion delay waits a few secondas for animation to finish
-    private IEnumerator boolDelay(float delayLength, bool choice)
+    protected IEnumerator animDelay(float delayLength)
     {
-        choice = false;
+        animOver = false;
 
         yield return new WaitForSeconds(delayLength);
 
-        choice = true;
+        animOver = true;
 
         yield return null;
     }
