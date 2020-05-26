@@ -14,7 +14,7 @@ public class minorEnemy : EnemyMovement
     {   
         if(player.GetComponent<MovementController>().currentLane == currentLane)
         {
-            if(!stopped && distanceToPlayer <= threatDistance && !stoppedOnce && !pushing)
+            if(!stopped && distanceToPlayer <= threatDistance && !stoppedOnce)
             {
                 StartCoroutine(stopDelay(Random.Range(rangeStopMin,rangeStopMax)));
                 stoppedOnce = true;
@@ -27,7 +27,9 @@ public class minorEnemy : EnemyMovement
 
             if(stoppedOnce && !stopped && distanceToPlayer <= threatDistance)
             {
+                lanes[currentLane].enemyCount --;
                 changeLane(Random.Range(0,2));
+                lanes[currentLane].enemyCount ++;
                 stoppedOnce = false;
             }
         }

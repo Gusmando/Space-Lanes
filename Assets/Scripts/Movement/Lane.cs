@@ -10,6 +10,8 @@ public class Lane : MonoBehaviour
     public Transform LaneReferenceObject;
     public Vector3 position;
     public Vector3 rotation;
+    public int enemyCount;
+    public int enemyLimit;
 
     // Start is called before the first frame update
     void Start()

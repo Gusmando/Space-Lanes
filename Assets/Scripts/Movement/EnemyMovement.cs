@@ -49,6 +49,7 @@ public class EnemyMovement : MonoBehaviour
     {
         changed = true;
         currentLane = Random.Range(0,lanes.Length); 
+        lanes[currentLane].enemyCount ++;
         subjectRb = subject.GetComponent<Rigidbody>();
         animOver = true;
     }
