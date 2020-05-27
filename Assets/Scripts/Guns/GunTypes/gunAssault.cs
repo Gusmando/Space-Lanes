@@ -15,6 +15,8 @@ public class gunAssault : Gun
             GameObject arrow = Instantiate(bullet,barrelLocation.position , barrelLocation.rotation);
 
             Rigidbody rb = arrow.GetComponent<Rigidbody>();
+            
+            arrow.GetComponent<Bullet>().damage = this.damage;
 
             rb.AddForce(barrelLocation.forward * bulletSpeed,ForceMode.Impulse);
 

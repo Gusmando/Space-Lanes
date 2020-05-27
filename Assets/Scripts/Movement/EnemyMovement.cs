@@ -7,6 +7,7 @@ public class EnemyMovement : MonoBehaviour
     [Header("Object Being Moved")]
     public GameObject subject;
     public Rigidbody subjectRb;
+    public float health;
     public GameObject player;
     public float distanceToPlayer;
     //Array holding different lanes within the level
@@ -89,6 +90,11 @@ public class EnemyMovement : MonoBehaviour
             //Keeping movement in the y and z axis, x is frozen as no strafe movement
             subjectRb.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionX;
             changed = false;
+        }
+
+        if(health <= 0)
+        {
+            Destroy(subject);
         }
 
         distanceToPlayer = Vector3.Distance(player.transform.position,subject.transform.position);
@@ -219,22 +225,28 @@ public class EnemyMovement : MonoBehaviour
     //Essentially an onGround check
     private void OnCollisionEnter(Collision other)
     {
-        if(jumping)
+        if(other.gameObject.CompareTag("Floor"))
         {
-            jumping = false;
-        }
+            if(jumping)
+            {
+                jumping = false;
+            }
 
-        if(falling)
-        {
-            falling = false;
+            if(falling)
+            {
+                falling = false;
+            }
         }
     }
     //To check for falls
     private void OnCollisionExit(Collision other)
     {
-        if(!falling)
+        if(other.gameObject.CompareTag("Floor"))
         {
-            falling = true;
+            if(!falling)
+            {
+                falling = true;
+            }
         }
     }
 

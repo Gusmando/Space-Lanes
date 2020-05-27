@@ -223,22 +223,28 @@ public class MovementController : MonoBehaviour
     //Essentially an onGround check
     private void OnCollisionEnter(Collision other)
     {
-        if(jumping)
+        if(other.gameObject.CompareTag("Floor"))
         {
-            jumping = false;
-        }
+            if(jumping)
+            {
+                jumping = false;
+            }
 
-        if(falling)
-        {
-            falling = false;
+            if(falling)
+            {
+                falling = false;
+            }
         }
     }
     //To check for falls
     private void OnCollisionExit(Collision other)
     {
-        if(!falling)
+        if(other.gameObject.CompareTag("Floor"))
         {
-            falling = true;
+            if(!falling)
+            {
+                falling = true;
+            }
         }
     }
     //Aniamtion delay waits a few secondas for animation to finish
