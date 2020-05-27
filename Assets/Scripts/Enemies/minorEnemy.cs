@@ -12,9 +12,10 @@ public class minorEnemy : EnemyMovement
     public bool stoppedOnce;
     override public void Update()
     {   
+        
         if(player.GetComponent<MovementController>().currentLane == currentLane)
         {
-            if(!stopped && distanceToPlayer <= threatDistance && !stoppedOnce)
+            if(!stopped && (distanceToPlayer <= threatDistance) && !stoppedOnce)
             {
                 StartCoroutine(stopDelay(Random.Range(rangeStopMin,rangeStopMax)));
                 stoppedOnce = true;

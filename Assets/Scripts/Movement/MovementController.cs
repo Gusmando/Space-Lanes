@@ -178,6 +178,10 @@ public class MovementController : MonoBehaviour
         {
             falling = true;
         }
+        else
+        {
+            falling = false;
+        }
 
          //If a left or right dash should be happening, anim state vars change
         if(!animOver)

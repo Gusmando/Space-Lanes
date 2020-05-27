@@ -13,24 +13,27 @@ public class GunController : MonoBehaviour
     public bool reload;
     public float animDelayTime;
     public CameraController camFunc;
-    bool input;
+    public bool input;
     // Update is called once per frame
     void Update()
     {
-        
-        if(currentGun.auto)
+        if(player)
         {
-            input = Input.GetMouseButton(0);
-
-            if(!input)
+            if(currentGun.auto)
             {
-                shotAnim = false;
+                input = Input.GetMouseButton(0);
+
+                if(!input)
+                {
+                    shotAnim = false;
+                }
+            }
+            else
+            {
+                input = Input.GetMouseButtonDown(0);
             }
         }
-        else
-        {
-            input = Input.GetMouseButtonDown(0);
-        }
+        
         
         if(currentGun.canShoot && currentGun.clipSize!= 0 && currentGun.clipCount!= 0 && input)
         {
@@ -55,8 +58,11 @@ public class GunController : MonoBehaviour
             StartCoroutine(reloadDelay(reloadTime));
             currentGun.clipCount--;
         }   
-        camFunc.setShakeIntensity(currentGun.shakeIntensity);
-        camFunc.setShakeLength(currentGun.shakeDelay);
+        if(player)
+        {
+            camFunc.setShakeIntensity(currentGun.shakeIntensity);
+            camFunc.setShakeLength(currentGun.shakeDelay);
+        }
     }
 
     void FixedUpdate() 
@@ -64,7 +70,10 @@ public class GunController : MonoBehaviour
         if(shooting)
         {
             currentGun.shoot();
-            camFunc.screenShake();
+            if(player)
+            {
+                camFunc.screenShake();
+            }
             shooting = false;
         }
     }

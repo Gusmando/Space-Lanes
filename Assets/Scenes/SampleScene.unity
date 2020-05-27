@@ -254,7 +254,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!54 &5579289
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -294,7 +294,7 @@ MonoBehaviour:
   - {fileID: 4334381}
   laneDiff: 0.05
   speed: -5
-  maxSpeed: -25
+  maxSpeed: -20
   jumpMult: 10
   rayCastOffset: -5
   gravityForce: {x: 0, y: -20, z: 0}
@@ -309,13 +309,13 @@ MonoBehaviour:
   currentLane: 0
   anim: {fileID: 0}
   animOver: 0
-  laneChangeDelay: 2
+  laneChangeDelay: 1
   leftRight: 1
   threatDistance: 20
-  rangePushMin: 1
-  rangePushMax: 3
-  rangeStopMin: 0.3
-  rangeStopMax: 0.5
+  rangePushMin: 100
+  rangePushMax: 100
+  rangeStopMin: 1
+  rangeStopMax: 1
   stoppedOnce: 0
 --- !u!136 &5579291
 CapsuleCollider:
@@ -386,7 +386,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5579288}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -13.056641, y: 1.7617188, z: 43.98}
+  m_LocalPosition: {x: -13.056641, y: 1.7617188, z: 60.99}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children: []
   m_Father: {fileID: 0}
@@ -521,6 +521,7 @@ MonoBehaviour:
   reload: 0
   animDelayTime: 0.3
   camFunc: {fileID: 963194229}
+  input: 0
 --- !u!1 &391547092
 GameObject:
   m_ObjectHideFlags: 0
@@ -541,7 +542,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!54 &391547093
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -581,7 +582,7 @@ MonoBehaviour:
   - {fileID: 4334381}
   laneDiff: 0.05
   speed: -5
-  maxSpeed: -25
+  maxSpeed: -20
   jumpMult: 10
   rayCastOffset: -5
   gravityForce: {x: 0, y: -20, z: 0}
@@ -596,13 +597,13 @@ MonoBehaviour:
   currentLane: 0
   anim: {fileID: 0}
   animOver: 0
-  laneChangeDelay: 2
+  laneChangeDelay: 1
   leftRight: 1
   threatDistance: 20
-  rangePushMin: 1
-  rangePushMax: 3
-  rangeStopMin: 0.3
-  rangeStopMax: 0.5
+  rangePushMin: 100
+  rangePushMax: 100
+  rangeStopMin: 1
+  rangeStopMax: 1
   stoppedOnce: 0
 --- !u!136 &391547095
 CapsuleCollider:
@@ -673,7 +674,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 391547092}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.9, y: 1.7617188, z: 48.18}
+  m_LocalPosition: {x: 2.9, y: 1.7617188, z: 65.19}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children: []
   m_Father: {fileID: 0}
@@ -769,7 +770,7 @@ Transform:
   m_GameObject: {fileID: 427050363}
   m_LocalRotation: {x: 0, y: 0, z: -0.13052624, w: 0.9914449}
   m_LocalPosition: {x: -9.8296, y: 1.2941, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 15}
+  m_LocalScale: {x: 1, y: 1, z: 25}
   m_Children:
   - {fileID: 1827137624}
   m_Father: {fileID: 0}
@@ -1028,7 +1029,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59d4f2cf1b1900443b61280a71fd6998, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  durability: 2
+  durability: 1
   bullet: {fileID: 548238275}
   damage: 5
   damageMod: 1
@@ -1141,8 +1142,8 @@ GameObject:
   - component: {fileID: 749586611}
   - component: {fileID: 749586610}
   - component: {fileID: 749586609}
-  - component: {fileID: 749586608}
   - component: {fileID: 749586613}
+  - component: {fileID: 749586608}
   - component: {fileID: 749586607}
   m_Layer: 0
   m_Name: Capsule (3)
@@ -1176,43 +1177,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 749586606}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1d8c93c10c5def64aa2d1885ccbf2ce0, type: 3}
+  m_Script: {fileID: 11500000, guid: f341ad31ea12e284ea96a56b495aacf8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  subject: {fileID: 749586606}
-  subjectRb: {fileID: 749586607}
-  health: 15
-  player: {fileID: 812171090}
-  distanceToPlayer: 0
-  lanes:
-  - {fileID: 427050368}
-  - {fileID: 503387616}
-  - {fileID: 4334381}
-  laneDiff: 0.05
-  speed: -5
-  maxSpeed: -25
-  jumpMult: 10
-  rayCastOffset: -5
-  gravityForce: {x: 0, y: -20, z: 0}
-  changed: 1
-  pushing: 0
-  jumping: 0
-  falling: 0
-  stopped: 0
-  idle: 0
-  jump: 0
-  choice: 0
-  currentLane: 0
-  anim: {fileID: 0}
-  animOver: 0
-  laneChangeDelay: 2
-  leftRight: 1
-  threatDistance: 20
-  rangePushMin: 1
-  rangePushMax: 3
-  rangeStopMin: 0.3
-  rangeStopMax: 0.5
-  stoppedOnce: 0
+  player: 0
+  currentGun: {fileID: 764333639}
+  reloadTime: 3
+  shooting: 0
+  shotAnim: 0
+  reload: 0
+  animDelayTime: 0
+  camFunc: {fileID: 0}
+  input: 0
 --- !u!136 &749586609
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1284,7 +1260,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -3.7, y: 1.7617188, z: 62}
   m_LocalScale: {x: 2, y: 2, z: 2}
-  m_Children: []
+  m_Children:
+  - {fileID: 1210643899}
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1326,21 +1303,17 @@ MonoBehaviour:
   currentLane: 0
   anim: {fileID: 0}
   animOver: 0
-  laneChangeDelay: 0
+  laneChangeDelay: 2
   leftRight: 0
-  gunContr: {fileID: 0}
-  threatDistance: 0
-  stoppedOnce: 0
-  shootOn: 0
-  canChange: 0
-  changeDelayTime: 0
-  rangeStopMin: 0
-  rangeStopMax: 0
-  rangePushMin: 0
-  rangePushMax: 0
-  barrageDelay: 0
-  barrageChangeTime: 0
-  lowHealth: 0
+  gunContr: {fileID: 749586608}
+  threatDistance: 35
+  canChange: 1
+  changeDelayTime: 0.5
+  shotDelayTime: 0.2
+  reloadTime: 2
+  sameLaneShotDelay: 0.1
+  sameLaneReloadTime: 1
+  sameLane: 0
 --- !u!1 &764333638
 GameObject:
   m_ObjectHideFlags: 0
@@ -1371,9 +1344,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   auto: 1
-  bulletSpeed: 15
-  delayTime: 0.1
-  barrelLocation: {fileID: 1314503824}
+  bulletSpeed: -15
+  delayTime: 5
+  barrelLocation: {fileID: 1210643899}
   bullet: {fileID: 548238275}
   gunSprite: {fileID: 21300000, guid: 588d3f8f39bd69d4eacbb511302af2db, type: 3}
   canShoot: 1
@@ -1658,6 +1631,36 @@ Transform:
   m_Father: {fileID: 4334380}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1210643898
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1210643899}
+  m_Layer: 0
+  m_Name: Barrel Reference Object
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1210643899
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1210643898}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -0.85}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_Children: []
+  m_Father: {fileID: 749586612}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1254578792
 GameObject:
   m_ObjectHideFlags: 0
@@ -1678,7 +1681,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!54 &1254578793
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1718,7 +1721,7 @@ MonoBehaviour:
   - {fileID: 4334381}
   laneDiff: 0.05
   speed: -5
-  maxSpeed: -25
+  maxSpeed: -20
   jumpMult: 10
   rayCastOffset: -5
   gravityForce: {x: 0, y: -20, z: 0}
@@ -1733,13 +1736,13 @@ MonoBehaviour:
   currentLane: 0
   anim: {fileID: 0}
   animOver: 0
-  laneChangeDelay: 2
+  laneChangeDelay: 1
   leftRight: 1
   threatDistance: 20
-  rangePushMin: 1
-  rangePushMax: 3
-  rangeStopMin: 0.3
-  rangeStopMax: 0.5
+  rangePushMin: 100
+  rangePushMax: 100
+  rangeStopMin: 1
+  rangeStopMax: 1
   stoppedOnce: 0
 --- !u!136 &1254578795
 CapsuleCollider:
@@ -1810,7 +1813,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1254578792}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 11.2, y: 1.7617188, z: 32.18}
+  m_LocalPosition: {x: 11.2, y: 1.7617188, z: 49.190002}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children: []
   m_Father: {fileID: 0}

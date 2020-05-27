@@ -96,11 +96,10 @@ public class EnemyMovement : MonoBehaviour
         {
             Destroy(subject);
         }
-
-        distanceToPlayer = Vector3.Distance(player.transform.position,subject.transform.position);
     }
     virtual protected void FixedUpdate() 
     {
+        distanceToPlayer = Vector3.Distance(player.transform.position,subject.transform.position);
         //Push and jump force set in inspector
         pushForce = new Vector3(0,0,10*speed);
         jumpForce = new Vector3(0,jumpMult,0);
@@ -194,31 +193,6 @@ public class EnemyMovement : MonoBehaviour
                 changed = true;
                 leftRight = true;
             }
-        }
-    }
-
-    public void stopMoving()
-    {
-        if(!stopped)
-        {
-            stopped = true;
-        }
-    }
-
-    public void jumpOn()
-    {
-        if(!jumping && !stopped)
-        {
-            jumping = true;
-            jump = true;
-        }
-    }
-
-    public void push()
-    {
-        if(!pushing && !stopped)
-        {
-            pushing = true;
         }
     }
 

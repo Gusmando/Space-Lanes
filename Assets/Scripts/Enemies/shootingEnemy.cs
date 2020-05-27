@@ -5,77 +5,63 @@ using UnityEngine;
 public class shootingEnemy : EnemyMovement
 {
     public GunController gunContr; 
-    public float threatDistance; 
-    public bool stoppedOnce;
-    public bool shootOn;
+    public float threatDistance;
     public bool canChange;
     public float changeDelayTime;
-    public float rangeStopMin;
-    public float rangeStopMax;
-     public float rangePushMin;
-    public float rangePushMax;
-    public float barrageDelay;
-    public float barrageChangeTime;
-    public float lowHealth;
-    
+    public float shotDelayTime;
+    public float reloadTime;
+    public float sameLaneShotDelay;
+    public float sameLaneReloadTime;
+    public bool sameLane;
+    private IEnumerator stoppedCoroutine;
+    private IEnumerator changedCoroutine;
     
     override public void Update()
     {
-        bool sameLane = player.GetComponent<MovementController>().currentLane == currentLane;
-        bool inRange = distanceToPlayer <= threatDistance;
-
-        if(!stopped && inRange && sameLane && pushing)
+        if(!gunContr.input)
         {
-            pushing = false;
-            stopped = true;
+            gunContr.input = true;
+        }
+
+        if(gunContr.currentGun.clipSize <= 0)
+        {
+            gunContr.reload = true;
+        }
+        sameLane = player.GetComponent<MovementController>().currentLane == currentLane;
+        bool inRange = distanceToPlayer <= threatDistance;
+        if(!inRange)
+        {
+            if(!pushing)
+            {
+                pushing = true;
+                stopped = false;
+            }
+        }
+
+        else
+        {
+            if(pushing)
+            {
+                pushing = false;
+            }
         }
 
         if(sameLane)
-        {   
-
-            StartCoroutine(changeDelay(changeDelayTime));
-            
-            if(!gunContr.shooting)
-            {
-                gunContr.shooting = true;
-            }
-
-            if(!pushing && !inRange)
-            {
-                pushing = true;
-            }
-        }
-
-        else if(!sameLane)
         {
-            if(canChange && health >= lowHealth)
+            gunContr.reloadTime = sameLaneReloadTime;
+            gunContr.currentGun.delayTime = sameLaneShotDelay;
+        }
+        else
+        {
+            gunContr.reloadTime = this.reloadTime;
+            gunContr.currentGun.delayTime= shotDelayTime;
+            if(canChange)
             {
                 changeLane(Random.Range(0,2));
-                StartCoroutine(changeDelay(changeDelayTime));
+                StartCoroutine(changeDelay(changeDelayTime));   
             }
-
-            if(!pushing && !inRange && !stopped)
-            {
-               pushing = true;
-            }
-
-            if(health <= lowHealth)
-            {
-                changeDelayTime = barrageChangeTime;
-
-                if(!gunContr.shooting)
-                {
-                    gunContr.shooting = true;
-                }
-
-                if(canChange)
-                {
-                    changeLane(Random.Range(0,2));
-                    StartCoroutine(changeDelay(changeDelayTime));
-                }
-            }
-            
         }
+
         base.Update();
     }
 
