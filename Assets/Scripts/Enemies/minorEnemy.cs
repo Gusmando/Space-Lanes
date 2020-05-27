@@ -66,7 +66,4 @@ public class minorEnemy : EnemyMovement
 
         yield return null;
     }
-
-
-
 }

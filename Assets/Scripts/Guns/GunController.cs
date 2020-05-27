@@ -4,18 +4,20 @@ using UnityEngine;
 
 public class GunController : MonoBehaviour
 {
+    public bool player;
     public Gun currentGun;
     private bool reloading;
     public float reloadTime; 
     public bool shooting;
     public bool shotAnim;
+    public bool reload;
     public float animDelayTime;
     public CameraController camFunc;
     bool input;
     // Update is called once per frame
     void Update()
     {
-
+        
         if(currentGun.auto)
         {
             input = Input.GetMouseButton(0);
@@ -43,7 +45,12 @@ public class GunController : MonoBehaviour
             shooting = true;
         }
 
-        if(Input.GetMouseButtonDown(1) && !reloading)
+        if(player)
+        {
+            reload = Input.GetMouseButtonDown(1);
+        }
+
+        if( reload && !reloading)
         {
             StartCoroutine(reloadDelay(reloadTime));
             currentGun.clipCount--;
