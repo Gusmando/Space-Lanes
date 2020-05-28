@@ -10,6 +10,12 @@ public class minorEnemy : EnemyMovement
     public float rangeStopMin;
     public float rangeStopMax;
     public bool stoppedOnce;
+
+    override public void Start()
+    {
+        base.Start();
+        lanes[currentLane].minorEnemyCount ++;
+    }
     override public void Update()
     {   
         
@@ -28,9 +34,9 @@ public class minorEnemy : EnemyMovement
 
             if(stoppedOnce && !stopped && distanceToPlayer <= threatDistance)
             {
-                lanes[currentLane].enemyCount --;
+                lanes[currentLane].minorEnemyCount --;
                 changeLane(Random.Range(0,2));
-                lanes[currentLane].enemyCount ++;
+                lanes[currentLane].minorEnemyCount ++;
                 stoppedOnce = false;
             }
         }
@@ -66,5 +72,10 @@ public class minorEnemy : EnemyMovement
         pushing = false;
 
         yield return null;
+    }
+
+    private void OnDestroy() 
+    {
+        lanes[currentLane].minorEnemyCount --;
     }
 }

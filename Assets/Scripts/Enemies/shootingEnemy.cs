@@ -5,6 +5,7 @@ using UnityEngine;
 public class shootingEnemy : EnemyMovement
 {
     public GunController gunContr; 
+    public GameManager gameManager;
     public float threatDistance;
     public bool canChange;
     public float changeDelayTime;
@@ -15,7 +16,11 @@ public class shootingEnemy : EnemyMovement
     public bool sameLane;
     private IEnumerator stoppedCoroutine;
     private IEnumerator changedCoroutine;
-    
+    override public void Start()
+    {
+        base.Start();
+        lanes[currentLane].shootingEnemyCount ++;
+    }
     override public void Update()
     {
         if(!gunContr.input)
@@ -57,7 +62,27 @@ public class shootingEnemy : EnemyMovement
             gunContr.currentGun.delayTime= shotDelayTime;
             if(canChange)
             {
-                changeLane(Random.Range(0,2));
+                lanes[currentLane].shootingEnemyCount --;
+                int laneShift = Random.Range(0,2);
+
+                if(laneShift == 0 && (currentLane - 1 != gameManager.lowActiveLane))
+                {
+                    changeLane(laneShift);
+                }
+                else if(laneShift == 0 && (currentLane - 1 == gameManager.lowActiveLane))
+                {
+                    changeLane(laneShift + 1);
+                }
+                if(laneShift == 1 && (currentLane + 1 != gameManager.lowActiveLane))
+                {
+                    changeLane(laneShift);
+                }
+                else if(laneShift == 0 && (currentLane + 1 == gameManager.lowActiveLane))
+                {
+                    changeLane(laneShift - 1);
+                }
+                
+                lanes[currentLane].shootingEnemyCount ++;
                 StartCoroutine(changeDelay(changeDelayTime));   
             }
         }
@@ -95,5 +120,10 @@ public class shootingEnemy : EnemyMovement
         canChange = true;
 
         yield return null;
+    }
+
+    private void OnDestroy() 
+    {
+        lanes[currentLane].shootingEnemyCount --;
     }
 }

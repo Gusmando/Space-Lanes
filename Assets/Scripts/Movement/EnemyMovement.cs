@@ -46,11 +46,10 @@ public class EnemyMovement : MonoBehaviour
     public bool leftRight;
     // Update is called once per frame
 
-    void Start()
+    virtual public void Start()
     {
         changed = true;
         currentLane = Random.Range(0,lanes.Length); 
-        lanes[currentLane].enemyCount ++;
         subjectRb = subject.GetComponent<Rigidbody>();
         animOver = true;
     }
