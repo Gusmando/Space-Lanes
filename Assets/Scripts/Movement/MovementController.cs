@@ -9,6 +9,7 @@ public class MovementController : MonoBehaviour
     [Header("Object Being Moved")]
     public GameObject subject;
     public Rigidbody subjectRb;
+    public float health;
     //Array holding different lanes within the level
     [Header("Lane Assignment (Left to Right)")]
     public Lane[] lanes;

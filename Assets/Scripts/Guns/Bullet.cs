@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
+    public bool player;
     public int durability;
     public GameObject bullet;
     public float damage;
@@ -44,17 +45,40 @@ public class Bullet : MonoBehaviour
 
      private void OnCollisionEnter(Collision other)
     {
-        if(other.gameObject.CompareTag("Enemy"))
+        if(other.gameObject.CompareTag("Bullet"))
         {
-            other.gameObject.GetComponent<EnemyMovement>().health -= (damage * damageMod);
-
-            if(other.gameObject != null)
+            durability--;
+            other.gameObject.GetComponent<Bullet>().durability --;
+        }
+        if(player)
+        {
+            if(other.gameObject.CompareTag("Enemy"))
             {
-                Rigidbody enemy = other.gameObject.GetComponent<Rigidbody>();
-                enemy.AddForce(0,0,knockback, ForceMode.Impulse);
-                durability--;
-                StartCoroutine(colliderDelay(invHitTime));
-                bullet.GetComponent<Rigidbody>().AddForce(0,0,speed,ForceMode.Impulse);
+                other.gameObject.GetComponent<EnemyMovement>().health -= (damage * damageMod);
+
+                if(other.gameObject != null)
+                {
+                    Rigidbody enemy = other.gameObject.GetComponent<Rigidbody>();
+                    enemy.AddForce(0,0,knockback, ForceMode.Impulse);
+                    durability--;
+                    StartCoroutine(colliderDelay(invHitTime));
+                    bullet.GetComponent<Rigidbody>().AddForce(0,0,speed,ForceMode.Impulse);
+                }
+            }
+        }
+        else
+        {
+            if(other.gameObject.CompareTag("Player"))
+            {
+                other.gameObject.GetComponent<MovementController>().health -= (damage * damageMod);
+                if(other.gameObject != null)
+                {
+                    Rigidbody playerRB = other.gameObject.GetComponent<Rigidbody>();
+                    playerRB.AddForce(0,0,knockback, ForceMode.Impulse);
+                    durability--;
+                    StartCoroutine(colliderDelay(invHitTime));
+                    bullet.GetComponent<Rigidbody>().AddForce(0,0,speed,ForceMode.Impulse);
+                }
             }
         }
     }
