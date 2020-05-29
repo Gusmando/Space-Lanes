@@ -22,10 +22,13 @@ public class EnemyMovement : MonoBehaviour
     public float maxSpeed;
     public float jumpMult;
     public float rayCastOffset;
+    public float laneChangeSpeed;
+    
     [Header("Force Vectors")]
     public Vector3 gravityForce;
     private Vector3 pushForce;
     private Vector3 jumpForce;
+    public Vector3 newPosition;
     //Whether on not a change has occured
     [Header("State Vars")]
     public bool changed;
@@ -36,6 +39,7 @@ public class EnemyMovement : MonoBehaviour
     public bool idle;
     public bool jump;
     public bool choice;
+    public bool changing;
     //An iterator keeping track of the current lane
     public int currentLane;
     //The rigid body of the object being controlled
@@ -68,8 +72,6 @@ public class EnemyMovement : MonoBehaviour
 
         if(changed)
         {
-            Vector3 newPosition = new Vector3(0f,0f,0f); 
-
             //Z position is the only nonchanging value as it show progress through each lane
             //also checks if current height is less than another lane
             if((!jumping && !falling) || (jumping && !falling) || (falling && lanes[currentLane].position.y - subject.transform.position.y < laneDiff))
@@ -83,12 +85,24 @@ public class EnemyMovement : MonoBehaviour
             }
 
             //Setting the new position and rotation of the object
-            subject.transform.position = newPosition;
-            subject.transform.eulerAngles = lanes[currentLane].LaneReferenceObject.transform.eulerAngles;
+            //subject.transform.position = newPosition;
+            //subject.transform.eulerAngles = lanes[currentLane].LaneReferenceObject.transform.eulerAngles;
             
             //Keeping movement in the y and z axis, x is frozen as no strafe movement
             subjectRb.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionX;
             changed = false;
+            changing = true;
+        }
+
+        if(subject.transform.position != newPosition && changing)
+        {
+            float step = Time.deltaTime * laneChangeSpeed;
+            subject.transform.rotation = Quaternion.RotateTowards(subject.transform.rotation,lanes[currentLane].rotation,step);
+            subject.transform.position = Vector3.MoveTowards(subject.transform.position,newPosition,step);
+        }
+        else
+        {
+            changing = false;
         }
 
         if(health <= 0)
