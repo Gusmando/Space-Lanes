@@ -9,7 +9,7 @@ public class Lane : MonoBehaviour
 {
     public Transform LaneReferenceObject;
     public Vector3 position;
-    public Vector3 rotation;
+    public Quaternion rotation;
     public int minorEnemyCount;
     public int shootingEnemyCount;
     public int enemyLimit;
@@ -18,6 +18,6 @@ public class Lane : MonoBehaviour
     void Start()
     {
         position = LaneReferenceObject.position;
-        rotation = LaneReferenceObject.eulerAngles;   
+        rotation = LaneReferenceObject.rotation;   
     }
 }

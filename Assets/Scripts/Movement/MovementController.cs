@@ -21,18 +21,23 @@ public class MovementController : MonoBehaviour
     public float speed;
     public float maxSpeed;
     public float jumpMult;
+    public float laneChangeSpeed;
     [Header("Force Vectors")]
     public Vector3 gravityForce;
     private Vector3 pushForce;
     private Vector3 jumpForce;
+
+    public Vector3 newPosition;
     //Whether on not a change has occured
     [Header("State Vars")]
     public bool changed;
     public bool pushing;
     public bool jumping;
     public bool falling;
+    public bool changing;
     //An iterator keeping track of the current lane
     public int currentLane;
+    public  bool jumpQueue;
     //The rigid body of the object being controlled
     [Header("Animation Control")]
     public Animator anim;
@@ -87,7 +92,7 @@ public class MovementController : MonoBehaviour
         }
         
         //This will handle a space or jump push
-        if(Input.GetKeyDown(KeyCode.Space) && !jumping && !falling)
+        if(Input.GetKeyDown(KeyCode.Space) && !jumping && !falling || jumpQueue && !jumping && !falling)
         {
             jumping = true;
             falling = false;
@@ -96,18 +101,25 @@ public class MovementController : MonoBehaviour
             //Helps to make jump feel bouncy and respoonsive
             subjectRb.velocity = new Vector3 (0,0,0);
             subjectRb.AddForce(jumpForce,ForceMode.Impulse);
+
+            if(jumpQueue)
+            {
+                jumpQueue = false;
+            }
         }
-
-        //A lane change occurs and new positions are set
-        if(changed)
+        if((Input.GetKeyDown(KeyCode.Space)) && changing)
         {
-            Vector3 newPosition = new Vector3(0f,0f,0f); 
-
+            jumpQueue = true;
+        }
+        //A lane change occurs and new positions are set
+        if(changed || changing)
+        {
             //Z position is the only nonchanging value as it show progress through each lane
             //also checks if current height is less than another lane
             if((!jumping && !falling) || (jumping && !falling) || (falling && lanes[currentLane].position.y - subject.transform.position.y < laneDiff))
             {
                 newPosition = new Vector3(lanes[currentLane].position.x,lanes[currentLane].position.y,subject.transform.position.z);
+
             }
 
             else
@@ -116,14 +128,26 @@ public class MovementController : MonoBehaviour
             }
 
             //Setting the new position and rotation of the object
-            subject.transform.position = newPosition;
-            subject.transform.eulerAngles = lanes[currentLane].rotation;
+
+            //subject.transform.position = newPosition;
+            //subject.transform.eulerAngles = lanes[currentLane].rotation;
             
             //Keeping movement in the y and z axis, x is frozen as no strafe movement
             subjectRb.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionX;
             changed = false;
+            changing = true;
         }
-            
+
+        if(subject.transform.position != newPosition && changing)
+        {
+            float step = Time.deltaTime * laneChangeSpeed;
+            subject.transform.rotation = Quaternion.RotateTowards(subject.transform.rotation,lanes[currentLane].rotation,step);
+            subject.transform.position = Vector3.MoveTowards(subject.transform.position,newPosition,step);
+        }
+        else
+        {
+            changing = false;
+        }
     }
 
     void FixedUpdate() 

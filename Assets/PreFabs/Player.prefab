@@ -364,12 +364,16 @@ MonoBehaviour:
   speed: 6
   maxSpeed: 25
   jumpMult: 8
+  laneChangeSpeed: 50
   gravityForce: {x: 0, y: -20, z: 0}
+  newPosition: {x: 0, y: 0, z: 0}
   changed: 0
   pushing: 0
   jumping: 0
   falling: 0
+  changing: 0
   currentLane: 0
+  jumpQueue: 0
   anim: {fileID: 10854954754580604}
   animOver: 0
   laneChangeDelay: 0.3

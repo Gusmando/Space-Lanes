@@ -231,9 +231,40 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LaneReferenceObject: {fileID: 1201143542}
   position: {x: 0, y: 0, z: 0}
-  rotation: {x: 0, y: 0, z: 0}
-  enemyCount: 0
+  rotation: {x: 0, y: 0, z: 0, w: 0}
+  minorEnemyCount: 0
+  shootingEnemyCount: 0
   enemyLimit: 0
+--- !u!1 &142270384
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 142270385}
+  m_Layer: 0
+  m_Name: --------------------Spawned-----------------------------
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &142270385
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 142270384}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.8478324, z: 0.36}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 14
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &427050363
 GameObject:
   m_ObjectHideFlags: 0
@@ -344,8 +375,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LaneReferenceObject: {fileID: 1827137624}
   position: {x: 0, y: 0, z: 0}
-  rotation: {x: 0, y: 0, z: 0}
-  enemyCount: 0
+  rotation: {x: 0, y: 0, z: 0, w: 0}
+  minorEnemyCount: 0
+  shootingEnemyCount: 0
   enemyLimit: 0
 --- !u!1 &428752950
 GameObject:
@@ -487,8 +519,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LaneReferenceObject: {fileID: 768738735}
   position: {x: 0, y: 0, z: 0}
-  rotation: {x: 0, y: 0, z: 0}
-  enemyCount: 0
+  rotation: {x: 0, y: 0, z: 0, w: 0}
+  minorEnemyCount: 0
+  shootingEnemyCount: 0
   enemyLimit: 0
 --- !u!1 &705507993
 GameObject:
@@ -797,6 +830,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3fba162743278241b2eb5c1b6218897, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lanes:
+  - {fileID: 427050368}
+  - {fileID: 503387616}
+  - {fileID: 4334381}
+  lowActiveLane: 0
+  laneChange: 1
+  laneDelayTime: 5
 --- !u!4 &1377402365
 Transform:
   m_ObjectHideFlags: 0
@@ -883,6 +923,11 @@ PrefabInstance:
       propertyPath: threatDistance
       value: 45
       objectReference: {fileID: 0}
+    - target: {fileID: 8202607085486834878, guid: 60aca5bc959b7f146b278a9c0b69fbe8,
+        type: 3}
+      propertyPath: gameManager
+      value: 
+      objectReference: {fileID: 1377402364}
     - target: {fileID: 8202607085486834879, guid: 60aca5bc959b7f146b278a9c0b69fbe8,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -896,7 +941,7 @@ PrefabInstance:
     - target: {fileID: 8202607085486834879, guid: 60aca5bc959b7f146b278a9c0b69fbe8,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 62
+      value: 67.1
       objectReference: {fileID: 0}
     - target: {fileID: 8202607085486834879, guid: 60aca5bc959b7f146b278a9c0b69fbe8,
         type: 3}
@@ -1059,7 +1104,7 @@ PrefabInstance:
     - target: {fileID: 1259156079434781978, guid: 57c4d095bd97070468405ec72d75067d,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -13.056641
+      value: 0.55
       objectReference: {fileID: 0}
     - target: {fileID: 1259156079434781978, guid: 57c4d095bd97070468405ec72d75067d,
         type: 3}
@@ -1185,6 +1230,11 @@ PrefabInstance:
       propertyPath: threatDistance
       value: 45
       objectReference: {fileID: 0}
+    - target: {fileID: 8202607085486834878, guid: 60aca5bc959b7f146b278a9c0b69fbe8,
+        type: 3}
+      propertyPath: gameManager
+      value: 
+      objectReference: {fileID: 1377402364}
     - target: {fileID: 8202607085486834879, guid: 60aca5bc959b7f146b278a9c0b69fbe8,
         type: 3}
       propertyPath: m_LocalPosition.x

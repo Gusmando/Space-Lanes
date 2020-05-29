@@ -84,7 +84,7 @@ public class EnemyMovement : MonoBehaviour
 
             //Setting the new position and rotation of the object
             subject.transform.position = newPosition;
-            subject.transform.eulerAngles = lanes[currentLane].rotation;
+            subject.transform.eulerAngles = lanes[currentLane].LaneReferenceObject.transform.eulerAngles;
             
             //Keeping movement in the y and z axis, x is frozen as no strafe movement
             subjectRb.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionX;
