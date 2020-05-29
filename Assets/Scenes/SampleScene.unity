@@ -928,6 +928,11 @@ PrefabInstance:
       propertyPath: gameManager
       value: 
       objectReference: {fileID: 1377402364}
+    - target: {fileID: 8202607085486834878, guid: 60aca5bc959b7f146b278a9c0b69fbe8,
+        type: 3}
+      propertyPath: laneChangeSpeed
+      value: 30
+      objectReference: {fileID: 0}
     - target: {fileID: 8202607085486834879, guid: 60aca5bc959b7f146b278a9c0b69fbe8,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1181,6 +1186,11 @@ PrefabInstance:
       propertyPath: lanes.Array.data[2]
       value: 
       objectReference: {fileID: 4334381}
+    - target: {fileID: 1259156079434781982, guid: 57c4d095bd97070468405ec72d75067d,
+        type: 3}
+      propertyPath: laneChangeSpeed
+      value: 30
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 57c4d095bd97070468405ec72d75067d, type: 3}
 --- !u!1001 &8202607085949963275
@@ -1235,6 +1245,11 @@ PrefabInstance:
       propertyPath: gameManager
       value: 
       objectReference: {fileID: 1377402364}
+    - target: {fileID: 8202607085486834878, guid: 60aca5bc959b7f146b278a9c0b69fbe8,
+        type: 3}
+      propertyPath: laneChangeSpeed
+      value: 30
+      objectReference: {fileID: 0}
     - target: {fileID: 8202607085486834879, guid: 60aca5bc959b7f146b278a9c0b69fbe8,
         type: 3}
       propertyPath: m_LocalPosition.x
