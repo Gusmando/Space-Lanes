@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 258534753093960830}
   m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 0.014344215, y: -0.13071513, z: -0.2256911}
-  m_LocalScale: {x: 0.0123000005, y: 0.012300001, z: 0.012300001}
+  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_Children: []
   m_Father: {fileID: 6264523955789674890}
   m_RootOrder: 1
@@ -4781,7 +4781,7 @@ Transform:
   m_GameObject: {fileID: 820282354422414752}
   m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 0.014344215, y: -0.13071513, z: -0.2256911}
-  m_LocalScale: {x: 0.060000002, y: 0.060000006, z: 0.060000006}
+  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_Children: []
   m_Father: {fileID: 6264523955789674890}
   m_RootOrder: 0
@@ -9652,8 +9652,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6872043995448701581}
   m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0.0124845505, y: -0.1307149, z: -0.22269131}
-  m_LocalScale: {x: 0.120000005, y: 0.12000001, z: 0.12000001}
+  m_LocalPosition: {x: 0.0124845505, y: -0.1307149, z: -0.231}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
   m_Father: {fileID: 6264523955789674890}
   m_RootOrder: 2
@@ -9848,7 +9848,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 1, g: 0, b: 0.8970642, a: 0.27058825}
+      maxColor: {r: 1, g: 0, b: 0.8970642, a: 0.4745098}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -13391,10 +13391,10 @@ ParticleSystem:
     enabled: 1
     ratio: 1
     light: {fileID: 4088962956165889847, guid: 7015b3a681ad3b048aa1a958ba75a3a2, type: 3}
-    randomDistribution: 1
+    randomDistribution: 0
     color: 1
-    range: 1
-    intensity: 1
+    range: 0
+    intensity: 0
     rangeCurve:
       serializedVersion: 2
       minMaxState: 0
@@ -13451,7 +13451,7 @@ ParticleSystem:
     intensityCurve:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 5
+      scalar: 1
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -13501,7 +13501,7 @@ ParticleSystem:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
-    maxLights: 1
+    maxLights: 100
   TrailModule:
     enabled: 0
     mode: 0
