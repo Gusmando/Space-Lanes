@@ -25,11 +25,11 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 258534753093960830}
-  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: -0.00000047683716, z: 0.0000009536743}
-  m_LocalScale: {x: 0.041, y: 0.041, z: 0.041}
+  m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: 0.014344215, y: -0.13071513, z: -0.2256911}
+  m_LocalScale: {x: 0.0123000005, y: 0.012300001, z: 0.012300001}
   m_Children: []
-  m_Father: {fileID: 1705798171018837420}
+  m_Father: {fileID: 6264523955789674890}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!198 &4878773815313645395
@@ -284,7 +284,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 0.5
+      scalar: 1
       minScalar: 0.05
       maxCurve:
         serializedVersion: 2
@@ -4779,11 +4779,11 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 820282354422414752}
-  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: -0.00000047683716, z: 0.0000009536743}
-  m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
+  m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: 0.014344215, y: -0.13071513, z: -0.2256911}
+  m_LocalScale: {x: 0.060000002, y: 0.060000006, z: 0.060000006}
   m_Children: []
-  m_Father: {fileID: 1705798171018837420}
+  m_Father: {fileID: 6264523955789674890}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!198 &2790843733719206812
@@ -9521,7 +9521,7 @@ GameObject:
   - component: {fileID: 1705798171018837421}
   - component: {fileID: 1705798171018837408}
   m_Layer: 8
-  m_Name: Spinning Orb
+  m_Name: Bullet
   m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9538,9 +9538,7 @@ Transform:
   m_LocalPosition: {x: 15.54, y: 2.97, z: 2.355}
   m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_Children:
-  - {fileID: 7854454839085903354}
-  - {fileID: 6678927232467802865}
-  - {fileID: 5374175055637637972}
+  - {fileID: 6264523955789674890}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -9595,6 +9593,39 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 6
   m_CollisionDetection: 1
+--- !u!1 &5884478337955009181
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6264523955789674890}
+  m_Layer: 0
+  m_Name: Spinning Orb
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6264523955789674890
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5884478337955009181}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.04781405, y: 0.4357163, z: 0.7523044}
+  m_LocalScale: {x: 3.3333333, y: 3.3333333, z: 3.3333333}
+  m_Children:
+  - {fileID: 7854454839085903354}
+  - {fileID: 6678927232467802865}
+  - {fileID: 5374175055637637972}
+  m_Father: {fileID: 1705798171018837420}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6872043995448701581
 GameObject:
   m_ObjectHideFlags: 0
@@ -9620,11 +9651,11 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6872043995448701581}
-  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -0.0062, y: 0, z: 0.01}
-  m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
+  m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: 0.0124845505, y: -0.1307149, z: -0.22269131}
+  m_LocalScale: {x: 0.120000005, y: 0.12000001, z: 0.12000001}
   m_Children: []
-  m_Father: {fileID: 1705798171018837420}
+  m_Father: {fileID: 6264523955789674890}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!198 &8954621125345945191
