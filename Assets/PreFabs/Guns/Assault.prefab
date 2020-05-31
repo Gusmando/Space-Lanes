@@ -53,6 +53,6 @@ MonoBehaviour:
   clipSize: 10
   fullClip: 10
   clipCount: 5
-  shakeIntensity: 0.1
+  shakeIntensity: 5
   shakeDelay: 0.05
   damage: 5

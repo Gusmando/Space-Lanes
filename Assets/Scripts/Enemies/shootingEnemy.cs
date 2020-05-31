@@ -5,7 +5,6 @@ using UnityEngine;
 public class shootingEnemy : EnemyMovement
 {
     public GunController gunContr; 
-    public GameManager gameManager;
     public float threatDistance;
     public bool canChange;
     public float changeDelayTime;
@@ -13,7 +12,13 @@ public class shootingEnemy : EnemyMovement
     public float reloadTime;
     public float sameLaneShotDelay;
     public float sameLaneReloadTime;
+    public float rayCastLeftOffset;
+    public float rayCastRightOffset;
+    public bool leftOpen;
+    public bool rightOpen;
     public bool sameLane;
+    public bool laneSkip;
+    public int shifting;
     private IEnumerator stoppedCoroutine;
     private IEnumerator changedCoroutine;
     override public void Start()
@@ -60,33 +65,40 @@ public class shootingEnemy : EnemyMovement
         {
             gunContr.reloadTime = this.reloadTime;
             gunContr.currentGun.delayTime= shotDelayTime;
+            RaycastHit hitLeft;
+            Vector3 highObjectleftRight = subject.transform.position + new Vector3(0,5,0);
+            Vector3 left = subject.transform.position + new Vector3(rayCastLeftOffset,lanes[currentLane].position.y,0);
+            Vector3 leftDirection = left - highObjectleftRight;
+
+            RaycastHit hitRight;
+            Vector3 right = subject.transform.position + new Vector3(rayCastRightOffset,lanes[currentLane].position.y,0);
+            Vector3 rightDirection = right - highObjectleftRight;
+
+            leftOpen = Physics.Raycast(highObjectleftRight,leftDirection,out hitLeft);
+            rightOpen = Physics.Raycast(highObjectleftRight,rightDirection,out hitRight);
+            Debug.DrawRay(highObjectleftRight, leftDirection, Color.blue);
+            Debug.DrawRay(highObjectleftRight, rightDirection, Color.red);
+
             if(canChange)
             {
                 lanes[currentLane].shootingEnemyCount --;
-                int laneShift = Random.Range(0,2);
+                shifting = Random.Range(0,2);
+                
+                if(shifting == 0 && leftOpen && currentLane - 1 != gameManager.lowActiveLane)
+                {
+                    changeLane(shifting);
+                }
 
-                if(laneShift == 0 && (currentLane - 1 != gameManager.lowActiveLane))
+                if(shifting == 1 && rightOpen && currentLane + 1 != gameManager.lowActiveLane)
                 {
-                    changeLane(laneShift);
-                }
-                else if(laneShift == 0 && (currentLane - 1 == gameManager.lowActiveLane))
-                {
-                    changeLane(laneShift + 1);
-                }
-                if(laneShift == 1 && (currentLane + 1 != gameManager.lowActiveLane))
-                {
-                    changeLane(laneShift);
-                }
-                else if(laneShift == 0 && (currentLane + 1 == gameManager.lowActiveLane))
-                {
-                    changeLane(laneShift - 1);
+                    changeLane(shifting);
                 }
                 
                 lanes[currentLane].shootingEnemyCount ++;
                 StartCoroutine(changeDelay(changeDelayTime));   
             }
         }
-
+        lanes[currentLane].shootingEnemyCount ++;
         base.Update();
     }
 

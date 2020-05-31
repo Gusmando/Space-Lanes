@@ -96,10 +96,6 @@ public class MovementController : MonoBehaviour
         {
             jumping = true;
             falling = false;
-
-            //Stops the object before the jump happens
-            //Helps to make jump feel bouncy and respoonsive
-            subjectRb.velocity = new Vector3 (0,0,0);
             subjectRb.AddForce(jumpForce,ForceMode.Impulse);
 
             if(jumpQueue)

@@ -9,18 +9,37 @@ public class minorEnemy : EnemyMovement
     public float rangePushMax;
     public float rangeStopMin;
     public float rangeStopMax;
+    public float rayCastLeftOffset;
+    public float rayCastRightOffset;
     public bool stoppedOnce;
+    public bool leftOpen;
+    public bool rightOpen;
 
     override public void Start()
     {
         base.Start();
-        lanes[currentLane].minorEnemyCount ++;
+        
     }
     override public void Update()
     {   
         
         if(player.GetComponent<MovementController>().currentLane == currentLane)
         {
+            RaycastHit hitLeft;
+            Vector3 highObjectleftRight = subject.transform.position + new Vector3(0,5,0);
+            Vector3 left = subject.transform.position + new Vector3(rayCastLeftOffset,lanes[currentLane].position.y,0);
+            Vector3 leftDirection = left - highObjectleftRight;
+
+            RaycastHit hitRight;
+            Vector3 right = subject.transform.position + new Vector3(rayCastRightOffset,lanes[currentLane].position.y,0);
+            Vector3 rightDirection = right - highObjectleftRight;
+
+            leftOpen = Physics.Raycast(highObjectleftRight,leftDirection,out hitLeft);
+            rightOpen = Physics.Raycast(highObjectleftRight,rightDirection,out hitRight);
+
+            Debug.DrawRay(highObjectleftRight, leftDirection, Color.blue);
+            Debug.DrawRay(highObjectleftRight, rightDirection, Color.red);
+
             if(!stopped && (distanceToPlayer <= threatDistance) && !stoppedOnce)
             {
                 StartCoroutine(stopDelay(Random.Range(rangeStopMin,rangeStopMax)));
@@ -32,12 +51,25 @@ public class minorEnemy : EnemyMovement
                 StartCoroutine(pushLength(Random.Range(rangePushMin,rangePushMax)));
             }
 
-            if(stoppedOnce && !stopped && distanceToPlayer <= threatDistance)
+            if(distanceToPlayer <= threatDistance && (leftOpen || rightOpen) && stoppedOnce)
             {
                 lanes[currentLane].minorEnemyCount --;
-                changeLane(Random.Range(0,2));
+                if(leftOpen && rightOpen)
+                {
+                    changeLane(Random.Range(0,2));
+                    stoppedOnce = false;
+                }
+                else if(leftOpen)
+                {
+                    changeLane(1);
+                    stoppedOnce = false;
+                }
+                else if(rightOpen)
+                {
+                    changeLane(0);
+                    stoppedOnce = false;
+                }
                 lanes[currentLane].minorEnemyCount ++;
-                stoppedOnce = false;
             }
         }
 
@@ -50,6 +82,7 @@ public class minorEnemy : EnemyMovement
         }
         
         base.Update(); 
+        lanes[currentLane].minorEnemyCount ++;
 
     }
     protected IEnumerator stopDelay(float delayLength)

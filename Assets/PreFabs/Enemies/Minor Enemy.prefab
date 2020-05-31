@@ -121,8 +121,10 @@ MonoBehaviour:
   speed: -5
   maxSpeed: -20
   jumpMult: 10
-  rayCastOffset: -5
+  rayCastOffset: -1
+  laneChangeSpeed: 0
   gravityForce: {x: 0, y: -20, z: 0}
+  newPosition: {x: 0, y: 0, z: 0}
   changed: 1
   pushing: 0
   jumping: 0
@@ -131,6 +133,7 @@ MonoBehaviour:
   idle: 0
   jump: 0
   choice: 0
+  changing: 0
   currentLane: 0
   anim: {fileID: 0}
   animOver: 0
