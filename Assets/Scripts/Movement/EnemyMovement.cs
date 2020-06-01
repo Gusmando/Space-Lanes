@@ -25,6 +25,7 @@ public class EnemyMovement : MonoBehaviour
     public float rayCastOffset;
     public float rayChange;
     public float laneChangeSpeed;
+    public float leftRightOffset;
     
     [Header("Force Vectors")]
     public Vector3 gravityForce;
@@ -42,10 +43,9 @@ public class EnemyMovement : MonoBehaviour
     public bool jump;
     public bool choice;
     public bool changing;
-    public bool first;
+    public bool noGap;
     //An iterator keeping track of the current lane
     public int currentLane;
-    public int initShift;
     //The rigid body of the object being controlled
     [Header("Animation Control")]
     public Animator anim;
@@ -60,7 +60,6 @@ public class EnemyMovement : MonoBehaviour
         currentLane = Random.Range(0,lanes.Length); 
         subjectRb = subject.GetComponent<Rigidbody>();
         animOver = true;
-        first = true;
     }
 
     virtual public void Update()
@@ -116,41 +115,6 @@ public class EnemyMovement : MonoBehaviour
             Destroy(subject);
         }
         
-        if(first)
-        {
-            RaycastHit initHit;
-            Vector3 highInitObject = subject.transform.position + new Vector3(0,5,0);
-            Vector3 below = subject.transform.position + new Vector3(0,lanes[currentLane].position.y,0);
-            Vector3 direction = below - highInitObject;
-
-            bool belowClear = Physics.Raycast(highInitObject,direction,out initHit);
-
-            if(!belowClear)
-            {
-                RaycastHit otherHit;
-                highInitObject = subject.transform.position + new Vector3(0,5,0);
-                Vector3 right = subject.transform.position + new Vector3(rayChange,lanes[currentLane].position.y,0);
-                Vector3 left = subject.transform.position + new Vector3(-1* rayChange,lanes[currentLane].position.y,0);
-                Vector3 directionRight = right - highInitObject;
-                Vector3 directionLeft = left - highInitObject;
-                bool lefty = Physics.Raycast(highInitObject,directionLeft,out initHit);
-                bool righty = Physics.Raycast(highInitObject,directionRight, out otherHit);
-                initShift = Random.Range(0,2);
-                
-                if(initShift == 0 && lefty && currentLane - 1 != gameManager.lowActiveLane)
-                {
-                    changeLane(initShift);
-                }
-
-                else if(initShift== 1 && righty && currentLane + 1 != gameManager.lowActiveLane)
-                {
-                    changeLane(initShift);
-                }
-
-            }
-
-            first = false;
-        }
     }
     virtual protected void FixedUpdate() 
     {
@@ -195,13 +159,54 @@ public class EnemyMovement : MonoBehaviour
             Vector3 highObject = subject.transform.position + new Vector3(0,5,0);
             Vector3 inFront = subject.transform.position + new Vector3(0,lanes[currentLane].position.y,rayCastOffset);
             Vector3 direction = inFront - highObject;
-            Debug.DrawRay(highObject, direction, Color.green);
 
-            if(!(Physics.Raycast(highObject,direction,out hit,25)) && !jump && !jumping && !falling)
+            RaycastHit leftHit;
+            Vector3 leftVec = subject.transform.position + new Vector3(-1*leftRightOffset,lanes[currentLane].position.y,0);
+            Vector3 leftDirections = leftVec - highObject;
+
+            RaycastHit rightHit;
+            Vector3 rightVec = subject.transform.position + new Vector3(leftRightOffset,lanes[currentLane].position.y,0);
+            Vector3 rightDirections = rightVec - highObject;
+
+            bool leftOpens = Physics.Raycast(highObject,leftDirections,out leftHit);
+            bool rightOpens = Physics.Raycast(highObject,rightDirections,out rightHit);
+            noGap = Physics.Raycast(highObject,direction,out hit,25);
+
+            Debug.DrawRay(highObject, direction, Color.green);
+            Debug.DrawRay(highObject, rightDirections, Color.blue);
+            Debug.DrawRay(highObject, leftDirections, Color.red);
+            if(leftOpens && rightOpens && !noGap && !changing)
+            {
+                int changeDirect = Random.Range(0,2);
+                if(changeDirect == 0 && (currentLane - 1) >= 0)
+                {
+                    changeLane(changeDirect);
+                }
+                else if(changeDirect == 1 && (currentLane + 1) <= (lanes.Length-1))
+                {
+                    changeLane(changeDirect);
+                }
+            }
+            else if(leftOpens && !noGap && !changing)
+            {
+                if((currentLane - 1) >= 0)
+                {
+                    changeLane(0);
+                }
+            }
+            else if(rightOpens && !noGap && !changing)
+            {
+                if((currentLane + 1) <= (lanes.Length-1))
+                {
+                    changeLane(1);
+                }
+            }
+            else if(!noGap && !jump && !jumping && !falling && !leftOpens && !rightOpens)
             {
                 jump = true;
             }
 
+            noGap = true;
             //Accelerate as long as top speed is not hit
             if(subjectRb.velocity.z > maxSpeed)
             {

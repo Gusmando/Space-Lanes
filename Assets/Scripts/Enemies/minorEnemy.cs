@@ -37,8 +37,8 @@ public class minorEnemy : EnemyMovement
             leftOpen = Physics.Raycast(highObjectleftRight,leftDirection,out hitLeft);
             rightOpen = Physics.Raycast(highObjectleftRight,rightDirection,out hitRight);
 
-            Debug.DrawRay(highObjectleftRight, leftDirection, Color.blue);
-            Debug.DrawRay(highObjectleftRight, rightDirection, Color.red);
+            //Debug.DrawRay(highObjectleftRight, leftDirection, Color.blue);
+            //Debug.DrawRay(highObjectleftRight, rightDirection, Color.red);
 
             if(!stopped && (distanceToPlayer <= threatDistance) && !stoppedOnce)
             {

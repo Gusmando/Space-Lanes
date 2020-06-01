@@ -79,7 +79,7 @@ public class shootingEnemy : EnemyMovement
             Debug.DrawRay(highObjectleftRight, leftDirection, Color.blue);
             Debug.DrawRay(highObjectleftRight, rightDirection, Color.red);
 
-            if(canChange)
+            if(canChange && noGap)
             {
                 lanes[currentLane].shootingEnemyCount --;
                 shifting = Random.Range(0,2);

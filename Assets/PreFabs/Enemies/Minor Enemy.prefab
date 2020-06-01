@@ -113,6 +113,7 @@ MonoBehaviour:
   health: 15
   player: {fileID: 10854956270901641, guid: 9d8075e9d7bf31249b48173e41228732, type: 3}
   distanceToPlayer: 0
+  gameManager: {fileID: 0}
   lanes:
   - {fileID: 0}
   - {fileID: 0}
@@ -122,7 +123,9 @@ MonoBehaviour:
   maxSpeed: -20
   jumpMult: 10
   rayCastOffset: -1
+  rayChange: 0
   laneChangeSpeed: 0
+  leftRightOffset: 3
   gravityForce: {x: 0, y: -20, z: 0}
   newPosition: {x: 0, y: 0, z: 0}
   changed: 1
@@ -144,7 +147,11 @@ MonoBehaviour:
   rangePushMax: 100
   rangeStopMin: 1
   rangeStopMax: 1
+  rayCastLeftOffset: 0
+  rayCastRightOffset: 0
   stoppedOnce: 0
+  leftOpen: 0
+  rightOpen: 0
 --- !u!54 &1259156079434781981
 Rigidbody:
   m_ObjectHideFlags: 0
