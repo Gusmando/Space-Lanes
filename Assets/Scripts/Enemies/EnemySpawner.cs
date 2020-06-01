@@ -34,7 +34,7 @@ public class EnemySpawner : MonoBehaviour
     {
 
         if(canWave)
-        (
+        {
             if(canSpawnMinor)
             {
                 minorEnemies--;
@@ -46,7 +46,7 @@ public class EnemySpawner : MonoBehaviour
                 shooterEnemies --;
                 StartCoroutine(shooterDelay(Random.Range(randMinShoot,randMaxShoot))); 
             } 
-        )
+        }
 
         if(minorEnemies == 0 && shooterEnemies == 0 && waves > 0 && !canWave)
         {
