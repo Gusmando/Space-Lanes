@@ -9,11 +9,6 @@ public class Section : MonoBehaviour
     public bool sectionActive;
     public GameObject endSpawn;
     // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void activateSpawner()
     {
         if(sectionActive)
