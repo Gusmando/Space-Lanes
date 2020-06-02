@@ -56,6 +56,7 @@ public class EnemyMovement : MonoBehaviour
 
     virtual public void Start()
     {
+        gameManager = GameObject.FindWithTag("GameManager").GetComponent<GameManager>();
         lanes = gameManager.currentLanes;
         changed = true;
         currentLane = Random.Range(0,lanes.Length); 
@@ -119,7 +120,6 @@ public class EnemyMovement : MonoBehaviour
     }
     virtual protected void FixedUpdate() 
     {
-        lanes = gameManager.currentLanes;
         distanceToPlayer = Vector3.Distance(player.transform.position,subject.transform.position);
         //Push and jump force set in inspector
         pushForce = new Vector3(0,0,10*speed);

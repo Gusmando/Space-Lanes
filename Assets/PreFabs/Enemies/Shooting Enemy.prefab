@@ -146,8 +146,7 @@ MonoBehaviour:
   health: 25
   player: {fileID: 10854956270901641, guid: 9d8075e9d7bf31249b48173e41228732, type: 3}
   distanceToPlayer: 0
-  gameManager: {fileID: 3438543757305703674, guid: 67b3be9d968ad7845857d76faf9acdbf,
-    type: 3}
+  gameManager: {fileID: 0}
   lanes: []
   laneDiff: 0.05
   speed: -5

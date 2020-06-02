@@ -12,13 +12,13 @@ public class GameManager : MonoBehaviour
     public int sectionsCleared;
     public int activeSection;
 
-    void Awake()
+    void Start()
     {
 
         Physics.IgnoreLayerCollision(9,9,true);
         activeSection = Random.Range(0,sections.Length);
-        currentLanes = sections[activeSection].lanes;
-        sections[activeSection].sectionActive = true;
+        currentLanes = GameObject.FindWithTag("activeSection").GetComponent<Section>().lanes;
+        GameObject.FindWithTag("activeSection").GetComponent<Section>().sectionActive = true;
     }
     void Update()
     {

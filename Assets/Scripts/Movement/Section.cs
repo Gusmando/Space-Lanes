@@ -8,6 +8,10 @@ public class Section : MonoBehaviour
     public EnemySpawner[] Spawners;
     public bool sectionActive;
     public GameObject spawn;
+    void Start() 
+    {
+        
+    }
 
     // Update is called once per frame
     void Update()

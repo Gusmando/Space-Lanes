@@ -357,8 +357,7 @@ MonoBehaviour:
   subject: {fileID: 10854956270901641}
   subjectRb: {fileID: 10854956270901640}
   health: 100
-  gameManager: {fileID: 3438543757305703674, guid: 67b3be9d968ad7845857d76faf9acdbf,
-    type: 3}
+  gameManager: {fileID: 0}
   lanes: []
   laneDiff: 1.5
   speed: 9

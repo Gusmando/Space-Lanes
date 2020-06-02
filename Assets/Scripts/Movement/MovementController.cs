@@ -47,12 +47,12 @@ public class MovementController : MonoBehaviour
     public bool leftRight;
     public int animStateDisp;
     public GunController weapon;
-    void Awake() 
+    void Start() 
     {
        //Initial placement will be set in middle
        //will change this to be set in editor
        changed = false; 
-       lanes = gameManager.currentLanes;
+       lanes = GameObject.FindWithTag("GameManager").GetComponent<GameManager>().currentLanes;
        currentLane = (lanes.Length/2);
        subjectRb = subject.GetComponent<Rigidbody>();
        animOver = true;
@@ -150,7 +150,6 @@ public class MovementController : MonoBehaviour
 
     void FixedUpdate() 
     {
-        lanes = gameManager.currentLanes;
         //Push and jump force set in inspector
         pushForce = new Vector3(0,0,10*speed);
         jumpForce = new Vector3(0,jumpMult,0);

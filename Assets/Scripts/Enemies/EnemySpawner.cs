@@ -52,20 +52,21 @@ public class EnemySpawner : MonoBehaviour
                     StartCoroutine(shooterDelay(Random.Range(randMinShoot,randMaxShoot))); 
                 } 
             }
-
-            if(minorEnemies == 0 && shooterEnemies == 0 && waves > 0 && !canWave)
-            {
-                StartCoroutine(waveDelay(waveDelayTime));
-            }
-
-            if(canWave && waves>= 0)
+            if(canWave && waves>= 0 && minorEnemies == 0 && shooterEnemies == 0 && waves > 0)
             {
                 shooterEnemies = totalShooter;
                 minorEnemies = totalMinor;
                 waves--;
                 canWave = false;
             }
+
+            if(minorEnemies == 0 && shooterEnemies == 0 && waves > 0 && !canWave )
+            {
+                StartCoroutine(waveDelay(waveDelayTime));
+            }
         }
+
+        
     }
        
     protected IEnumerator shooterDelay(float delayLength)

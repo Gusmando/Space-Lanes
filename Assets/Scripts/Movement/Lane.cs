@@ -19,6 +19,7 @@ public class Lane : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        LaneReferenceObject = this.transform.GetChild(0);
         position = LaneReferenceObject.position;
         rotation = LaneReferenceObject.rotation;   
     }
