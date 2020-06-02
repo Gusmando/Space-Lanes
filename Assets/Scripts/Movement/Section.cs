@@ -5,17 +5,23 @@ using UnityEngine;
 public class Section : MonoBehaviour
 {
     public Lane[] lanes;
-    public EnemySpawner[] Spawners;
+    public EnemySpawner[] spawners;
     public bool sectionActive;
-    public GameObject spawn;
-    void Start() 
-    {
-        
-    }
-
+    public GameObject endSpawn;
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    public void activateSpawner()
+    {
+        if(sectionActive)
+        {
+            foreach (EnemySpawner x in spawners)
+            {
+                x.isActive = true;
+            }
+        }
     }
 }

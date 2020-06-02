@@ -4,21 +4,28 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public Section[] sections;
+    public GameObject[] sections;
     public Lane[] currentLanes;
     public  int lowActiveLane;
     public bool  laneChange;
+    public bool activeSectionChanged;
     public float laneDelayTime;
     public int sectionsCleared;
     public int activeSection;
+    public GameObject spawned;
+    public GameObject initSpawnPoint;
+
 
     void Start()
     {
-
         Physics.IgnoreLayerCollision(9,9,true);
         activeSection = Random.Range(0,sections.Length);
+        spawned = Instantiate(sections[activeSection],initSpawnPoint.transform.position,initSpawnPoint.transform.rotation);
+        spawned.tag = "activeSection";
         currentLanes = GameObject.FindWithTag("activeSection").GetComponent<Section>().lanes;
-        GameObject.FindWithTag("activeSection").GetComponent<Section>().sectionActive = true;
+        spawned.GetComponent<Section>().sectionActive = true;
+        spawned.GetComponent<Section>().activateSpawner();
+        
     }
     void Update()
     {

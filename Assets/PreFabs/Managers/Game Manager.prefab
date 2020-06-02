@@ -44,10 +44,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sections:
-  - {fileID: 0}
+  - {fileID: 3668009467808806316, guid: ad363a88c083e3645a3787555480ccca, type: 3}
   currentLanes: []
   lowActiveLane: 0
   laneChange: 1
   laneDelayTime: 5
   sectionsCleared: 0
   activeSection: 0
+  spawned: {fileID: 0}
+  initSpawnPoint: {fileID: 0}
