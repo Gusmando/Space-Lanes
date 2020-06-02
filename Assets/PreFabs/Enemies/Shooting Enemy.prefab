@@ -146,18 +146,16 @@ MonoBehaviour:
   health: 25
   player: {fileID: 10854956270901641, guid: 9d8075e9d7bf31249b48173e41228732, type: 3}
   distanceToPlayer: 0
-  gameManager: {fileID: 0}
-  lanes:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  gameManager: {fileID: 3438543757305703674, guid: 67b3be9d968ad7845857d76faf9acdbf,
+    type: 3}
+  lanes: []
   laneDiff: 0.05
   speed: -5
   maxSpeed: -17
   jumpMult: 10
-  rayCastOffset: -1
-  rayChange: 0
-  laneChangeSpeed: 0
+  rayCastOffset: -2
+  rayChange: 3
+  laneChangeSpeed: 30
   leftRightOffset: 3
   gravityForce: {x: 0, y: -20, z: 0}
   newPosition: {x: 0, y: 0, z: 0}
@@ -170,21 +168,22 @@ MonoBehaviour:
   jump: 0
   choice: 0
   changing: 0
+  noGap: 0
   currentLane: 0
   anim: {fileID: 0}
   animOver: 0
   laneChangeDelay: 2
   leftRight: 0
   gunContr: {fileID: 8202607085486834875}
-  threatDistance: 35
+  threatDistance: 45
   canChange: 1
   changeDelayTime: 0.5
   shotDelayTime: 0.3
   reloadTime: 4
   sameLaneShotDelay: 0.2
   sameLaneReloadTime: 2
-  rayCastLeftOffset: 0
-  rayCastRightOffset: 0
+  rayCastLeftOffset: -3
+  rayCastRightOffset: 3
   leftOpen: 0
   rightOpen: 0
   sameLane: 0

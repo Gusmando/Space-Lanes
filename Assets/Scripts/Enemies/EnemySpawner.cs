@@ -19,6 +19,7 @@ public class EnemySpawner : MonoBehaviour
     public bool canWave;
     public int totalShooter;
     public int totalMinor;
+    public bool isActive;
 
     // Start is called before the first frame update
     void Start()
@@ -32,35 +33,41 @@ public class EnemySpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        if(canWave)
+        if(isActive)
         {
-            if(canSpawnMinor)
+            if(canWave)
             {
-                minorEnemies--;
-                StartCoroutine(minorDelay(Random.Range(randMinMinor,randMaxMinor)));    
+
+                if(canSpawnMinor)
+                {
+                    Instantiate(minorEnemy,transform.position ,transform.rotation);
+                    minorEnemies--;
+                    StartCoroutine(minorDelay(Random.Range(randMinMinor,randMaxMinor)));    
+                }
+
+                if(canSpawnShoot)
+                {
+                    Instantiate(shooterEnemy,transform.position ,transform.rotation);
+                    shooterEnemies --;
+                    StartCoroutine(shooterDelay(Random.Range(randMinShoot,randMaxShoot))); 
+                } 
             }
 
-            if(canSpawnShoot)
+            if(minorEnemies == 0 && shooterEnemies == 0 && waves > 0 && !canWave)
             {
-                shooterEnemies --;
-                StartCoroutine(shooterDelay(Random.Range(randMinShoot,randMaxShoot))); 
-            } 
-        }
+                StartCoroutine(waveDelay(waveDelayTime));
+            }
 
-        if(minorEnemies == 0 && shooterEnemies == 0 && waves > 0 && !canWave)
-        {
-            StartCoroutine(waveDelay(waveDelayTime));
+            if(canWave && waves>= 0)
+            {
+                shooterEnemies = totalShooter;
+                minorEnemies = totalMinor;
+                waves--;
+                canWave = false;
+            }
         }
-        if(canWave && waves>= 0)
-        {
-            shooterEnemies = totalShooter;
-            minorEnemies = totalMinor;
-            waves--;
-            canWave = false;
-        }
-
     }
+       
     protected IEnumerator shooterDelay(float delayLength)
     {
         canSpawnShoot = false;

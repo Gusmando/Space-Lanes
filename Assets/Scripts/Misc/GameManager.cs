@@ -4,23 +4,27 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public Lane[] lanes;
+    public Section[] sections;
+    public Lane[] currentLanes;
     public  int lowActiveLane;
     public bool  laneChange;
     public float laneDelayTime;
+    public int sectionsCleared;
+    public int activeSection;
 
     void Awake()
     {
-        Physics.IgnoreLayerCollision(9,9,true);
-    }
 
-    
+        Physics.IgnoreLayerCollision(9,9,true);
+        activeSection = Random.Range(0,sections.Length);
+        currentLanes = sections[activeSection].lanes;
+        sections[activeSection].sectionActive = true;
+    }
     void Update()
     {
-
         if(laneChange)
         {   
-            lowActiveLane = Random.Range(0,lanes.Length);
+            lowActiveLane = Random.Range(0,currentLanes.Length);
             StartCoroutine(activeLaneDelay(laneDelayTime));
         }
         

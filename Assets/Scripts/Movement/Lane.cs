@@ -13,6 +13,8 @@ public class Lane : MonoBehaviour
     public int minorEnemyCount;
     public int shootingEnemyCount;
     public int enemyLimit;
+    public GameObject[] Platforms;
+    public Collider[] Colliders;
 
     // Start is called before the first frame update
     void Start()

@@ -10,6 +10,7 @@ public class MovementController : MonoBehaviour
     public GameObject subject;
     public Rigidbody subjectRb;
     public float health;
+    public GameManager gameManager;
     //Array holding different lanes within the level
     [Header("Lane Assignment (Left to Right)")]
     public Lane[] lanes;
@@ -46,11 +47,12 @@ public class MovementController : MonoBehaviour
     public bool leftRight;
     public int animStateDisp;
     public GunController weapon;
-    void Start() 
+    void Awake() 
     {
        //Initial placement will be set in middle
        //will change this to be set in editor
        changed = false; 
+       lanes = gameManager.currentLanes;
        currentLane = (lanes.Length/2);
        subjectRb = subject.GetComponent<Rigidbody>();
        animOver = true;
@@ -148,6 +150,7 @@ public class MovementController : MonoBehaviour
 
     void FixedUpdate() 
     {
+        lanes = gameManager.currentLanes;
         //Push and jump force set in inspector
         pushForce = new Vector3(0,0,10*speed);
         jumpForce = new Vector3(0,jumpMult,0);
