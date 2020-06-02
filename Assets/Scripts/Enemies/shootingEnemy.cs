@@ -37,7 +37,7 @@ public class shootingEnemy : EnemyMovement
         {
             gunContr.reload = true;
         }
-        sameLane = player.GetComponent<MovementController>().currentLane == currentLane;
+        sameLane = GameObject.FindWithTag("Player").GetComponent<MovementController>().currentLane == currentLane;
         bool inRange = distanceToPlayer <= threatDistance;
         if(!inRange)
         {

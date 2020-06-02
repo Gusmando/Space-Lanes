@@ -118,7 +118,7 @@ MonoBehaviour:
   laneDiff: 0.05
   speed: -5
   maxSpeed: -20
-  jumpMult: 10
+  jumpMult: 15
   rayCastOffset: -2
   jumpCastOffset: -10
   laneChangeSpeed: 30
