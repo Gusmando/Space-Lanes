@@ -8,12 +8,12 @@ public class EnemySpawner : MonoBehaviour
     public GameObject minorEnemy;
     public int shooterEnemies;
     public int minorEnemies;
+    public int waves;
     public float waveDelayTime;
     public float randMinMinor;
     public float randMaxMinor;
     public float randMinShoot;
     public float randMaxShoot; 
-    int waves;
     public bool canSpawnShoot;
     public bool canSpawnMinor;
     public bool canWave;
@@ -38,30 +38,27 @@ public class EnemySpawner : MonoBehaviour
             if(canWave)
             {
 
-                if(canSpawnMinor)
+                if(canSpawnMinor && minorEnemies!= 0)
                 {
                     Instantiate(minorEnemy,transform.position ,transform.rotation);
                     minorEnemies--;
                     StartCoroutine(minorDelay(Random.Range(randMinMinor,randMaxMinor)));    
                 }
 
-                if(canSpawnShoot)
+                if(canSpawnShoot && shooterEnemies !=0)
                 {
                     Instantiate(shooterEnemy,transform.position ,transform.rotation);
                     shooterEnemies --;
                     StartCoroutine(shooterDelay(Random.Range(randMinShoot,randMaxShoot))); 
                 } 
             }
+            
             if(canWave && waves>= 0 && minorEnemies == 0 && shooterEnemies == 0 && waves > 0)
             {
                 shooterEnemies = totalShooter;
                 minorEnemies = totalMinor;
                 waves--;
                 canWave = false;
-            }
-
-            if(minorEnemies == 0 && shooterEnemies == 0 && waves > 0 && !canWave )
-            {
                 StartCoroutine(waveDelay(waveDelayTime));
             }
         }

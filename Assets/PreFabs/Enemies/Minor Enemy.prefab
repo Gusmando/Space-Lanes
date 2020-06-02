@@ -111,7 +111,7 @@ MonoBehaviour:
   subject: {fileID: 1259156079434781980}
   subjectRb: {fileID: 1259156079434781981}
   health: 15
-  player: {fileID: 10854956270901641, guid: 9d8075e9d7bf31249b48173e41228732, type: 3}
+  player: {fileID: 0}
   distanceToPlayer: 0
   gameManager: {fileID: 0}
   lanes: []
@@ -144,7 +144,7 @@ MonoBehaviour:
   rangePushMin: 100
   rangePushMax: 100
   rangeStopMin: 1
-  rangeStopMax: 1
+  rangeStopMax: 2
   rayCastLeftOffset: 3
   rayCastRightOffset: -3
   stoppedOnce: 0

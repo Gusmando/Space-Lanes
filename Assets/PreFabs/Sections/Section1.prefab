@@ -49,7 +49,8 @@ MonoBehaviour:
     type: 3}
   shooterEnemies: 3
   minorEnemies: 5
-  waveDelayTime: 10
+  waves: 3
+  waveDelayTime: 3
   randMinMinor: 1
   randMaxMinor: 2
   randMinShoot: 4

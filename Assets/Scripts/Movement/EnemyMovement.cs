@@ -57,6 +57,7 @@ public class EnemyMovement : MonoBehaviour
     virtual public void Start()
     {
         gameManager = GameObject.FindWithTag("GameManager").GetComponent<GameManager>();
+        player = GameObject.FindWithTag("Player");
         lanes = gameManager.currentLanes;
         changed = true;
         currentLane = Random.Range(0,lanes.Length); 

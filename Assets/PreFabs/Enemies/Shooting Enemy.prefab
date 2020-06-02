@@ -144,7 +144,7 @@ MonoBehaviour:
   subject: {fileID: 8202607085486834853}
   subjectRb: {fileID: 8202607085486834852}
   health: 25
-  player: {fileID: 10854956270901641, guid: 9d8075e9d7bf31249b48173e41228732, type: 3}
+  player: {fileID: 0}
   distanceToPlayer: 0
   gameManager: {fileID: 0}
   lanes: []

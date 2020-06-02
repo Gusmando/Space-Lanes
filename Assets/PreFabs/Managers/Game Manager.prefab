@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sections:
-  - {fileID: 3668009467808806319, guid: ad363a88c083e3645a3787555480ccca, type: 3}
+  - {fileID: 0}
   currentLanes: []
   lowActiveLane: 0
   laneChange: 1

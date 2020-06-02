@@ -25,20 +25,6 @@ public class minorEnemy : EnemyMovement
         
         if(player.GetComponent<MovementController>().currentLane == currentLane)
         {
-            RaycastHit hitLeft;
-            Vector3 highObjectleftRight = subject.transform.position + new Vector3(0,5,0);
-            Vector3 left = subject.transform.position + new Vector3(rayCastLeftOffset,lanes[currentLane].position.y,0);
-            Vector3 leftDirection = left - highObjectleftRight;
-
-            RaycastHit hitRight;
-            Vector3 right = subject.transform.position + new Vector3(rayCastRightOffset,lanes[currentLane].position.y,0);
-            Vector3 rightDirection = right - highObjectleftRight;
-
-            leftOpen = Physics.Raycast(highObjectleftRight,leftDirection,out hitLeft);
-            rightOpen = Physics.Raycast(highObjectleftRight,rightDirection,out hitRight);
-
-            //Debug.DrawRay(highObjectleftRight, leftDirection, Color.blue);
-            //Debug.DrawRay(highObjectleftRight, rightDirection, Color.red);
 
             if(!stopped && (distanceToPlayer <= threatDistance) && !stoppedOnce)
             {
@@ -46,38 +32,21 @@ public class minorEnemy : EnemyMovement
                 stoppedOnce = true;
             }
             
-            else if(distanceToPlayer >= threatDistance && !stopped && !pushing)
+            else if(distanceToPlayer >= threatDistance && !stopped && !pushing && stoppedOnce)
             {
-                StartCoroutine(pushLength(Random.Range(rangePushMin,rangePushMax)));
-            }
-
-            if(distanceToPlayer <= threatDistance && (leftOpen || rightOpen) && stoppedOnce)
-            {
-                lanes[currentLane].minorEnemyCount --;
-                if(leftOpen && rightOpen)
-                {
-                    changeLane(Random.Range(0,2));
-                    stoppedOnce = false;
-                }
-                else if(leftOpen)
-                {
-                    changeLane(1);
-                    stoppedOnce = false;
-                }
-                else if(rightOpen)
-                {
-                    changeLane(0);
-                    stoppedOnce = false;
-                }
-                lanes[currentLane].minorEnemyCount ++;
+                pushing = true;
             }
         }
 
         else
         {
-            if(!stopped && !pushing)
+            if(!pushing)
             {
-                StartCoroutine(pushLength(Random.Range(rangePushMin,rangePushMax)));
+                pushing = true;
+                if(stopped)
+                {
+                    stopped = false;
+                }
             }
         }
         
