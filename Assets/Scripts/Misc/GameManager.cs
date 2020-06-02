@@ -18,6 +18,8 @@ public class GameManager : MonoBehaviour
     public GameObject spawned;
     public GameObject initSpawnPoint;
     public GameObject endSpawn;
+    public MovementController player;
+    public Section currentActive;
 
 
     void Start()
@@ -27,10 +29,12 @@ public class GameManager : MonoBehaviour
         activeSection = Random.Range(0,sections.Length);
         spawned = Instantiate(sections[activeSection],initSpawnPoint.transform.position,initSpawnPoint.transform.rotation);
         spawned.tag = "activeSection";
-        currentLanes = GameObject.FindWithTag("activeSection").GetComponent<Section>().lanes;
-        spawned.GetComponent<Section>().sectionActive = true;
-        spawned.GetComponent<Section>().activateSpawner();
-        this.endSpawn = spawned.GetComponent<Section>().endSpawn;
+        currentActive = GameObject.FindWithTag("activeSection").GetComponent<Section>();
+        currentLanes = currentActive.lanes;
+        currentActive.sectionActive = true;
+        currentActive.activateSpawner();
+        currentActive.first = true;
+        this.endSpawn = currentActive.endSpawn;
         
     }
     void Update()
@@ -47,17 +51,24 @@ public class GameManager : MonoBehaviour
             spawning = false;
         }
         
+        if(activeSectionChanged)
+        {
+            currentActive.sectionActive = false;
+            currentActive.deactivateSpawner();
+            currentActive = GameObject.FindWithTag("activeSection").GetComponent<Section>();
+            currentLanes = currentActive.lanes;
+            currentActive.sectionActive = true;
+            player = GameObject.FindWithTag("Player").GetComponent<MovementController>();
+            player.lanes = currentLanes;
+            currentActive.activateSpawner();
+            activeSectionChanged = false;
+        }
+
         if(laneChange)
         {   
             lowActiveLane = Random.Range(0,currentLanes.Length);
             StartCoroutine(activeLaneDelay(laneDelayTime));
         }
-
-        if(activeSectionChanged)
-        {
-
-        }
-        
     }
 
     public IEnumerator activeLaneDelay(float delayLength)

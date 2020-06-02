@@ -1710,6 +1710,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3668009467808806318}
   - component: {fileID: 3668009467808806319}
+  - component: {fileID: 313025899907560899}
   m_Layer: 0
   m_Name: Section1
   m_TagString: Untagged
@@ -1772,8 +1773,23 @@ MonoBehaviour:
   - {fileID: 3668009466934408436}
   spawners:
   - {fileID: 4648787904075147727}
-  sectionActive: 1
+  sectionActive: 0
+  first: 0
   endSpawn: {fileID: 4091207328166180341}
+  gameManager: {fileID: 0}
+--- !u!65 &313025899907560899
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3668009467808806316}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 35.128952, y: 34.211502, z: 152.76202}
+  m_Center: {x: -0.26925278, y: 1.2161255, z: 72.96327}
 --- !u!1 &3668009467962779948
 GameObject:
   m_ObjectHideFlags: 0

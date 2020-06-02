@@ -647,9 +647,26 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3438543757305703674, guid: 67b3be9d968ad7845857d76faf9acdbf,
         type: 3}
+      propertyPath: sections.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3438543757305703674, guid: 67b3be9d968ad7845857d76faf9acdbf,
+        type: 3}
       propertyPath: initSpawnPoint
       value: 
       objectReference: {fileID: 1535511457}
+    - target: {fileID: 3438543757305703674, guid: 67b3be9d968ad7845857d76faf9acdbf,
+        type: 3}
+      propertyPath: sections.Array.data[1]
+      value: 
+      objectReference: {fileID: 3668009467808806316, guid: ad363a88c083e3645a3787555480ccca,
+        type: 3}
+    - target: {fileID: 3438543757305703674, guid: 67b3be9d968ad7845857d76faf9acdbf,
+        type: 3}
+      propertyPath: sections.Array.data[2]
+      value: 
+      objectReference: {fileID: 3668009467808806316, guid: ad363a88c083e3645a3787555480ccca,
+        type: 3}
     - target: {fileID: 3438543757305703675, guid: 67b3be9d968ad7845857d76faf9acdbf,
         type: 3}
       propertyPath: m_LocalPosition.x

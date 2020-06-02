@@ -274,6 +274,14 @@ public class MovementController : MonoBehaviour
             }
         }
     }
+
+    private void OnTriggerEnter(Collider other) 
+    {
+        if(other.gameObject.tag == "Enemy")
+        {
+            Destroy(other.gameObject);
+        }    
+    }
     //Aniamtion delay waits a few secondas for animation to finish
     private IEnumerator animDelay(float delayLength)
     {

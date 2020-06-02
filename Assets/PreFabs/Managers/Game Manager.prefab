@@ -48,8 +48,15 @@ MonoBehaviour:
   currentLanes: []
   lowActiveLane: 0
   laneChange: 1
+  spawning: 0
+  activeSectionChanged: 0
   laneDelayTime: 5
+  spawnOffset: 15
   sectionsCleared: 0
   activeSection: 0
+  maxSections: 3
   spawned: {fileID: 0}
   initSpawnPoint: {fileID: 0}
+  endSpawn: {fileID: 0}
+  player: {fileID: 0}
+  currentActive: {fileID: 0}
