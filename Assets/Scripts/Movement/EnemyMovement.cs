@@ -23,7 +23,7 @@ public class EnemyMovement : MonoBehaviour
     public float maxSpeed;
     public float jumpMult;
     public float rayCastOffset;
-    public float rayChange;
+    public float jumpCastOffset;
     public float laneChangeSpeed;
     public float leftRightOffset;
     
@@ -170,14 +170,22 @@ public class EnemyMovement : MonoBehaviour
             Vector3 rightVec = subject.transform.position + new Vector3(leftRightOffset,lanes[currentLane].position.y,0);
             Vector3 rightDirections = rightVec - highObject;
 
+            RaycastHit jumpHit;
+            Vector3 jumpVec = subject.transform.position + new Vector3(0,lanes[currentLane].position.y,jumpCastOffset);
+            Vector3 jumpDirections = jumpVec - highObject;
+
             bool leftOpens = Physics.Raycast(highObject,leftDirections,out leftHit);
             bool rightOpens = Physics.Raycast(highObject,rightDirections,out rightHit);
+            bool jumpable = Physics.Raycast(highObject,jumpDirections,out jumpHit);
+
             noGap = Physics.Raycast(highObject,direction,out hit,25);
 
             Debug.DrawRay(highObject, direction, Color.green);
             Debug.DrawRay(highObject, rightDirections, Color.blue);
             Debug.DrawRay(highObject, leftDirections, Color.red);
-            if(leftOpens && rightOpens && !noGap && !changing)
+            Debug.DrawRay(highObject, jumpDirections, Color.red);
+
+            if(leftOpens && rightOpens && !noGap && !changing && !jumpable)
             {
                 int changeDirect = Random.Range(0,2);
                 if(changeDirect == 0 && (currentLane - 1) >= 0)
@@ -189,21 +197,21 @@ public class EnemyMovement : MonoBehaviour
                     changeLane(changeDirect);
                 }
             }
-            else if(leftOpens && !noGap && !changing)
+            else if(leftOpens && !noGap && !changing && !jumpable)
             {
                 if((currentLane - 1) >= 0)
                 {
                     changeLane(0);
                 }
             }
-            else if(rightOpens && !noGap && !changing)
+            else if(rightOpens && !noGap && !changing && !jumpable)
             {
                 if((currentLane + 1) <= (lanes.Length-1))
                 {
                     changeLane(1);
                 }
             }
-            else if(!noGap && !jump && !jumping && !falling && !leftOpens && !rightOpens)
+            else if(!noGap && !jump && !jumping && !falling && jumpable)
             {
                 jump = true;
             }

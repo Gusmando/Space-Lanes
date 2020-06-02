@@ -7,6 +7,8 @@ TagManager:
   - Floor
   - Bullet
   - Enemy
+  - activeSection
+  - GameManager
   layers:
   - Default
   - TransparentFX

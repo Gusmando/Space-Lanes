@@ -153,7 +153,7 @@ MonoBehaviour:
   maxSpeed: -17
   jumpMult: 10
   rayCastOffset: -2
-  rayChange: 3
+  jumpCastOffset: -10
   laneChangeSpeed: 30
   leftRightOffset: 3
   gravityForce: {x: 0, y: -20, z: 0}
