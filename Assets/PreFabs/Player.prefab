@@ -285,7 +285,7 @@ MonoBehaviour:
   clipSize: 10
   fullClip: 10
   clipCount: 5
-  shakeIntensity: 0.1
+  shakeIntensity: 0.3
   shakeDelay: 0.05
   damage: 5
 --- !u!1 &10854956270901641
@@ -505,9 +505,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerCam: {fileID: 10854956421991338}
-  outCam: {fileID: 0}
+  player: {fileID: 10854956270901635}
   shakeIntensity: 0
   shakeDuration: 0
+  redLight: {r: 0.90588236, g: 0.37254903, b: 0.37254903, a: 1}
+  whiteLight: {r: 1, g: 1, b: 1, a: 1}
+  spotLight: {fileID: 5579955635383192662}
   shaking: 0
 --- !u!1 &481922401251549879
 GameObject:
@@ -552,7 +555,7 @@ Light:
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 3.73
+  m_Intensity: 3.85
   m_Range: 11.127173
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208

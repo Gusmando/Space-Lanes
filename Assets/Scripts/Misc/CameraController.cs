@@ -6,11 +6,14 @@ public class CameraController : MonoBehaviour
 {
     [Header("Cameras")]
     public GameObject playerCam;
-    public GameObject outCam;
+    public MovementController player;
     private Vector3 initCamPos;
     [Header("Shake Function")]
     public float shakeIntensity;
     public float shakeDuration;
+    public Color redLight;
+    public Color whiteLight;
+    public Light spotLight;
     public bool shaking;
 
     void Start()
@@ -32,6 +35,14 @@ public class CameraController : MonoBehaviour
         else
         {
             playerCam.transform.localPosition = initCamPos;
+        }
+        if(player.hurt)
+        {
+            spotLight.color = redLight;
+        }
+        else
+        {
+            spotLight.color = whiteLight;
         }
     }
     
