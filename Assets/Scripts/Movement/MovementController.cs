@@ -36,6 +36,7 @@ public class MovementController : MonoBehaviour
     public bool jumping;
     public bool falling;
     public bool changing;
+    public bool hurt;
     //An iterator keeping track of the current lane
     public int currentLane;
     public  bool jumpQueue;
@@ -47,6 +48,7 @@ public class MovementController : MonoBehaviour
     public bool leftRight;
     public int animStateDisp;
     public GunController weapon;
+    public float hurtDelayTime;
     void Start() 
     {
        //Initial placement will be set in middle
@@ -150,6 +152,10 @@ public class MovementController : MonoBehaviour
 
     void FixedUpdate() 
     {
+        if(subjectRb.velocity.z < -.01 && !hurt)
+        {
+            StartCoroutine(hurtDelay(hurtDelayTime));
+        }
         //Push and jump force set in inspector
         pushForce = new Vector3(0,0,10*speed);
         jumpForce = new Vector3(0,jumpMult,0);
@@ -245,6 +251,15 @@ public class MovementController : MonoBehaviour
         {
             anim.SetBool("shooting",false);
         }
+
+        if(hurt)
+        {
+            anim.SetBool("hurt",true);
+        }
+        else
+        {
+            anim.SetBool("hurt",false);
+        }
     }
 
     //Essentially an onGround check
@@ -290,6 +305,17 @@ public class MovementController : MonoBehaviour
         yield return new WaitForSeconds(delayLength);
 
         animOver = true;
+
+        yield return null;
+    }
+
+    private IEnumerator hurtDelay(float delayLength)
+    {
+        hurt = true;
+
+        yield return new WaitForSeconds(delayLength);
+
+        hurt = false;
 
         yield return null;
     }

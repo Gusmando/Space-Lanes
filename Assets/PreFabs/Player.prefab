@@ -101,7 +101,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 4748496047744815929, guid: d25467f0deea26049a99157d3f4d6dc6,
+  m_Sprite: {fileID: 4588727643139884868, guid: 6b5b6fc303fff2d428df0649984f27c8,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -372,6 +372,7 @@ MonoBehaviour:
   jumping: 0
   falling: 0
   changing: 0
+  hurt: 0
   currentLane: 0
   jumpQueue: 0
   anim: {fileID: 10854954754580604}
@@ -380,6 +381,7 @@ MonoBehaviour:
   leftRight: 0
   animStateDisp: 0
   weapon: {fileID: 10854955653442782}
+  hurtDelayTime: 0.3
 --- !u!65 &10854956270901647
 BoxCollider:
   m_ObjectHideFlags: 0

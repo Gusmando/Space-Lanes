@@ -34,7 +34,12 @@ public class gunAnimationController : MonoBehaviour
     
     void FixedUpdate()
     {
-        switch(playerAnim.GetInteger("animState"))
+        int animStateDisp = playerAnim.GetInteger("animState");
+        if(playerAnim.GetBool("hurt"))
+        {
+            animStateDisp = 111;
+        }
+        switch(animStateDisp)
         {
             case 0:
                 gunTrans.localPosition = initLocation;
