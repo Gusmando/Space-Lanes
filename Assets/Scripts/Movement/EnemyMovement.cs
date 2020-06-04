@@ -72,7 +72,6 @@ public class EnemyMovement : MonoBehaviour
         {
             jumping = true;
             falling = false;
-            
             subjectRb.velocity = new Vector3 (0,0,0);
             subjectRb.AddForce(jumpForce,ForceMode.Impulse);
             jump = false;
@@ -133,27 +132,6 @@ public class EnemyMovement : MonoBehaviour
         else
         {
             falling = false;
-        }
-        
-        //Depending on the velocity, the run speed is set
-        if(pushing && !jumping)
-        {
-            //anim.speed = (subjectRb.velocity.z/maxSpeed)*.3f;
-        }
-
-        //Otherwise if there is no jumping then there should
-        //be no movement
-        else
-        {
-            if(!jumping)
-            {
-                //Ensures that falling off stage conserves acceleration
-                if(!falling)
-                {
-                    subjectRb.velocity = new Vector3(0,0,0);
-                }
-                //anim.speed = 0;
-            } 
         }
 
         if(pushing && !stopped)
@@ -255,12 +233,14 @@ public class EnemyMovement : MonoBehaviour
             if(shifting == 0 && (currentLane - 1) >= 0)
             {
                 currentLane --;
+                StartCoroutine(animDelay(laneChangeDelay));
                 changed = true;
                 leftRight = false;
             }
             else if(shifting == 1 && (currentLane + 1) <= (lanes.Length-1))
             {
                 currentLane ++;
+                StartCoroutine(animDelay(laneChangeDelay));
                 changed = true;
                 leftRight = true;
             }
