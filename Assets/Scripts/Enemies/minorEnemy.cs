@@ -129,6 +129,17 @@ public class minorEnemy : EnemyMovement
                 anim.SetInteger("animState",100);
             }
         }
+
+        if(hurt)
+        {
+            anim.SetBool("hurt",true);
+            spotLight.color = red;
+        }
+        else
+        {
+            anim.SetBool("hurt",false);
+            spotLight.color = white;
+        }
     }
     protected IEnumerator stopDelay(float delayLength)
     {

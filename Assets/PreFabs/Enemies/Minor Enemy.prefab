@@ -145,6 +145,9 @@ MonoBehaviour:
   player: {fileID: 0}
   distanceToPlayer: 0
   gameManager: {fileID: 0}
+  spotLight: {fileID: 6074187471941611603}
+  white: {r: 1, g: 1, b: 1, a: 1}
+  red: {r: 1, g: 0, b: 0, a: 1}
   lanes: []
   laneDiff: 0.05
   speed: -5
@@ -163,6 +166,7 @@ MonoBehaviour:
   stopped: 0
   idle: 0
   jump: 0
+  hurt: 0
   choice: 0
   changing: 0
   noGap: 0
@@ -171,6 +175,7 @@ MonoBehaviour:
   animOver: 1
   laneChangeDelay: 0.5
   leftRight: 1
+  hurtDelayTime: 0.3
   threatDistance: 25
   rangePushMin: 100
   rangePushMax: 100
@@ -283,7 +288,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -8631903526712813442, guid: 489dbb07b6fb30a46a7d3d8bcd10b535,
+  m_Sprite: {fileID: 1914816323495384693, guid: 4aab63bf0b46c474abae41274c807111,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

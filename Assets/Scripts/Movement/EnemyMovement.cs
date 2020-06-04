@@ -11,6 +11,9 @@ public class EnemyMovement : MonoBehaviour
     public GameObject player;
     public float distanceToPlayer;
     public GameManager gameManager;
+    public Light spotLight;
+    public Color white;
+    public Color red;
     //Array holding different lanes within the level
     [Header("Lane Assignment (Left to Right)")]
     public Lane[] lanes;
@@ -41,6 +44,7 @@ public class EnemyMovement : MonoBehaviour
     public bool stopped;
     public bool idle;
     public bool jump;
+    public bool hurt;
     public bool choice;
     public bool changing;
     public bool noGap;
@@ -52,6 +56,7 @@ public class EnemyMovement : MonoBehaviour
     public bool animOver;
     public float laneChangeDelay;
     public bool leftRight;
+    public float hurtDelayTime;
     // Update is called once per frame
 
     virtual public void Start()
@@ -120,6 +125,11 @@ public class EnemyMovement : MonoBehaviour
     }
     virtual protected void FixedUpdate() 
     {
+        if(subjectRb.velocity.z > .01 && !hurt)
+        {
+            StartCoroutine(hurtDelay(hurtDelayTime));
+        }
+
         distanceToPlayer = Vector3.Distance(player.transform.position,subject.transform.position);
         //Push and jump force set in inspector
         pushForce = new Vector3(0,0,10*speed);
@@ -283,6 +293,16 @@ public class EnemyMovement : MonoBehaviour
         yield return new WaitForSeconds(delayLength);
 
         animOver = true;
+
+        yield return null;
+    }
+    private IEnumerator hurtDelay(float delayLength)
+    {
+        hurt = true;
+
+        yield return new WaitForSeconds(delayLength);
+
+        hurt = false;
 
         yield return null;
     }
