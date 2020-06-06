@@ -389,6 +389,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: 0
   currentGun: {fileID: 8202607085505512012}
+  reloading: 0
   reloadTime: 3
   shooting: 0
   shotAnim: 0

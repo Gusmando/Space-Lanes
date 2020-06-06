@@ -56,7 +56,7 @@ public class Bullet : MonoBehaviour
             {
                 other.gameObject.GetComponent<EnemyMovement>().health -= (damage * damageMod);
 
-                if(other.gameObject != null)
+                if(other.gameObject != null && !other.gameObject.GetComponent<EnemyMovement>().hurt)
                 {
                     Rigidbody enemy = other.gameObject.GetComponent<Rigidbody>();
                     enemy.AddForce(0,0,knockback, ForceMode.Impulse);
