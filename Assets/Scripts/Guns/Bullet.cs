@@ -59,10 +59,15 @@ public class Bullet : MonoBehaviour
                 if(other.gameObject != null && !other.gameObject.GetComponent<EnemyMovement>().hurt)
                 {
                     Rigidbody enemy = other.gameObject.GetComponent<Rigidbody>();
+                    if(!other.gameObject.GetComponent<EnemyMovement>().hurt)
+                    {
+                        other.gameObject.GetComponent<EnemyMovement>().hurtDelayStart();
+                    }
                     enemy.AddForce(0,0,knockback, ForceMode.Impulse);
                     durability--;
                     StartCoroutine(colliderDelay(invHitTime));
                     bullet.GetComponent<Rigidbody>().AddForce(0,0,speed,ForceMode.Impulse);
+                    
                 }
             }
         }

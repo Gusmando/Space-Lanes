@@ -12,8 +12,11 @@ public class Section : MonoBehaviour
     public GameObject[] platforms;
     }
     public MultiDimensionalInt[] lanePlats;
+    public MultiDimensionalInt[] lights;
     public bool sectionActive;
     public bool first;
+    public Color onLight;
+    public Color offLight;
     public Material offColor;
     public Material onColor;
     public GameObject endSpawn;
@@ -48,12 +51,20 @@ public class Section : MonoBehaviour
                     {
                         x.GetComponent<Renderer>().material = onColor;
                     }
+                    foreach(GameObject x in lights[i].platforms)
+                    {
+                        x.GetComponent<Light>().color = onLight;
+                    }
                 }
                 else
                 {
                     foreach(GameObject x in lanePlats[i].platforms)
                     {
                         x.GetComponent<Renderer>().material = offColor;
+                    }
+                    foreach(GameObject x in lights[i].platforms)
+                    {
+                        x.GetComponent<Light>().color = offLight;
                     }
                 }
             }
@@ -62,9 +73,14 @@ public class Section : MonoBehaviour
         {
              for (int i = 0; i < lanePlats.Length; i++)
              {
-                 foreach(GameObject x in lanePlats[i].platforms)
+                foreach(GameObject x in lanePlats[i].platforms)
                 {
                         x.GetComponent<Renderer>().material = offColor;
+                }
+                
+                foreach(GameObject x in lights[i].platforms)
+                {
+                    x.GetComponent<Light>().color = offLight;
                 }
              }
         } 

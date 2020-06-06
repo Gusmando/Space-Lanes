@@ -125,11 +125,6 @@ public class EnemyMovement : MonoBehaviour
     }
     virtual protected void FixedUpdate() 
     {
-        if(subjectRb.velocity.z > .01 && !hurt)
-        {
-            StartCoroutine(hurtDelay(hurtDelayTime));
-        }
-
         distanceToPlayer = Vector3.Distance(player.transform.position,subject.transform.position);
         //Push and jump force set in inspector
         pushForce = new Vector3(0,0,10*speed);
@@ -234,6 +229,7 @@ public class EnemyMovement : MonoBehaviour
         {
             falling = false;
         }
+
     }
 
     public void changeLane(int shifting)
@@ -255,6 +251,10 @@ public class EnemyMovement : MonoBehaviour
                 leftRight = true;
             }
         }
+    }
+    public void hurtDelayStart()
+    {
+        StartCoroutine(hurtDelay(hurtDelayTime));
     }
 
     //Essentially an onGround check

@@ -23,6 +23,7 @@ public class MovementController : MonoBehaviour
     public float maxSpeed;
     public float jumpMult;
     public float laneChangeSpeed;
+    public float rayCastBelow;
     [Header("Force Vectors")]
     public Vector3 gravityForce;
     private Vector3 pushForce;
@@ -37,6 +38,7 @@ public class MovementController : MonoBehaviour
     public bool falling;
     public bool changing;
     public bool hurt;
+    public bool belowOpen;
     //An iterator keeping track of the current lane
     public int currentLane;
     public  bool jumpQueue;
@@ -265,7 +267,13 @@ public class MovementController : MonoBehaviour
     //Essentially an onGround check
     private void OnCollisionEnter(Collision other)
     {
-        if(other.gameObject.CompareTag("Floor"))
+        RaycastHit hit;
+        Vector3 highObject = subject.transform.position + new Vector3(0,5,0);
+        Vector3 below = subject.transform.position + new Vector3(0,rayCastBelow,0);
+        Vector3 direction = below - highObject; 
+        belowOpen = Physics.Raycast(subject.transform.position, direction,out hit);
+
+        if(other.gameObject.CompareTag("Floor") && belowOpen)
         {
             if(jumping)
             {
@@ -276,6 +284,12 @@ public class MovementController : MonoBehaviour
             {
                 falling = false;
             }
+        }
+
+        if(!belowOpen && other.gameObject.CompareTag("Floor"))
+        {
+            falling = true;
+            Physics.IgnoreCollision(subjectRb.GetComponent<Collider>(),other.collider);
         }
     }
     //To check for falls

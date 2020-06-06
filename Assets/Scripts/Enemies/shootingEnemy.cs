@@ -28,9 +28,13 @@ public class shootingEnemy : EnemyMovement
     }
     override public void Update()
     {
-        if(!gunContr.input)
+        if(!gunContr.input && !hurt)
         {
             gunContr.input = true;
+        }
+        else
+        {
+            gunContr.input = false;
         }
 
         if(gunContr.currentGun.clipSize <= 0)
@@ -65,6 +69,7 @@ public class shootingEnemy : EnemyMovement
             gunContr.reloadTime = sameLaneReloadTime;
             gunContr.currentGun.delayTime = sameLaneShotDelay;
         }
+
         else
         {
             gunContr.reloadTime = this.reloadTime;
@@ -83,7 +88,7 @@ public class shootingEnemy : EnemyMovement
             Debug.DrawRay(highObjectleftRight, leftDirection, Color.blue);
             Debug.DrawRay(highObjectleftRight, rightDirection, Color.red);
 
-            if(canChange && noGap && !changing && !jumping)
+            if(canChange && noGap && !changing)
             {
                 lanes[currentLane].shootingEnemyCount --;
                 shifting = Random.Range(0,2);
@@ -102,7 +107,6 @@ public class shootingEnemy : EnemyMovement
                 StartCoroutine(changeDelay(changeDelayTime));   
             }
         }
-        lanes[currentLane].shootingEnemyCount ++;
         base.Update();
 
          //Depending on the velocity, the run speed is set
@@ -156,6 +160,15 @@ public class shootingEnemy : EnemyMovement
             }
         }
 
+        if(!gunContr.reloading)
+        {
+            anim.SetBool("shooting",true);
+        }
+        else
+        {
+            anim.SetBool("shooting",false);
+        }
+
         if(hurt)
         {
             anim.SetBool("hurt",true);
@@ -166,14 +179,7 @@ public class shootingEnemy : EnemyMovement
             anim.SetBool("hurt",false);
             spotLight.color = white;
         }
-        if(!gunContr.reloading)
-        {
-            anim.SetBool("shooting",true);
-        }
-        else
-        {
-            anim.SetBool("shooting",false);
-        }
+
     }
 
     protected IEnumerator stopDelay(float delayLength)
