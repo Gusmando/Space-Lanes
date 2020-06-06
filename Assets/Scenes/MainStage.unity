@@ -561,6 +561,16 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 10854956270901635, guid: 9d8075e9d7bf31249b48173e41228732,
+        type: 3}
+      propertyPath: rayCastBelow
+      value: -20
+      objectReference: {fileID: 0}
+    - target: {fileID: 10854956270901635, guid: 9d8075e9d7bf31249b48173e41228732,
+        type: 3}
+      propertyPath: jumpMult
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 10854956270901641, guid: 9d8075e9d7bf31249b48173e41228732,
         type: 3}
       propertyPath: m_Name
@@ -667,6 +677,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 3668009467808806316, guid: ad363a88c083e3645a3787555480ccca,
         type: 3}
+    - target: {fileID: 3438543757305703674, guid: 67b3be9d968ad7845857d76faf9acdbf,
+        type: 3}
+      propertyPath: laneDelayTime
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 3438543757305703675, guid: 67b3be9d968ad7845857d76faf9acdbf,
         type: 3}
       propertyPath: m_LocalPosition.x

@@ -256,6 +256,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: 1
   currentGun: {fileID: 4100110789955137373}
+  reloading: 0
   reloadTime: 0.5
   shooting: 0
   shotAnim: 0
@@ -276,7 +277,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   auto: 1
-  bulletSpeed: 15
+  bulletSpeed: 20
   delayTime: 0.1
   barrelLocation: {fileID: 10854954493631051}
   bullet: {fileID: 1705798171018837415, guid: 2b1e883b497b83c49bc07a21eb778748, type: 3}
@@ -284,7 +285,7 @@ MonoBehaviour:
   canShoot: 1
   clipSize: 10
   fullClip: 10
-  clipCount: 5
+  clipCount: 100
   shakeIntensity: 0.3
   shakeDelay: 0.05
   damage: 5
@@ -365,6 +366,7 @@ MonoBehaviour:
   maxSpeed: 35
   jumpMult: 8
   laneChangeSpeed: 50
+  rayCastBelow: 0
   gravityForce: {x: 0, y: -20, z: 0}
   newPosition: {x: 0, y: 0, z: 0}
   changed: 0
@@ -373,6 +375,7 @@ MonoBehaviour:
   falling: 0
   changing: 0
   hurt: 0
+  belowOpen: 0
   currentLane: 0
   jumpQueue: 0
   anim: {fileID: 10854954754580604}

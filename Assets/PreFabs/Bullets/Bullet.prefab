@@ -65,7 +65,7 @@ MonoBehaviour:
   damage: 5
   damageMod: 1
   knockback: 3
-  speed: 5
+  speed: 8
   range: 100
   canHit: 0
   invHitTime: 0.1

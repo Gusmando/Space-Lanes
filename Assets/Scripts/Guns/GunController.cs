@@ -35,7 +35,7 @@ public class GunController : MonoBehaviour
         }
         
         
-        if(currentGun.canShoot && currentGun.clipSize!= 0 && currentGun.clipCount!= 0 && input)
+        if(currentGun.canShoot && currentGun.clipSize!= 0 && currentGun.clipCount!= 0 && input && !reloading)
         {
             if(!currentGun.auto)
             {
@@ -50,12 +50,20 @@ public class GunController : MonoBehaviour
 
         if(player)
         {
-            reload = Input.GetMouseButtonDown(1);
+            if(currentGun.clipSize== 0 && !reload)
+            {
+                reload = true;
+            }
+            else
+            {
+                reload = false;
+            }
         }
 
-        if( reload && !reloading)
+        if(reload && !reloading)
         {
             StartCoroutine(reloadDelay(reloadTime));
+            currentGun.clipSize = currentGun.fullClip;
             currentGun.clipCount--;
         }   
         if(player)
@@ -92,7 +100,6 @@ public class GunController : MonoBehaviour
     {
         reloading = true;
         yield return new WaitForSeconds(delayLength);
-        currentGun.clipSize = currentGun.fullClip;
         reloading = false;
         yield return null;
     }

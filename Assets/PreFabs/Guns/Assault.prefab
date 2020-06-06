@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   auto: 1
-  bulletSpeed: 15
+  bulletSpeed: 25
   delayTime: 0.1
   barrelLocation: {fileID: 0}
   bullet: {fileID: 0}
