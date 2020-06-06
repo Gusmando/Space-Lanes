@@ -61,12 +61,14 @@ public class GameManager : MonoBehaviour
             player = GameObject.FindWithTag("Player").GetComponent<MovementController>();
             player.lanes = currentLanes;
             currentActive.activateSpawner();
+            currentActive.lightUpdate();
             activeSectionChanged = false;
         }
 
         if(laneChange)
         {   
             lowActiveLane = Random.Range(0,currentLanes.Length);
+            currentActive.lightUpdate();
             StartCoroutine(activeLaneDelay(laneDelayTime));
         }
     }
