@@ -174,7 +174,7 @@ public class EnemyMovement : MonoBehaviour
             Debug.DrawRay(highObject, leftDirections, Color.red);
             Debug.DrawRay(highObject, jumpDirections, Color.red);
 
-            if(leftOpens && rightOpens && !noGap && !changing && !jumpable)
+            if(leftOpens && rightOpens && !noGap && !changing && !jumpable && !changing && !jumping)
             {
                 int changeDirect = Random.Range(0,2);
                 if(changeDirect == 0 && (currentLane - 1) >= 0)
@@ -186,14 +186,14 @@ public class EnemyMovement : MonoBehaviour
                     changeLane(changeDirect);
                 }
             }
-            else if(leftOpens && !noGap && !changing && !jumpable)
+            else if(leftOpens && !noGap && !changing && !jumpable&& !changing && !jumping)
             {
                 if((currentLane - 1) >= 0)
                 {
                     changeLane(0);
                 }
             }
-            else if(rightOpens && !noGap && !changing && !jumpable)
+            else if(rightOpens && !noGap && !changing && !jumpable&& !changing && !jumping)
             {
                 if((currentLane + 1) <= (lanes.Length-1))
                 {

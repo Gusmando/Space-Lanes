@@ -37,6 +37,10 @@ public class shootingEnemy : EnemyMovement
         {
             gunContr.reload = true;
         }
+        else
+        {
+            gunContr.reload = false;
+        }
         sameLane = GameObject.FindWithTag("Player").GetComponent<MovementController>().currentLane == currentLane;
         bool inRange = distanceToPlayer <= threatDistance;
         if(!inRange)
@@ -79,7 +83,7 @@ public class shootingEnemy : EnemyMovement
             Debug.DrawRay(highObjectleftRight, leftDirection, Color.blue);
             Debug.DrawRay(highObjectleftRight, rightDirection, Color.red);
 
-            if(canChange && noGap && !changing)
+            if(canChange && noGap && !changing && !jumping)
             {
                 lanes[currentLane].shootingEnemyCount --;
                 shifting = Random.Range(0,2);
@@ -100,6 +104,76 @@ public class shootingEnemy : EnemyMovement
         }
         lanes[currentLane].shootingEnemyCount ++;
         base.Update();
+
+         //Depending on the velocity, the run speed is set
+        if(pushing && !jumping)
+        {
+            anim.speed = (subjectRb.velocity.z/maxSpeed)*.2f;
+        }
+
+        //Otherwise if there is no jumping then there should
+        //be no movement
+        else
+        {
+            if(!jumping)
+            {
+                //Ensures that falling off stage conserves acceleration
+                if(!falling)
+                {
+                    subjectRb.velocity = new Vector3(0,0,0);
+                }
+                anim.speed = 0;
+            } 
+        }
+          //If a left or right dash should be happening, anim state vars change
+        if(!animOver)
+        {
+            if(!leftRight)
+            {
+                anim.SetInteger("animState",10);
+            }
+            else
+            {
+                anim.SetInteger("animState",1);
+            }
+        }
+
+        //Otherwise depending on the y veloicty an another animation state is determined
+        else
+        {
+            if((subjectRb.velocity.y == 0 || pushing) && !jumping)
+            {
+                anim.SetInteger("animState",0);
+            }
+
+            else if(subjectRb.velocity.y > 0)
+            {
+                anim.SetInteger("animState",111);
+            }
+            else if(subjectRb.velocity.y < -.05)
+            {
+                anim.SetInteger("animState",100);
+            }
+        }
+
+        if(hurt)
+        {
+            anim.SetBool("hurt",true);
+            spotLight.color = red;
+        }
+        else
+        {
+            anim.SetBool("hurt",false);
+            spotLight.color = white;
+        }
+        if(!gunContr.reloading)
+        {
+            anim.SetBool("shooting",true);
+        }
+        else
+        {
+            anim.SetBool("shooting",false);
+        }
     }
 
     protected IEnumerator stopDelay(float delayLength)

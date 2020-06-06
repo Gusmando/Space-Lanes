@@ -6,7 +6,7 @@ public class GunController : MonoBehaviour
 {
     public bool player;
     public Gun currentGun;
-    private bool reloading;
+    public bool reloading;
     public float reloadTime; 
     public bool shooting;
     public bool shotAnim;
