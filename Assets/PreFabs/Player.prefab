@@ -286,7 +286,7 @@ MonoBehaviour:
   clipSize: 10
   fullClip: 10
   clipCount: 100
-  shakeIntensity: 0.3
+  shakeIntensity: 0.1
   shakeDelay: 0.05
   damage: 5
 --- !u!1 &10854956270901641
@@ -364,9 +364,10 @@ MonoBehaviour:
   laneDiff: 1.5
   speed: 9
   maxSpeed: 35
-  jumpMult: 8
-  laneChangeSpeed: 50
-  rayCastBelow: 0
+  jumpMult: 10
+  laneChangeSpeed: 60
+  rayCastBelow: -20
+  colliderDelayTime: 0.5
   gravityForce: {x: 0, y: -20, z: 0}
   newPosition: {x: 0, y: 0, z: 0}
   changed: 0

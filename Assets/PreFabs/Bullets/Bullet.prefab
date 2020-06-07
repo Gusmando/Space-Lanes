@@ -68,7 +68,7 @@ MonoBehaviour:
   speed: 8
   range: 100
   canHit: 0
-  invHitTime: 0.1
+  invHitTime: 0.05
 --- !u!54 &1705798171018837408
 Rigidbody:
   m_ObjectHideFlags: 0

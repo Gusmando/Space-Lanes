@@ -24,6 +24,7 @@ public class MovementController : MonoBehaviour
     public float jumpMult;
     public float laneChangeSpeed;
     public float rayCastBelow;
+    public float colliderDelayTime;
     [Header("Force Vectors")]
     public Vector3 gravityForce;
     private Vector3 pushForce;
@@ -289,7 +290,8 @@ public class MovementController : MonoBehaviour
         if(!belowOpen && other.gameObject.CompareTag("Floor"))
         {
             falling = true;
-            Physics.IgnoreCollision(subjectRb.GetComponent<Collider>(),other.collider);
+            subjectRb.GetComponent<Collider>().enabled = false;
+            StartCoroutine(colliderDelay(colliderDelayTime));
         }
     }
     //To check for falls
@@ -332,5 +334,10 @@ public class MovementController : MonoBehaviour
         hurt = false;
 
         yield return null;
+    }
+    private IEnumerator colliderDelay(float delayLength)
+    {
+        yield return new WaitForSeconds(delayLength);
+        subjectRb.GetComponent<Collider>().enabled = true;
     }
 }
