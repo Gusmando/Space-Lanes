@@ -7,6 +7,7 @@ public class Section : MonoBehaviour
     public Lane[] lanes;
     public int fadingArch;
     public int lastFade;
+    public float lightFadeSpeed;
     public EnemySpawner[] spawners;
     public GameObject[] arches;
     [System.Serializable]
@@ -19,8 +20,11 @@ public class Section : MonoBehaviour
     public bool sectionActive;
     public bool first;
     public bool fading;
+    public bool fadingLast;
     public bool alt;
-    public float intensityLev;
+    public bool altLast;
+    public bool startOff;
+    public int startOffInt;
     public Color onLight;
     public Color offLight;
     public Material offColor;
@@ -41,20 +45,13 @@ public class Section : MonoBehaviour
         {
             if(!fading)
             {
-                if(alt)
-                {
-                    StartCoroutine(FadeTo(1,.25f));
-                }
-                else
-                {
-                    StartCoroutine(FadeTo(0,.25f));
-                } 
+                StartCoroutine(FadeTo(1,lightFadeSpeed));
             }
-        }
 
-        else
-        {
-            
+            if(!fadingLast && startOff)
+            {
+                StartCoroutine(FadeToLast(0,lightFadeSpeed));
+            }
         }
     }
     public void activateSpawner()
@@ -152,7 +149,7 @@ public class Section : MonoBehaviour
     IEnumerator FadeTo(float aValue, float aTime)
     {
         fading = true;
-        intensityLev = arches[fadingArch].GetComponent<Renderer>().material.GetColor("_EmissionColor").a;
+        float intensityLev = arches[fadingArch].GetComponent<Renderer>().material.GetColor("_EmissionColor").a;
         for (float t = 0.0f; t < 1.0f; t += Time.deltaTime / aTime)
         {
             Color newColor = new Color(1, 1, 1, 1);
@@ -160,6 +157,11 @@ public class Section : MonoBehaviour
             yield return null;
         }
         fadingArch ++;
+
+        if(fadingArch == startOffInt && !startOff)
+        {
+            startOff = true;            
+        }
 
         if(fadingArch == arches.Length)
         {
@@ -177,5 +179,32 @@ public class Section : MonoBehaviour
         }
         fading = false;
         
+    }
+
+    IEnumerator FadeToLast(float aValue, float aTime)
+    {
+        fadingLast = true;
+        float intensityLev = arches[lastFade].GetComponent<Renderer>().material.GetColor("_EmissionColor").a;
+        for (float t = 0.0f; t < 1.0f; t += Time.deltaTime / aTime)
+        {
+            Color newColor = new Color(1, 1, 1, 1);
+            arches[lastFade].GetComponent<Renderer>().material.SetColor("_EmissionColor",newColor * Mathf.Lerp(intensityLev,aValue,t));
+            yield return null;
+        }
+        lastFade ++;
+        if(lastFade == arches.Length)
+        {
+            lastFade = 0;
+
+            if(!altLast)
+            {
+                altLast = true;
+            }
+            else
+            {
+                altLast = false;
+            }   
+        }
+        fadingLast = false;
     }
 }
