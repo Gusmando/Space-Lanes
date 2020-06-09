@@ -66,7 +66,7 @@ public class MovementController : MonoBehaviour
     void Update()
     {
         //Display for the animation state for debug
-        animStateDisp = anim.GetInteger("animState");
+        //animStateDisp = anim.GetInteger("animState");
         //If a left key press occurs and the left lane exists
         if(Input.GetKeyDown(KeyCode.A) && (currentLane - 1) >= 0)
         {
