@@ -97,7 +97,10 @@ public class MovementController : MonoBehaviour
         {
             pushing = false;
         }
-        
+        if((Input.GetKeyDown(KeyCode.Space)))
+        {
+            jumpQueue = true;
+        }
         //This will handle a space or jump push
         if(Input.GetKeyDown(KeyCode.Space) && !jumping && !falling || jumpQueue && !jumping && !falling)
         {
@@ -110,10 +113,7 @@ public class MovementController : MonoBehaviour
                 jumpQueue = false;
             }
         }
-        if((Input.GetKeyDown(KeyCode.Space)) && changing)
-        {
-            jumpQueue = true;
-        }
+        
         //A lane change occurs and new positions are set
         if(changed || changing)
         {

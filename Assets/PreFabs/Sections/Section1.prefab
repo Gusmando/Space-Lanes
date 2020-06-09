@@ -2620,7 +2620,7 @@ Transform:
   m_GameObject: {fileID: 3668009467717287890}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0.20002909, y: 0.010005001, z: 133.85}
-  m_LocalScale: {x: 5, y: 15, z: 15}
+  m_LocalScale: {x: 5, y: 5, z: 15}
   m_Children:
   - {fileID: 3668009468219026188}
   - {fileID: 3668009467682049402}
@@ -2704,6 +2704,7 @@ MonoBehaviour:
   - {fileID: 3668009466934408436}
   fadingArch: 0
   lastFade: 0
+  lightFadeSpeed: 0.3
   spawners:
   - {fileID: 4648787904075147727}
   arches:
@@ -2753,7 +2754,11 @@ MonoBehaviour:
   sectionActive: 0
   first: 0
   fading: 0
-  intensityLev: 0
+  fadingLast: 0
+  alt: 0
+  altLast: 0
+  startOff: 0
+  startOffInt: 7
   onLight: {r: 0.1764706, g: 0.8, b: 0.40392157, a: 1}
   offLight: {r: 1, g: 0, b: 0, a: 1}
   offColor: {fileID: 2100000, guid: feebeeb8fe2f14d45b4b319036343965, type: 2}
@@ -2828,7 +2833,7 @@ Transform:
   m_GameObject: {fileID: 3668009468016354696}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0.20002909, y: 0.010005001, z: 54.53}
-  m_LocalScale: {x: 5, y: 15, z: 15}
+  m_LocalScale: {x: 5, y: 5, z: 15}
   m_Children:
   - {fileID: 3668009466887346291}
   - {fileID: 3668009466787485019}
@@ -2862,7 +2867,7 @@ Transform:
   m_GameObject: {fileID: 3668009468017221548}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0.20002909, y: 0.010005001, z: 93.049995}
-  m_LocalScale: {x: 5, y: 15, z: 15}
+  m_LocalScale: {x: 5, y: 5, z: 15}
   m_Children:
   - {fileID: 3668009466536367116}
   - {fileID: 3668009468538043152}
@@ -3619,7 +3624,7 @@ Transform:
   m_GameObject: {fileID: 5047776466041316651}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0.20002909, y: 0.010005001, z: 16.949997}
-  m_LocalScale: {x: 5, y: 15, z: 15}
+  m_LocalScale: {x: 5, y: 5, z: 15}
   m_Children:
   - {fileID: 6257570622786316258}
   - {fileID: 5468370272624158191}
