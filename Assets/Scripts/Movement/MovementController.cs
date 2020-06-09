@@ -20,7 +20,9 @@ public class MovementController : MonoBehaviour
     //on which lane is on
     [Header("Physic Scalars")]
     public float speed;
+    public float speedBoost;
     public float maxSpeed;
+    public float maxSpeedBoost;
     public float jumpMult;
     public float laneChangeSpeed;
     public float rayCastBelow;
@@ -160,7 +162,7 @@ public class MovementController : MonoBehaviour
             StartCoroutine(hurtDelay(hurtDelayTime));
         }
         //Push and jump force set in inspector
-        pushForce = new Vector3(0,0,10*speed);
+        pushForce = new Vector3(0,0,10*speed*speedBoost);
         jumpForce = new Vector3(0,jumpMult,0);
         
         //Depending on the velocity, the run speed is set
@@ -187,7 +189,7 @@ public class MovementController : MonoBehaviour
         if(pushing)
         {
             //Accelerate as long as top speed is not hit
-            if(subjectRb.velocity.z < maxSpeed)
+            if(subjectRb.velocity.z < (maxSpeed * maxSpeedBoost))
             {
                 subjectRb.AddForce(pushForce,ForceMode.Acceleration);   
             }
@@ -274,7 +276,7 @@ public class MovementController : MonoBehaviour
         Vector3 direction = below - highObject; 
         belowOpen = Physics.Raycast(subject.transform.position, direction,out hit);
 
-        if(other.gameObject.CompareTag("Floor") && belowOpen)
+        if(other.gameObject.tag.Contains("Floor") && belowOpen)
         {
             if(jumping)
             {
@@ -287,7 +289,18 @@ public class MovementController : MonoBehaviour
             }
         }
 
-        if(!belowOpen && other.gameObject.CompareTag("Floor"))
+        if(other.gameObject.tag.Contains("Fast"))
+        {
+            speedBoost = 2;
+            maxSpeedBoost = 1.5f;
+        }
+        else
+        {
+            speedBoost = 1;
+            maxSpeedBoost = 1;
+        }
+
+        if(!belowOpen && other.gameObject.tag.Contains("Floor"))
         {
             falling = true;
             subjectRb.GetComponent<Collider>().enabled = false;
@@ -297,7 +310,7 @@ public class MovementController : MonoBehaviour
     //To check for falls
     private void OnCollisionExit(Collision other)
     {
-        if(other.gameObject.CompareTag("Floor"))
+        if(other.gameObject.tag.Contains("Floor"))
         {
             if(!falling)
             {
@@ -308,7 +321,7 @@ public class MovementController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other) 
     {
-        if(other.gameObject.tag == "Enemy")
+        if(other.gameObject.CompareTag("Enemy"))
         {
             Destroy(other.gameObject);
         }    

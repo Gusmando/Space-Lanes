@@ -29,6 +29,7 @@ public class Section : MonoBehaviour
     public Color offLight;
     public Material offColor;
     public Material onColor;
+    public Material speedColor;
     public GameObject endSpawn;
     public GameManager gameManager;
 
@@ -75,6 +76,10 @@ public class Section : MonoBehaviour
                     foreach(GameObject x in lanePlats[i].platforms)
                     {
                         x.GetComponent<Renderer>().material = onColor;
+                        if(x.tag.Contains("Fast"))
+                        {
+                            x.GetComponent<Renderer>().material = speedColor;
+                        }
                     }
                     foreach(GameObject x in lights[i].platforms)
                     {
@@ -86,6 +91,10 @@ public class Section : MonoBehaviour
                     foreach(GameObject x in lanePlats[i].platforms)
                     {
                         x.GetComponent<Renderer>().material = offColor;
+                        if(x.tag.Contains("Fast"))
+                        {
+                            x.GetComponent<Renderer>().material = speedColor;
+                        }
                     }
                     foreach(GameObject x in lights[i].platforms)
                     {

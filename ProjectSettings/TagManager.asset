@@ -9,6 +9,7 @@ TagManager:
   - Enemy
   - activeSection
   - GameManager
+  - FloorFast
   layers:
   - Default
   - TransparentFX

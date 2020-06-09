@@ -260,7 +260,7 @@ public class EnemyMovement : MonoBehaviour
     //Essentially an onGround check
     private void OnCollisionEnter(Collision other)
     {
-        if(other.gameObject.CompareTag("Floor"))
+        if(other.gameObject.tag.Contains("Floor"))
         {
             if(jumping)
             {
@@ -276,7 +276,7 @@ public class EnemyMovement : MonoBehaviour
     //To check for falls
     private void OnCollisionExit(Collision other)
     {
-        if(other.gameObject.CompareTag("Floor"))
+        if(other.gameObject.tag.Contains("Floor"))
         {
             if(!falling)
             {

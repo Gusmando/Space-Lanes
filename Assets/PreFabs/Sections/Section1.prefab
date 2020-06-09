@@ -1027,7 +1027,7 @@ GameObject:
   - component: {fileID: 2226808184628277068}
   m_Layer: 0
   m_Name: Top Inside
-  m_TagString: Untagged
+  m_TagString: FloorFast
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1106,7 +1106,7 @@ GameObject:
   - component: {fileID: 2646069657663691148}
   m_Layer: 0
   m_Name: Sides Outer
-  m_TagString: Untagged
+  m_TagString: FloorFast
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2284,7 +2284,7 @@ GameObject:
   - component: {fileID: 3668009467249566717}
   m_Layer: 0
   m_Name: Collider
-  m_TagString: Floor
+  m_TagString: FloorFast
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2763,6 +2763,7 @@ MonoBehaviour:
   offLight: {r: 1, g: 0, b: 0, a: 1}
   offColor: {fileID: 2100000, guid: feebeeb8fe2f14d45b4b319036343965, type: 2}
   onColor: {fileID: 2100000, guid: cefef58918569e34dbef84d694c8e7b9, type: 2}
+  speedColor: {fileID: 2100000, guid: 90d92417eff247746bd93c176cb970a4, type: 2}
   endSpawn: {fileID: 4091207328166180341}
   gameManager: {fileID: 0}
 --- !u!65 &313025899907560899
@@ -3295,7 +3296,7 @@ GameObject:
   - component: {fileID: 6745783513824747714}
   m_Layer: 0
   m_Name: Top Outer
-  m_TagString: Untagged
+  m_TagString: FloorFast
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3610,7 +3611,7 @@ GameObject:
   - component: {fileID: 8094679557114615608}
   m_Layer: 0
   m_Name: Platform with Separate Outer
-  m_TagString: Floor
+  m_TagString: FloorFast
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4752,7 +4753,7 @@ GameObject:
   - component: {fileID: 8539868008300142046}
   m_Layer: 0
   m_Name: Sides Inner
-  m_TagString: Untagged
+  m_TagString: FloorFast
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
