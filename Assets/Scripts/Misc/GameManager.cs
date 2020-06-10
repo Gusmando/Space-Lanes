@@ -26,6 +26,7 @@ public class GameManager : MonoBehaviour
     {
         spawning = true;
         Physics.IgnoreLayerCollision(9,9,true);
+        Physics.IgnoreLayerCollision(8,8,true);
         activeSection = Random.Range(0,sections.Length);
         spawned = Instantiate(sections[activeSection],initSpawnPoint.transform.position,initSpawnPoint.transform.rotation);
         spawned.tag = "activeSection";

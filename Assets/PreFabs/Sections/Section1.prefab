@@ -811,7 +811,7 @@ GameObject:
   - component: {fileID: 6607880079965763017}
   m_Layer: 0
   m_Name: Top Outer.001
-  m_TagString: Untagged
+  m_TagString: FloorFast
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -981,7 +981,7 @@ GameObject:
   - component: {fileID: 3807365306081091173}
   m_Layer: 0
   m_Name: Mid Collider
-  m_TagString: Floor
+  m_TagString: FloorFast
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1185,7 +1185,7 @@ GameObject:
   - component: {fileID: 2135509059322694158}
   m_Layer: 0
   m_Name: Top Inside.001
-  m_TagString: Untagged
+  m_TagString: FloorFast
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1715,7 +1715,7 @@ GameObject:
   - component: {fileID: 3668009466881902048}
   m_Layer: 0
   m_Name: Top Inside
-  m_TagString: Untagged
+  m_TagString: FloorFast
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2051,7 +2051,7 @@ GameObject:
   - component: {fileID: 3668009467004079711}
   m_Layer: 0
   m_Name: Collider (3)
-  m_TagString: Floor
+  m_TagString: FloorFast
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2405,7 +2405,7 @@ GameObject:
   - component: {fileID: 3668009467384012200}
   m_Layer: 0
   m_Name: Top Outer
-  m_TagString: Untagged
+  m_TagString: FloorFast
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2529,7 +2529,7 @@ GameObject:
   - component: {fileID: 3668009467682049405}
   m_Layer: 0
   m_Name: Sides Outer
-  m_TagString: Untagged
+  m_TagString: FloorFast
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2999,7 +2999,7 @@ GameObject:
   - component: {fileID: 3668009468219026191}
   m_Layer: 0
   m_Name: Sides Inner
-  m_TagString: Untagged
+  m_TagString: FloorFast
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3187,7 +3187,7 @@ GameObject:
   - component: {fileID: 3437355672090986966}
   m_Layer: 0
   m_Name: Sides Inner.001
-  m_TagString: Untagged
+  m_TagString: FloorFast
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5385,7 +5385,7 @@ GameObject:
   - component: {fileID: 877080087496062806}
   m_Layer: 0
   m_Name: Sides Outer.001
-  m_TagString: Untagged
+  m_TagString: FloorFast
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

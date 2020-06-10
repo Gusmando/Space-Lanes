@@ -141,7 +141,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   subject: {fileID: 1259156079434781980}
   subjectRb: {fileID: 1259156079434781981}
-  health: 15
+  health: 10
   player: {fileID: 0}
   distanceToPlayer: 0
   gameManager: {fileID: 0}

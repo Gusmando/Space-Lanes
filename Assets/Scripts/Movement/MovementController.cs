@@ -200,7 +200,7 @@ public class MovementController : MonoBehaviour
                 if(!jumping)
                 {
                     Vector3 temp = subjectRb.velocity;
-                    temp.z = maxSpeed;
+                    temp.z = maxSpeed * maxSpeedBoost;
                     subjectRb.velocity = temp;
                 } 
             }

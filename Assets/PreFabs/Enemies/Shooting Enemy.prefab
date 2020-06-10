@@ -325,7 +325,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   subject: {fileID: 8202607085486834853}
   subjectRb: {fileID: 8202607085486834852}
-  health: 25
+  health: 15
   player: {fileID: 0}
   distanceToPlayer: 0
   gameManager: {fileID: 0}
@@ -368,7 +368,7 @@ MonoBehaviour:
   reloadTime: 4
   sameLaneShotDelay: 0.2
   sameLaneReloadTime: 2
-  rayCastLeftOffset: -3.5
+  rayCastLeftOffset: 3.5
   rayCastRightOffset: -3.5
   leftOpen: 0
   rightOpen: 0

@@ -144,7 +144,7 @@ GameObject:
   - component: {fileID: 10854955653442776}
   - component: {fileID: 10854955653442783}
   - component: {fileID: 10854955653442782}
-  - component: {fileID: 4100110789955137373}
+  - component: {fileID: 7210047008051742430}
   m_Layer: 0
   m_Name: Gun
   m_TagString: Untagged
@@ -255,7 +255,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: 1
-  currentGun: {fileID: 4100110789955137373}
+  currentGun: {fileID: 7210047008051742430}
   reloading: 0
   reloadTime: 0.5
   shooting: 0
@@ -264,7 +264,7 @@ MonoBehaviour:
   animDelayTime: 0.3
   camFunc: {fileID: 10854956421991342}
   input: 0
---- !u!114 &4100110789955137373
+--- !u!114 &7210047008051742430
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -273,7 +273,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 10854955653442778}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 31a278da32ab34e4389ad644e2190aea, type: 3}
+  m_Script: {fileID: 11500000, guid: 692b302382f151845bf9f39e4d8e850a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   auto: 1
@@ -363,7 +363,9 @@ MonoBehaviour:
   lanes: []
   laneDiff: 1.5
   speed: 9
+  speedBoost: 0
   maxSpeed: 35
+  maxSpeedBoost: 0
   jumpMult: 10
   laneChangeSpeed: 60
   rayCastBelow: -20
