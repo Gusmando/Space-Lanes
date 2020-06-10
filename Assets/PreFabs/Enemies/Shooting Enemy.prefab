@@ -361,7 +361,7 @@ MonoBehaviour:
   leftRight: 0
   hurtDelayTime: 0.3
   gunContr: {fileID: 8202607085486834875}
-  threatDistance: 30
+  threatDistance: 90
   canChange: 1
   changeDelayTime: 0.5
   shotDelayTime: 0.3
@@ -388,7 +388,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: 0
-  currentGun: {fileID: 8202607085505512012}
+  currentGun: {fileID: 7946315118320078771}
   reloading: 0
   reloadTime: 3
   shooting: 0
@@ -435,7 +435,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8202607085505512003}
-  - component: {fileID: 8202607085505512012}
+  - component: {fileID: 7946315118320078771}
   m_Layer: 9
   m_Name: EnemyGun
   m_TagString: Untagged
@@ -457,7 +457,7 @@ Transform:
   m_Father: {fileID: 8202607085486834879}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8202607085505512012
+--- !u!114 &7946315118320078771
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -474,7 +474,7 @@ MonoBehaviour:
   delayTime: 5
   barrelLocation: {fileID: 8202607085008894384}
   bullet: {fileID: 2630340232886679178, guid: f00df4f5ba56dad43bf22b9e1b565123, type: 3}
-  gunSprite: {fileID: 21300000, guid: 588d3f8f39bd69d4eacbb511302af2db, type: 3}
+  gunSprite: {fileID: 0}
   canShoot: 1
   clipSize: 10
   fullClip: 10
