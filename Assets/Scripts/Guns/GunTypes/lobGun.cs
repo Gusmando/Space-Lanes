@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class lobGun : Gun
 {
+    public int shot;
     public GameObject target;
     private void Start() 
     {
@@ -14,18 +15,12 @@ public class lobGun : Gun
     }
     public override void shoot()
     { 
-        Vector3 directionEdit = new Vector3 (barrelLocation.position.x, target.transform.position.y,target.transform.position.z); 
-        Vector3 direction = directionEdit - barrelLocation.position;
-        direction = Vector3.Scale(direction, new Vector3(-1,-1,1));
-        Quaternion lookRotation = Quaternion.LookRotation(direction);
-        Vector3 rotation = lookRotation.eulerAngles;
-        barrelLocation.eulerAngles = rotation;
-        GameObject arrow = Instantiate(bullet,barrelLocation.position , barrelLocation.rotation);
+        GameObject arrow = Instantiate(bullet, barrelLocation.position, barrelLocation.rotation);
+        
+        arrow.transform.eulerAngles = new Vector3(0,4*clipSize,0);
         Rigidbody rb = arrow.GetComponent<Rigidbody>();
         arrow.GetComponent<Bullet>().damage = this.damage;
-        Vector3 temp = barrelLocation.eulerAngles;
-        barrelLocation.eulerAngles = new Vector3(-10,-temp.y,-temp.z);
-        rb.AddForce(barrelLocation.forward * (-1*bulletSpeed),ForceMode.Impulse);
+        rb.AddForce(arrow.transform.forward * bulletSpeed,ForceMode.Impulse);
         StartCoroutine(shootingDelay(delayTime));
         clipSize--;
     }

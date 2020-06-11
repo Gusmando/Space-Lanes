@@ -24,7 +24,6 @@ public class shootingEnemy : EnemyMovement
     override public void Start()
     {
         base.Start();
-        lanes[currentLane].shootingEnemyCount ++;
     }
     override public void Update()
     {

@@ -361,7 +361,7 @@ MonoBehaviour:
   leftRight: 0
   hurtDelayTime: 0.3
   gunContr: {fileID: 8202607085486834875}
-  threatDistance: 90
+  threatDistance: 30
   canChange: 1
   changeDelayTime: 0.5
   shotDelayTime: 0.3
