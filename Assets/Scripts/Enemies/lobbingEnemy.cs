@@ -32,11 +32,12 @@ public class lobbingEnemy : EnemyMovement
 
         else
         {
-            if(gunContr.input)
+            if(gunContr.input && gunContr.reloading)
             {
                 gunContr.input = false;
             }
         }
+
         if(gunContr.currentGun.clipSize <= 0)
         {
             gunContr.reload = true;
@@ -46,15 +47,4 @@ public class lobbingEnemy : EnemyMovement
             gunContr.reload = false;
         }
     }   
-
-    protected IEnumerator shootDelay(float delayLength)
-    {
-        canShoot = false;
-
-        yield return new WaitForSeconds(delayLength);
-
-        canShoot = true;
-
-        yield return null;
-    }
 }

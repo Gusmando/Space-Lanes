@@ -1,0 +1,119 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &7798077258969684739
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8901480669327941268}
+  - component: {fileID: 2873550802050431915}
+  - component: {fileID: 3275144842247844651}
+  - component: {fileID: 5872712257051250840}
+  m_Layer: 0
+  m_Name: lobbingEnemy
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8901480669327941268
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7798077258969684739}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -2.296153, y: 2.3140953, z: 98.34209}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!54 &2873550802050431915
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7798077258969684739}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!114 &3275144842247844651
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7798077258969684739}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1653e9a2cb12ee04392e2c4c65da4008, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  subject: {fileID: 7798077258969684739}
+  subjectRb: {fileID: 2873550802050431915}
+  health: 30
+  player: {fileID: 0}
+  distanceToPlayer: 0
+  gameManager: {fileID: 0}
+  spotLight: {fileID: 0}
+  white: {r: 0, g: 0, b: 0, a: 0}
+  red: {r: 0, g: 0, b: 0, a: 0}
+  lanes: []
+  laneDiff: 0
+  speed: 0
+  maxSpeed: 0
+  jumpMult: 0
+  rayCastOffset: 0
+  jumpCastOffset: 0
+  laneChangeSpeed: 0
+  leftRightOffset: 0
+  gravityForce: {x: 0, y: 0, z: 0}
+  newPosition: {x: 0, y: 0, z: 0}
+  changed: 0
+  pushing: 0
+  jumping: 0
+  falling: 0
+  stopped: 0
+  idle: 0
+  jump: 0
+  hurt: 0
+  choice: 0
+  changing: 0
+  noGap: 0
+  currentLane: 0
+  anim: {fileID: 0}
+  animOver: 0
+  laneChangeDelay: 0
+  leftRight: 0
+  hurtDelayTime: 0
+  gunContr: {fileID: 0}
+  threatDistance: 0
+  reloadTime: 0
+  sameLane: 0
+  canShoot: 0
+  inRange: 0
+--- !u!65 &5872712257051250840
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7798077258969684739}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}

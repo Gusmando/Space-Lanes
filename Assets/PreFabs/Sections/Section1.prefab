@@ -790,8 +790,8 @@ MonoBehaviour:
   waveDelayTime: 3
   randMinMinor: 0.5
   randMaxMinor: 1.5
-  randMinShoot: 4
-  randMaxShoot: 5
+  randMinShoot: 2
+  randMaxShoot: 3
   canSpawnShoot: 1
   canSpawnMinor: 1
   canWave: 1
