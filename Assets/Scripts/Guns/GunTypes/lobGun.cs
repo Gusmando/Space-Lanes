@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class lobGun : Gun
 {
-    public int shot;
     public GameObject target;
     private void Start() 
     {
@@ -16,8 +15,7 @@ public class lobGun : Gun
     public override void shoot()
     { 
         GameObject arrow = Instantiate(bullet, barrelLocation.position, barrelLocation.rotation);
-        
-        arrow.transform.eulerAngles = new Vector3(0,4*clipSize,0);
+        arrow.transform.eulerAngles = new Vector3(4*clipSize,0,0);
         Rigidbody rb = arrow.GetComponent<Rigidbody>();
         arrow.GetComponent<Bullet>().damage = this.damage;
         rb.AddForce(arrow.transform.forward * bulletSpeed,ForceMode.Impulse);

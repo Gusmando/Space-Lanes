@@ -6,19 +6,25 @@ public class EnemySpawner : MonoBehaviour
 {
     public GameObject shooterEnemy;
     public GameObject minorEnemy;
+    public GameObject lobEnemy;
     public int shooterEnemies;
     public int minorEnemies;
+    public int lobEnemies;
     public int waves;
     public float waveDelayTime;
     public float randMinMinor;
     public float randMaxMinor;
     public float randMinShoot;
-    public float randMaxShoot; 
+    public float randMaxShoot;
+    public float randMinLob;
+    public float randMaxLob;  
     public bool canSpawnShoot;
     public bool canSpawnMinor;
+    public bool canSpawnLob;
     public bool canWave;
     public int totalShooter;
     public int totalMinor;
+    public int totalLob;
     public bool isActive;
 
     // Start is called before the first frame update
@@ -27,7 +33,7 @@ public class EnemySpawner : MonoBehaviour
         canWave = true;
         totalShooter = shooterEnemies;
         totalMinor = minorEnemies;
-
+        totalLob = lobEnemies;
     }
 
     // Update is called once per frame
@@ -51,12 +57,20 @@ public class EnemySpawner : MonoBehaviour
                     shooterEnemies --;
                     StartCoroutine(shooterDelay(Random.Range(randMinShoot,randMaxShoot))); 
                 } 
+
+                if(canSpawnLob && lobEnemies !=0)
+                {
+                    Instantiate(lobEnemy,transform.position ,transform.rotation);
+                    lobEnemies --;
+                    StartCoroutine(lobDelay(Random.Range(randMinLob,randMaxLob))); 
+                } 
             }
             
-            if(canWave && waves>= 0 && minorEnemies == 0 && shooterEnemies == 0 && waves > 0)
+            if(canWave && waves>= 0 && minorEnemies == 0 && shooterEnemies == 0 && lobEnemies == 0 && waves > 0)
             {
                 shooterEnemies = totalShooter;
                 minorEnemies = totalMinor;
+                lobEnemies = totalLob;
                 waves--;
                 canWave = false;
                 StartCoroutine(waveDelay(waveDelayTime));
@@ -93,6 +107,16 @@ public class EnemySpawner : MonoBehaviour
         yield return new WaitForSeconds(delayLength);
 
         canWave = true;
+
+        yield return null;
+    }
+    protected IEnumerator lobDelay(float delayLength)
+    {
+        canSpawnLob = false;
+
+        yield return new WaitForSeconds(delayLength);
+
+        canSpawnLob = true;
 
         yield return null;
     }

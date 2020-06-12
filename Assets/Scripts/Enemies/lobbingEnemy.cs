@@ -6,7 +6,6 @@ public class lobbingEnemy : EnemyMovement
 {
     public GunController gunContr; 
     public float threatDistance;
-    public float reloadTime;
     public bool sameLane;
     public bool canShoot;
     public bool inRange;
@@ -18,15 +17,12 @@ public class lobbingEnemy : EnemyMovement
     override public void Update()
     {
         sameLane = GameObject.FindWithTag("Player").GetComponent<MovementController>().currentLane == currentLane;
-        bool inRange = distanceToPlayer <= threatDistance;
+        inRange = distanceToPlayer <= threatDistance;
         if(sameLane && inRange)
         {
-            if(canShoot)
+            if(!gunContr.input && !hurt)
             {
-                if(!gunContr.input && !hurt)
-                {
-                    gunContr.input = true;
-                }
+                gunContr.input = true;
             }
         }
 
@@ -46,5 +42,7 @@ public class lobbingEnemy : EnemyMovement
         {
             gunContr.reload = false;
         }
+
+        base.Update();
     }   
 }

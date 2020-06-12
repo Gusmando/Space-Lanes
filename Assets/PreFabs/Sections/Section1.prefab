@@ -784,19 +784,26 @@ MonoBehaviour:
     type: 3}
   minorEnemy: {fileID: 1259156079434781980, guid: 57c4d095bd97070468405ec72d75067d,
     type: 3}
+  lobEnemy: {fileID: 7798077258969684739, guid: 893a07fa4c93dd34ea7b5decfcd358be,
+    type: 3}
   shooterEnemies: 3
   minorEnemies: 9
+  lobEnemies: 3
   waves: 3
   waveDelayTime: 3
   randMinMinor: 0.5
   randMaxMinor: 1.5
   randMinShoot: 2
   randMaxShoot: 3
+  randMinLob: 1
+  randMaxLob: 2
   canSpawnShoot: 1
   canSpawnMinor: 1
+  canSpawnLob: 1
   canWave: 1
   totalShooter: 3
   totalMinor: 5
+  totalLob: 6
   isActive: 0
 --- !u!1 &1637662266097810251
 GameObject:
