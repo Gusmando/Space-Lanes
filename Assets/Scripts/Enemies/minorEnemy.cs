@@ -65,7 +65,6 @@ public class minorEnemy : EnemyMovement
                     }
                 }
             }
-            gameManager.currentLanes[currentLane].minorEnemyCount ++;
         }
 
         else
@@ -79,7 +78,7 @@ public class minorEnemy : EnemyMovement
                 }
             }
         }
-        
+        gameManager.currentLanes[currentLane].minorEnemyCount ++;
         base.Update(); 
 
         //Depending on the velocity, the run speed is set

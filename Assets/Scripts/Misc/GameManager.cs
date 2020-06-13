@@ -15,6 +15,10 @@ public class GameManager : MonoBehaviour
     public int sectionsCleared;
     public int activeSection;
     public int maxSections;
+    public int totalMinor;
+    public int totalShooting;
+    public int totalLob;
+    
     public GameObject spawned;
     public GameObject initSpawnPoint;
     public GameObject endSpawn;
@@ -71,6 +75,17 @@ public class GameManager : MonoBehaviour
             lowActiveLane = Random.Range(0,currentLanes.Length);
             currentActive.lightUpdate();
             StartCoroutine(activeLaneDelay(laneDelayTime));
+        }
+
+        totalMinor = 0;
+        totalShooting = 0;
+        totalLob = 0;
+        
+        foreach(Lane x in currentLanes)
+        {
+            totalMinor += x.minorEnemyCount;
+            totalShooting += x.shootingEnemyCount;
+            totalLob += x.lobbingEnemyCount;
         }
     }
 
