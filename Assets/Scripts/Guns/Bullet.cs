@@ -68,7 +68,6 @@ public class Bullet : MonoBehaviour
                     durability--;
                     StartCoroutine(colliderDelay(invHitTime));
                     bullet.GetComponent<Rigidbody>().AddForce(0,0,speed,ForceMode.Impulse);
-                    
                 }
             }
         }

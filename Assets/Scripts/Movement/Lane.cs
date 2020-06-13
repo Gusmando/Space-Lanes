@@ -12,6 +12,7 @@ public class Lane : MonoBehaviour
     public Quaternion rotation;
     public int minorEnemyCount;
     public int shootingEnemyCount;
+    public int lobbingEnemyCount;
     public int enemyLimit;
     public GameObject[] Platforms;
     public Collider[] Colliders;

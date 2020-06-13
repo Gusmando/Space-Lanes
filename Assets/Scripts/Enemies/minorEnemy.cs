@@ -20,11 +20,13 @@ public class minorEnemy : EnemyMovement
     override public void Start()
     {
         base.Start();
+        currentLane = Random.Range(0,lanes.Length); 
+        gameManager.currentLanes[currentLane].minorEnemyCount ++;
         
     }
     override public void Update()
     {   
-        
+        gameManager.currentLanes[currentLane].minorEnemyCount --;
         if(player.GetComponent<MovementController>().currentLane == currentLane)
         {
             if(!pushing)
@@ -63,6 +65,7 @@ public class minorEnemy : EnemyMovement
                     }
                 }
             }
+            gameManager.currentLanes[currentLane].minorEnemyCount ++;
         }
 
         else
@@ -154,11 +157,8 @@ public class minorEnemy : EnemyMovement
     protected IEnumerator changeDelay(float delayLength)
     {
         canChange = false;
-
         yield return new WaitForSeconds(delayLength);
-
         canChange = true;
-
         yield return null;
     }
 

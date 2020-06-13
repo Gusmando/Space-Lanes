@@ -65,7 +65,6 @@ public class EnemyMovement : MonoBehaviour
         player = GameObject.FindWithTag("Player");
         lanes = gameManager.currentLanes;
         changed = true;
-        currentLane = Random.Range(0,lanes.Length); 
         subjectRb = subject.GetComponent<Rigidbody>();
         animOver = true;
     }

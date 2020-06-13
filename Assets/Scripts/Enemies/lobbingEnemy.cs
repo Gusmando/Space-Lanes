@@ -12,10 +12,13 @@ public class lobbingEnemy : EnemyMovement
     override public void Start()
     {
         base.Start();
+        currentLane = Random.Range(0,lanes.Length); 
+        gameManager.currentLanes[currentLane].lobbingEnemyCount ++;
     }
 
     override public void Update()
     {
+        gameManager.currentLanes[currentLane].lobbingEnemyCount --;
         sameLane = GameObject.FindWithTag("Player").GetComponent<MovementController>().currentLane == currentLane;
         inRange = distanceToPlayer <= threatDistance;
         if(sameLane && inRange)
@@ -44,5 +47,11 @@ public class lobbingEnemy : EnemyMovement
         }
 
         base.Update();
+        gameManager.currentLanes[currentLane].lobbingEnemyCount ++;
+    }
+
+    private void OnDestroy() 
+    {
+        lanes[currentLane].lobbingEnemyCount --;
     }   
 }

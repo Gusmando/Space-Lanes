@@ -24,9 +24,12 @@ public class shootingEnemy : EnemyMovement
     override public void Start()
     {
         base.Start();
+        currentLane = Random.Range(0,lanes.Length); 
+        gameManager.currentLanes[currentLane].shootingEnemyCount ++;
     }
     override public void Update()
     {
+        gameManager.currentLanes[currentLane].shootingEnemyCount --;
         if(!gunContr.input && !hurt)
         {
             gunContr.input = true;
@@ -107,8 +110,8 @@ public class shootingEnemy : EnemyMovement
             }
         }
         base.Update();
-
-         //Depending on the velocity, the run speed is set
+        gameManager.currentLanes[currentLane].shootingEnemyCount ++;
+        //Depending on the velocity, the run speed is set
         if(pushing && !jumping)
         {
             anim.speed = (subjectRb.velocity.z/maxSpeed)*.2f;
@@ -180,7 +183,7 @@ public class shootingEnemy : EnemyMovement
         }
 
     }
-
+    
     protected IEnumerator stopDelay(float delayLength)
     {
         stopped = true;
