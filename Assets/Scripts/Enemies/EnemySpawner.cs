@@ -7,6 +7,7 @@ public class EnemySpawner : MonoBehaviour
     public GameObject shooterEnemy;
     public GameObject minorEnemy;
     public GameObject lobEnemy;
+    public GameManager gameManager;
     public int shooterEnemies;
     public int minorEnemies;
     public int lobEnemies;
@@ -34,6 +35,7 @@ public class EnemySpawner : MonoBehaviour
         totalShooter = shooterEnemies;
         totalMinor = minorEnemies;
         totalLob = lobEnemies;
+        gameManager = GameObject.FindWithTag("GameManager").GetComponent<GameManager>();
     }
 
     // Update is called once per frame
@@ -58,7 +60,7 @@ public class EnemySpawner : MonoBehaviour
                     StartCoroutine(shooterDelay(Random.Range(randMinShoot,randMaxShoot))); 
                 } 
 
-                if(canSpawnLob && lobEnemies !=0)
+                if(canSpawnLob && lobEnemies !=0 && gameManager.totalLob < gameManager.currentLanes.Length)
                 {
                     Instantiate(lobEnemy,transform.position ,transform.rotation);
                     lobEnemies --;

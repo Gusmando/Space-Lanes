@@ -7,12 +7,11 @@ public class lobbingEnemy : EnemyMovement
     public GunController gunContr; 
     public float threatDistance;
     public bool sameLane;
-    public bool canShoot;
     public bool inRange;
     override public void Start()
     {
         base.Start();
-        currentLane = Random.Range(0,lanes.Length); 
+        currentLane = openLane(); 
         gameManager.currentLanes[currentLane].lobbingEnemyCount ++;
     }
 
@@ -53,5 +52,19 @@ public class lobbingEnemy : EnemyMovement
     private void OnDestroy() 
     {
         lanes[currentLane].lobbingEnemyCount --;
-    }   
+    } 
+
+    private int openLane()
+    {
+        int openLane = 0;
+        for(int i = 0; i< gameManager.currentLanes.Length;i ++)
+        {
+            if(gameManager.currentLanes[i].lobbingEnemyCount == 0)
+            {
+                openLane = i;
+            }
+        }
+
+        return openLane;
+    }
 }
