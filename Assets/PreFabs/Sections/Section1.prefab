@@ -786,6 +786,7 @@ MonoBehaviour:
     type: 3}
   lobEnemy: {fileID: 7798077258969684739, guid: 893a07fa4c93dd34ea7b5decfcd358be,
     type: 3}
+  gameManager: {fileID: 0}
   shooterEnemies: 3
   minorEnemies: 9
   lobEnemies: 3
@@ -795,15 +796,15 @@ MonoBehaviour:
   randMaxMinor: 1.5
   randMinShoot: 2
   randMaxShoot: 3
-  randMinLob: 1
-  randMaxLob: 2
+  randMinLob: 0
+  randMaxLob: 1
   canSpawnShoot: 1
   canSpawnMinor: 1
   canSpawnLob: 1
   canWave: 1
   totalShooter: 3
   totalMinor: 5
-  totalLob: 6
+  totalLob: 5
   isActive: 0
 --- !u!1 &1637662266097810251
 GameObject:
@@ -1375,6 +1376,7 @@ MonoBehaviour:
   rotation: {x: 0, y: 0, z: 0, w: 0}
   minorEnemyCount: 0
   shootingEnemyCount: 0
+  lobbingEnemyCount: 0
   enemyLimit: 0
   Platforms: []
   Colliders: []
@@ -1428,6 +1430,7 @@ MonoBehaviour:
   rotation: {x: 0, y: 0, z: 0, w: 0}
   minorEnemyCount: 0
   shootingEnemyCount: 0
+  lobbingEnemyCount: 0
   enemyLimit: 0
   Platforms: []
   Colliders: []
@@ -1998,6 +2001,7 @@ MonoBehaviour:
   rotation: {x: 0, y: 0, z: 0, w: 0}
   minorEnemyCount: 0
   shootingEnemyCount: 0
+  lobbingEnemyCount: 0
   enemyLimit: 0
   Platforms: []
   Colliders: []

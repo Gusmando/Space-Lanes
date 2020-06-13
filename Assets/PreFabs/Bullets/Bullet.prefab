@@ -60,6 +60,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: 1
+  distanceCap: 1
   durability: 1
   bullet: {fileID: 1705798171018837415}
   damage: 5

@@ -153,14 +153,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   auto: 1
-  bulletSpeed: -15
-  delayTime: 0.1
+  bulletSpeed: -25
+  delayTime: 0.02
   barrelLocation: {fileID: 3286900609536251931}
   bullet: {fileID: 7688421465851161077, guid: 04374143aa21f484d8b19cce3d75fbb7, type: 3}
   gunSprite: {fileID: 0}
   canShoot: 1
-  clipSize: 10
-  fullClip: 10
+  clipSize: 20
+  fullClip: 20
   clipCount: 5
   shakeIntensity: 0.1
   shakeDelay: 0.05
@@ -271,7 +271,6 @@ MonoBehaviour:
   gunContr: {fileID: 6738637385118766901}
   threatDistance: 200
   sameLane: 0
-  canShoot: 0
   inRange: 0
 --- !u!65 &5872712257051250840
 BoxCollider:
@@ -301,7 +300,7 @@ MonoBehaviour:
   player: 0
   currentGun: {fileID: 2955895224156418511}
   reloading: 0
-  reloadTime: 15
+  reloadTime: 2
   shooting: 0
   shotAnim: 0
   reload: 0

@@ -5,6 +5,7 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     public bool player;
+    public bool distanceCap;
     public int durability;
     public GameObject bullet;
     public float damage;
@@ -25,7 +26,7 @@ public class Bullet : MonoBehaviour
     void Update()
     {
         float distance = Vector3.Distance(initPosition,bullet.transform.position);
-        if(distance >= range || durability <= 0)
+        if((distance >= range && distanceCap) || durability <= 0)
         {
             Destroy(bullet);
         }
