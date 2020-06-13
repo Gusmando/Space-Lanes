@@ -338,9 +338,9 @@ MonoBehaviour:
   maxSpeed: -17
   jumpMult: 15
   rayCastOffset: -2
-  jumpCastOffset: -10
+  jumpCastOffset: -8
   laneChangeSpeed: 30
-  leftRightOffset: 3
+  leftRightOffset: 2.5
   gravityForce: {x: 0, y: -20, z: 0}
   newPosition: {x: 0, y: 0, z: 0}
   changed: 1
@@ -368,8 +368,8 @@ MonoBehaviour:
   reloadTime: 4
   sameLaneShotDelay: 0.2
   sameLaneReloadTime: 2
-  rayCastLeftOffset: 3.5
-  rayCastRightOffset: -3.5
+  rayCastLeftOffset: 2.5
+  rayCastRightOffset: -2.5
   leftOpen: 0
   rightOpen: 0
   sameLane: 0

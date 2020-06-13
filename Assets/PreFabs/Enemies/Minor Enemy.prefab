@@ -156,7 +156,7 @@ MonoBehaviour:
   rayCastOffset: -2
   jumpCastOffset: -10
   laneChangeSpeed: 30
-  leftRightOffset: 3
+  leftRightOffset: 2.5
   gravityForce: {x: 0, y: -20, z: 0}
   newPosition: {x: 0, y: 0, z: 0}
   changed: 1
@@ -181,8 +181,8 @@ MonoBehaviour:
   rangePushMax: 100
   rangeStopMin: 1
   rangeStopMax: 2
-  rayCastLeftOffset: 3
-  rayCastRightOffset: -3
+  rayCastLeftOffset: 2.5
+  rayCastRightOffset: -2.5
   changeDelayTime: 1.5
   stoppedOnce: 0
   leftOpen: 0
