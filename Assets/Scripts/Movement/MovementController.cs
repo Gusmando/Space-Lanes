@@ -166,7 +166,7 @@ public class MovementController : MonoBehaviour
         jumpForce = new Vector3(0,jumpMult,0);
         
         //Depending on the velocity, the run speed is set
-        if(pushing && !jumping)
+        if(pushing && !jumping && !(subjectRb.velocity.z/maxSpeed<0))
         {
             anim.speed = (subjectRb.velocity.z/maxSpeed)*.3f;
         }

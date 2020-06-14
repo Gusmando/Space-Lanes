@@ -82,7 +82,7 @@ public class minorEnemy : EnemyMovement
         base.Update(); 
 
         //Depending on the velocity, the run speed is set
-        if(pushing && !jumping)
+        if(pushing && !jumping && !(subjectRb.velocity.z/maxSpeed<0))
         {
             anim.speed = (subjectRb.velocity.z/maxSpeed)*.2f;
         }
