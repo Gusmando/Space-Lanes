@@ -208,13 +208,9 @@ public class MovementController : MonoBehaviour
         //The force of gravity is constantly acting on the object
         subjectRb.AddForce(gravityForce,ForceMode.Acceleration);
 
-        if(subjectRb.velocity.y < -.05)
+        if(subjectRb.velocity.y < -.05 && !falling)
         {
             falling = true;
-        }
-        else
-        {
-            falling = false;
         }
 
          //If a left or right dash should be happening, anim state vars change
@@ -288,6 +284,12 @@ public class MovementController : MonoBehaviour
                 falling = false;
             }
         }
+        else if(!belowOpen && other.gameObject.tag.Contains("Floor"))
+        {
+            falling = true;
+            subjectRb.GetComponent<Collider>().enabled = false;
+            StartCoroutine(colliderDelay(colliderDelayTime));
+        }
 
         if(other.gameObject.tag.Contains("Fast"))
         {
@@ -298,13 +300,6 @@ public class MovementController : MonoBehaviour
         {
             speedBoost = 1;
             maxSpeedBoost = 1;
-        }
-
-        if(!belowOpen && other.gameObject.tag.Contains("Floor"))
-        {
-            falling = true;
-            subjectRb.GetComponent<Collider>().enabled = false;
-            StartCoroutine(colliderDelay(colliderDelayTime));
         }
     }
     //To check for falls
