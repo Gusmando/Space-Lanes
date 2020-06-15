@@ -8,6 +8,7 @@ public class EnemySpawner : MonoBehaviour
     public GameObject minorEnemy;
     public GameObject lobEnemy;
     public GameManager gameManager;
+    public MovementController player;
     public int shooterEnemies;
     public int minorEnemies;
     public int lobEnemies;
@@ -18,7 +19,9 @@ public class EnemySpawner : MonoBehaviour
     public float randMinShoot;
     public float randMaxShoot;
     public float randMinLob;
-    public float randMaxLob;  
+    public float randMaxLob;
+    public float range;
+    public float distanceToPlayer;
     public bool canSpawnShoot;
     public bool canSpawnMinor;
     public bool canSpawnLob;
@@ -36,11 +39,18 @@ public class EnemySpawner : MonoBehaviour
         totalMinor = minorEnemies;
         totalLob = lobEnemies;
         gameManager = GameObject.FindWithTag("GameManager").GetComponent<GameManager>();
+        player = GameObject.FindWithTag("Player").GetComponent<MovementController>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        distanceToPlayer = Vector3.Distance(player.subject.transform.position,this.transform.position);
+
+        if(distanceToPlayer <= range && isActive)
+        {
+            isActive = false;
+        }
         if(isActive)
         {
             if(canWave)

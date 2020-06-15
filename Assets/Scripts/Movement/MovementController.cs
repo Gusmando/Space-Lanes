@@ -212,6 +212,10 @@ public class MovementController : MonoBehaviour
         {
             falling = true;
         }
+        else if(subjectRb.velocity.y > -.05 && falling)
+        {
+            falling = false;
+        }
 
          //If a left or right dash should be happening, anim state vars change
         if(!animOver)
@@ -270,21 +274,22 @@ public class MovementController : MonoBehaviour
         Vector3 highObject = subject.transform.position + new Vector3(0,5,0);
         Vector3 below = subject.transform.position + new Vector3(0,rayCastBelow,0);
         Vector3 direction = below - highObject; 
-        belowOpen = Physics.Raycast(subject.transform.position, direction,out hit);
+        belowOpen = Physics.Raycast(highObject, direction,out hit);
+        Debug.DrawRay(highObject, direction, Color.green);
 
         if(other.gameObject.tag.Contains("Floor") && belowOpen)
         {
-            if(jumping)
-            {
-                jumping = false;
-            }
-
             if(falling)
             {
                 falling = false;
             }
+
+            if(jumping)
+            {
+                jumping = false;
+            }
         }
-        else if(!belowOpen && other.gameObject.tag.Contains("Floor"))
+        else if(!belowOpen && other.gameObject.tag.Contains("Floor") && subjectRb.velocity.y < -.05)
         {
             falling = true;
             subjectRb.GetComponent<Collider>().enabled = false;
@@ -305,12 +310,9 @@ public class MovementController : MonoBehaviour
     //To check for falls
     private void OnCollisionExit(Collision other)
     {
-        if(other.gameObject.tag.Contains("Floor"))
+        if(subjectRb.velocity.y < -.05)
         {
-            if(!falling)
-            {
-                falling = true;
-            }
+            falling = true;
         }
     }
 
