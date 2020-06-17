@@ -178,6 +178,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Spinning Orb
       objectReference: {fileID: 0}
+    - target: {fileID: 2017358339225758724, guid: 7c166d51bf1e97845b49cfff639f62d2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4099484412844865774, guid: 7c166d51bf1e97845b49cfff639f62d2,
         type: 3}
       propertyPath: InitialModule.startColor.maxColor.b
@@ -192,6 +197,11 @@ PrefabInstance:
         type: 3}
       propertyPath: InitialModule.startColor.maxColor.g
       value: 0.4528575
+      objectReference: {fileID: 0}
+    - target: {fileID: 5131571257382804215, guid: 7c166d51bf1e97845b49cfff639f62d2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7c166d51bf1e97845b49cfff639f62d2, type: 3}
