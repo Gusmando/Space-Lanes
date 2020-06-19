@@ -144,7 +144,6 @@ GameObject:
   - component: {fileID: 10854955653442776}
   - component: {fileID: 10854955653442783}
   - component: {fileID: 10854955653442782}
-  - component: {fileID: 7210047008051742430}
   m_Layer: 0
   m_Name: Gun
   m_TagString: Untagged
@@ -255,40 +254,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: 1
-  currentGun: {fileID: 7210047008051742430}
+  barrel: {fileID: 10854954493631051}
+  currentGun: {fileID: 0}
+  gunObj: {fileID: 0}
+  currentGunIndex: 0
+  guns:
+  - {fileID: 2846936634778609401, guid: 7299cdae32814c149ab3021eff416179, type: 3}
+  - {fileID: 8001320711532842900, guid: 87aea0ca36ff33b468b396b4dbc5d5a7, type: 3}
   reloading: 0
   reloadTime: 0.5
   shooting: 0
   shotAnim: 0
   reload: 0
+  gunChange: 0
   animDelayTime: 0.3
   camFunc: {fileID: 10854956421991342}
   input: 0
---- !u!114 &7210047008051742430
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 10854955653442778}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 692b302382f151845bf9f39e4d8e850a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  auto: 1
-  bulletSpeed: 20
-  delayTime: 0.1
-  barrelLocation: {fileID: 10854954493631051}
-  bullet: {fileID: 1705798171018837415, guid: 2b1e883b497b83c49bc07a21eb778748, type: 3}
-  gunSprite: {fileID: 21300000, guid: 588d3f8f39bd69d4eacbb511302af2db, type: 3}
-  canShoot: 1
-  clipSize: 10
-  fullClip: 10
-  clipCount: 100
-  shakeIntensity: 0.1
-  shakeDelay: 0.05
-  damage: 5
 --- !u!1 &10854956270901641
 GameObject:
   m_ObjectHideFlags: 0
@@ -387,7 +368,7 @@ MonoBehaviour:
   leftRight: 0
   animStateDisp: 0
   weapon: {fileID: 10854955653442782}
-  hurtDelayTime: 0.3
+  hurtDelayTime: 0.8
 --- !u!65 &10854956270901647
 BoxCollider:
   m_ObjectHideFlags: 0

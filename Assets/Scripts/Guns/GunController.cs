@@ -5,18 +5,40 @@ using UnityEngine;
 public class GunController : MonoBehaviour
 {
     public bool player;
+    public Transform barrel;
     public Gun currentGun;
+    public GameObject gunObj;
+    public int currentGunIndex;
+    public GameObject[] guns;
     public bool reloading;
     public float reloadTime; 
     public bool shooting;
     public bool shotAnim;
     public bool reload;
+    public bool gunChange;
     public float animDelayTime;
     public CameraController camFunc;
     public bool input;
-    // Update is called once per frame
+    void Start()
+    {
+        if(player)
+        {
+            gunObj = Instantiate(guns[currentGunIndex]);
+            currentGun = gunObj.GetComponent<Gun>();
+            currentGun.barrelLocation = this.barrel;
+        }
+        
+    }
     void Update()
     {
+        if(gunChange)
+        {
+            gunObj = Instantiate(guns[currentGunIndex]);
+            currentGun = gunObj.GetComponent<Gun>();
+            currentGun.barrelLocation = this.barrel;
+            gunChange = false; 
+        }
+
         if(player)
         {
             if(currentGun.auto)
@@ -34,8 +56,7 @@ public class GunController : MonoBehaviour
             }
         }
         
-        
-        if(currentGun.canShoot && currentGun.clipSize!= 0 && currentGun.clipCount!= 0 && input && !reloading)
+        if(currentGun.canShoot && currentGun.clipSize!= 0 && input && !reloading)
         {
             if(!currentGun.auto)
             {
@@ -50,7 +71,7 @@ public class GunController : MonoBehaviour
 
         if(player)
         {
-            if(currentGun.clipSize== 0 && !reload)
+            if(currentGun.clipSize == 0 && currentGun.clipCount > 0 && !reload)
             {
                 reload = true;
             }
@@ -65,12 +86,20 @@ public class GunController : MonoBehaviour
             StartCoroutine(reloadDelay(reloadTime));
             currentGun.clipSize = currentGun.fullClip;
             currentGun.clipCount--;
-        }   
+        }
+
+        if(currentGun.clipSize== 0 && currentGun.clipCount==0)
+        {
+            setGun(0);
+        }
+
         if(player)
         {
             camFunc.setShakeIntensity(currentGun.shakeIntensity);
             camFunc.setShakeLength(currentGun.shakeDelay);
         }
+
+        
     }
 
     void FixedUpdate() 
@@ -83,6 +112,14 @@ public class GunController : MonoBehaviour
                 camFunc.screenShake();
             }
             shooting = false;
+        }
+    }
+    public void setGun(int gunNum) 
+    {
+        if(currentGunIndex != gunNum)
+        {
+            currentGunIndex = gunNum; 
+            gunChange = true;
         }
     }
 

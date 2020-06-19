@@ -17,6 +17,7 @@ public abstract class Gun : MonoBehaviour
     public float shakeIntensity;
     public float shakeDelay;
     public float damage;
+    public Color gunColor;
     public abstract void shoot();
 
     protected IEnumerator shootingDelay(float delayLength)

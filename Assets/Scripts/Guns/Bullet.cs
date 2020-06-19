@@ -76,7 +76,10 @@ public class Bullet : MonoBehaviour
         {
             if(other.gameObject.CompareTag("Player"))
             {
-                other.gameObject.GetComponent<MovementController>().health -= (damage * damageMod);
+                if(!other.gameObject.GetComponent<MovementController>().hurt)
+                {
+                    other.gameObject.GetComponent<MovementController>().health -= (damage * damageMod);
+                }
                 if(other.gameObject != null)
                 {
                     Rigidbody playerRB = other.gameObject.GetComponent<Rigidbody>();

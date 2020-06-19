@@ -584,8 +584,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cfabb0440166ab443bba8876756fdfa9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
-  m_EffectDistance: {x: 60.37, y: -54.3}
+  m_EffectColor: {r: 0, g: 0.7921569, b: 1, a: 0.07058824}
+  m_EffectDistance: {x: -63.09, y: -54.3}
   m_UseGraphicAlpha: 1
 --- !u!114 &618764334
 MonoBehaviour:
@@ -690,8 +690,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cfabb0440166ab443bba8876756fdfa9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
-  m_EffectDistance: {x: 60.37, y: -54.3}
+  m_EffectColor: {r: 0, g: 0.7921569, b: 1, a: 0.07058824}
+  m_EffectDistance: {x: -63.09, y: -54.3}
   m_UseGraphicAlpha: 1
 --- !u!114 &628281517
 MonoBehaviour:
@@ -888,8 +888,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cfabb0440166ab443bba8876756fdfa9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
-  m_EffectDistance: {x: 60.37, y: -54.3}
+  m_EffectColor: {r: 0, g: 0.7921569, b: 1, a: 0.07058824}
+  m_EffectDistance: {x: -63.09, y: -54.3}
   m_UseGraphicAlpha: 1
 --- !u!114 &888323509
 MonoBehaviour:
@@ -1024,8 +1024,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cfabb0440166ab443bba8876756fdfa9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
-  m_EffectDistance: {x: 60.37, y: -54.3}
+  m_EffectColor: {r: 0, g: 0.7921569, b: 1, a: 0.07058824}
+  m_EffectDistance: {x: -63.09, y: -54.3}
   m_UseGraphicAlpha: 1
 --- !u!114 &1177347114
 MonoBehaviour:
@@ -1130,8 +1130,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cfabb0440166ab443bba8876756fdfa9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
-  m_EffectDistance: {x: 60.37, y: -54.3}
+  m_EffectColor: {r: 0, g: 0.7921569, b: 1, a: 0.07058824}
+  m_EffectDistance: {x: -63.09, y: -54.3}
   m_UseGraphicAlpha: 1
 --- !u!114 &1296957243
 MonoBehaviour:
@@ -1265,8 +1265,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cfabb0440166ab443bba8876756fdfa9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_EffectColor: {r: 0, g: 0, b: 0, a: 1}
-  m_EffectDistance: {x: 38.05, y: -42.6}
+  m_EffectColor: {r: 0, g: 0.7921569, b: 1, a: 1}
+  m_EffectDistance: {x: -58.99, y: -42.6}
   m_UseGraphicAlpha: 1
 --- !u!1 &1446052041
 GameObject:
@@ -1421,7 +1421,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 2439db41613b0a8499eb4b14c3941696, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 0b4985572a608d047a928d61175440c0, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1579,10 +1579,25 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 10854955653442782, guid: 9d8075e9d7bf31249b48173e41228732,
+        type: 3}
+      propertyPath: currentGunIndex
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 10854955653442782, guid: 9d8075e9d7bf31249b48173e41228732,
+        type: 3}
+      propertyPath: gunChange
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 10854956270901635, guid: 9d8075e9d7bf31249b48173e41228732,
         type: 3}
       propertyPath: colliderDelayTime
       value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 10854956270901635, guid: 9d8075e9d7bf31249b48173e41228732,
+        type: 3}
+      propertyPath: health
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 10854956270901641, guid: 9d8075e9d7bf31249b48173e41228732,
         type: 3}
@@ -1689,7 +1704,8 @@ PrefabInstance:
       propertyPath: bulletSpeed
       value: 25
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7210047008051742430, guid: 9d8075e9d7bf31249b48173e41228732, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 9d8075e9d7bf31249b48173e41228732, type: 3}
 --- !u!1001 &3438543758076842246
 PrefabInstance:

@@ -63,7 +63,7 @@ MonoBehaviour:
   distanceCap: 0
   durability: 1
   bullet: {fileID: 7688421465851161077}
-  damage: 5
+  damage: 1
   damageMod: 1
   knockback: -5
   speed: -5
