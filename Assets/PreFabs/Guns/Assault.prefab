@@ -56,4 +56,4 @@ MonoBehaviour:
   shakeIntensity: 0.1
   shakeDelay: 0.05
   damage: 5
-  gunColor: {r: 0, g: 0, b: 0, a: 0}
+  gunColor: {r: 0, g: 0.7921569, b: 1, a: 1}

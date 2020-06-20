@@ -28,7 +28,7 @@ public class gunAnimationController : MonoBehaviour
     // Update is called once per frame
     void Start() 
     {
-        spriteDisp.sprite = gunController.currentGun.gunSprite;
+        //spriteDisp.sprite = gunController.currentGun.gunSprite;
         initLocation = gunTrans.localPosition;
     }
     

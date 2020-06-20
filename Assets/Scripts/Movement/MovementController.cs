@@ -9,8 +9,9 @@ public class MovementController : MonoBehaviour
     [Header("Object Being Moved")]
     public GameObject subject;
     public Rigidbody subjectRb;
-    public float health;
+    public int health;
     public GameManager gameManager;
+    public canvasMangager canvas;
     //Array holding different lanes within the level
     [Header("Lane Assignment (Left to Right)")]
     public Lane[] lanes;
@@ -69,6 +70,9 @@ public class MovementController : MonoBehaviour
     {
         //Display for the animation state for debug
         animStateDisp = anim.GetInteger("animState");
+        canvas.currentColor = weapon.currentGun.gunColor;
+        canvas.updateUIColors();
+        canvas.currentHealth = health;
         //If a left key press occurs and the left lane exists
         if(Input.GetKeyDown(KeyCode.A) && (currentLane - 1) >= 0)
         {

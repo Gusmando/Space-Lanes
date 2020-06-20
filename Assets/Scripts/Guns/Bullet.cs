@@ -78,7 +78,8 @@ public class Bullet : MonoBehaviour
             {
                 if(!other.gameObject.GetComponent<MovementController>().hurt)
                 {
-                    other.gameObject.GetComponent<MovementController>().health -= (damage * damageMod);
+                    other.gameObject.GetComponent<MovementController>().health --;
+                    other.gameObject.GetComponent<MovementController>().canvas.updateUIHealth();
                 }
                 if(other.gameObject != null)
                 {

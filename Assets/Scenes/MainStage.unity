@@ -137,7 +137,7 @@ GameObject:
   - component: {fileID: 141177162}
   m_Layer: 5
   m_Name: itemBox
-  m_TagString: Untagged
+  m_TagString: boxUI
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -287,6 +287,66 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &340391270
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 340391272}
+  - component: {fileID: 340391271}
+  m_Layer: 0
+  m_Name: Canvas Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &340391271
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 340391270}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fbed341bae9fe14fb30ae7b4f9e855c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  coloredUI:
+  - {fileID: 888323504}
+  - {fileID: 618764329}
+  - {fileID: 1296957238}
+  - {fileID: 1177347109}
+  - {fileID: 628281512}
+  - {fileID: 1641980893}
+  - {fileID: 141177158}
+  - {fileID: 1326419191}
+  currentColor: {r: 0, g: 0, b: 0, a: 0}
+  healthBar:
+  - {fileID: 888323506}
+  - {fileID: 618764331}
+  - {fileID: 1296957240}
+  - {fileID: 1177347111}
+  - {fileID: 628281514}
+  currentHealth: 0
+--- !u!4 &340391272
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 340391270}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 3.8278327, z: 4.1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &355197630
 GameObject:
@@ -507,11 +567,11 @@ GameObject:
   - component: {fileID: 618764330}
   - component: {fileID: 618764332}
   - component: {fileID: 618764331}
-  - component: {fileID: 618764334}
   - component: {fileID: 618764333}
+  - component: {fileID: 618764334}
   m_Layer: 5
   m_Name: Bar1
-  m_TagString: Untagged
+  m_TagString: shadowUIBar
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -613,11 +673,11 @@ GameObject:
   - component: {fileID: 628281513}
   - component: {fileID: 628281515}
   - component: {fileID: 628281514}
-  - component: {fileID: 628281517}
   - component: {fileID: 628281516}
+  - component: {fileID: 628281517}
   m_Layer: 5
   m_Name: Bar4
-  m_TagString: Untagged
+  m_TagString: shadowUIBar
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -811,11 +871,11 @@ GameObject:
   - component: {fileID: 888323505}
   - component: {fileID: 888323507}
   - component: {fileID: 888323506}
-  - component: {fileID: 888323509}
   - component: {fileID: 888323508}
+  - component: {fileID: 888323509}
   m_Layer: 5
   m_Name: Bar0
-  m_TagString: Untagged
+  m_TagString: shadowUIBar
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -947,11 +1007,11 @@ GameObject:
   - component: {fileID: 1177347110}
   - component: {fileID: 1177347112}
   - component: {fileID: 1177347111}
-  - component: {fileID: 1177347114}
   - component: {fileID: 1177347113}
+  - component: {fileID: 1177347114}
   m_Layer: 5
   m_Name: Bar3
-  m_TagString: Untagged
+  m_TagString: shadowUIBar
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1053,11 +1113,11 @@ GameObject:
   - component: {fileID: 1296957239}
   - component: {fileID: 1296957241}
   - component: {fileID: 1296957240}
-  - component: {fileID: 1296957243}
   - component: {fileID: 1296957242}
+  - component: {fileID: 1296957243}
   m_Layer: 5
   m_Name: Bar2
-  m_TagString: Untagged
+  m_TagString: shadowUIBar
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1192,7 +1252,7 @@ GameObject:
   - component: {fileID: 1326419195}
   m_Layer: 5
   m_Name: healthBar
-  m_TagString: Untagged
+  m_TagString: shadowUI
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1213,7 +1273,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: -614.89996, y: 43.799988}
+  m_AnchoredPosition: {x: -614.89996, y: 43.80005}
   m_SizeDelta: {x: 4409, y: 976.3093}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &1326419193
@@ -1378,7 +1438,7 @@ GameObject:
   - component: {fileID: 1641980897}
   m_Layer: 5
   m_Name: item
-  m_TagString: Untagged
+  m_TagString: shadowUI
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1599,6 +1659,11 @@ PrefabInstance:
       propertyPath: health
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 10854956270901635, guid: 9d8075e9d7bf31249b48173e41228732,
+        type: 3}
+      propertyPath: canvas
+      value: 
+      objectReference: {fileID: 340391271}
     - target: {fileID: 10854956270901641, guid: 9d8075e9d7bf31249b48173e41228732,
         type: 3}
       propertyPath: m_Name
