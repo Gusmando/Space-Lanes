@@ -165,6 +165,7 @@ MonoBehaviour:
   shakeIntensity: 0.1
   shakeDelay: 0.05
   damage: 5
+  gunColor: {r: 0, g: 0, b: 0, a: 0}
   target: {fileID: 0}
 --- !u!1 &7798077258969684739
 GameObject:
@@ -233,7 +234,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   subject: {fileID: 7798077258969684739}
   subjectRb: {fileID: 2873550802050431915}
-  health: 30
+  health: 20
   player: {fileID: 0}
   distanceToPlayer: 0
   gameManager: {fileID: 0}
@@ -298,12 +299,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: 0
+  barrel: {fileID: 0}
   currentGun: {fileID: 2955895224156418511}
+  gunObj: {fileID: 0}
+  currentGunIndex: 0
+  guns: []
   reloading: 0
   reloadTime: 2
   shooting: 0
   shotAnim: 0
   reload: 0
+  gunChange: 0
   animDelayTime: 0.3
   camFunc: {fileID: 0}
   input: 0
