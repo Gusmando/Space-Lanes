@@ -10,6 +10,7 @@ public class MovementController : MonoBehaviour
     public GameObject subject;
     public Rigidbody subjectRb;
     public int health;
+    public int currentCount;
     public GameManager gameManager;
     public canvasMangager canvas;
     //Array holding different lanes within the level
@@ -70,7 +71,24 @@ public class MovementController : MonoBehaviour
     {
         //Display for the animation state for debug
         animStateDisp = anim.GetInteger("animState");
+        if(weapon.currentGunIndex != 0)
+        {
+            canvas.limited = true;
+        }
+        else
+        {
+            canvas.limited = false;
+        }
         canvas.currentColor = weapon.currentGun.gunColor;
+        if(weapon.currentGun.clipCount!= 0)
+        {
+            currentCount = weapon.currentGun.clipSize + (weapon.currentGun.fullClip * (weapon.currentGun.clipCount));
+        }
+        else
+        {
+            currentCount = weapon.currentGun.clipSize;
+        }
+        canvas.ammoCountInt = currentCount;
         canvas.updateUIColors();
         canvas.currentHealth = health;
         //If a left key press occurs and the left lane exists

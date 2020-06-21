@@ -1,0 +1,116 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &1239475963521988927
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 665918691723058909, guid: 2b1e883b497b83c49bc07a21eb778748,
+        type: 3}
+      propertyPath: InitialModule.startColor.maxColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 665918691723058909, guid: 2b1e883b497b83c49bc07a21eb778748,
+        type: 3}
+      propertyPath: InitialModule.startColor.maxColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 665918691723058909, guid: 2b1e883b497b83c49bc07a21eb778748,
+        type: 3}
+      propertyPath: InitialModule.startColor.maxColor.b
+      value: 0.9104991
+      objectReference: {fileID: 0}
+    - target: {fileID: 1705798171018837415, guid: 2b1e883b497b83c49bc07a21eb778748,
+        type: 3}
+      propertyPath: m_Name
+      value: Bullet3Lane
+      objectReference: {fileID: 0}
+    - target: {fileID: 1705798171018837420, guid: 2b1e883b497b83c49bc07a21eb778748,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 15.54
+      objectReference: {fileID: 0}
+    - target: {fileID: 1705798171018837420, guid: 2b1e883b497b83c49bc07a21eb778748,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.97
+      objectReference: {fileID: 0}
+    - target: {fileID: 1705798171018837420, guid: 2b1e883b497b83c49bc07a21eb778748,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 2.355
+      objectReference: {fileID: 0}
+    - target: {fileID: 1705798171018837420, guid: 2b1e883b497b83c49bc07a21eb778748,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1705798171018837420, guid: 2b1e883b497b83c49bc07a21eb778748,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1705798171018837420, guid: 2b1e883b497b83c49bc07a21eb778748,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1705798171018837420, guid: 2b1e883b497b83c49bc07a21eb778748,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1705798171018837420, guid: 2b1e883b497b83c49bc07a21eb778748,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1705798171018837420, guid: 2b1e883b497b83c49bc07a21eb778748,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1705798171018837420, guid: 2b1e883b497b83c49bc07a21eb778748,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1705798171018837420, guid: 2b1e883b497b83c49bc07a21eb778748,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6035936666222555942, guid: 2b1e883b497b83c49bc07a21eb778748,
+        type: 3}
+      propertyPath: InitialModule.startColor.maxColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6035936666222555942, guid: 2b1e883b497b83c49bc07a21eb778748,
+        type: 3}
+      propertyPath: InitialModule.startColor.maxColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6035936666222555942, guid: 2b1e883b497b83c49bc07a21eb778748,
+        type: 3}
+      propertyPath: InitialModule.startColor.maxColor.b
+      value: 0.84147406
+      objectReference: {fileID: 0}
+    - target: {fileID: 7796332374680693266, guid: 2b1e883b497b83c49bc07a21eb778748,
+        type: 3}
+      propertyPath: InitialModule.startColor.maxColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7796332374680693266, guid: 2b1e883b497b83c49bc07a21eb778748,
+        type: 3}
+      propertyPath: InitialModule.startColor.maxColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7796332374680693266, guid: 2b1e883b497b83c49bc07a21eb778748,
+        type: 3}
+      propertyPath: InitialModule.startColor.maxColor.b
+      value: 0.74655247
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 2b1e883b497b83c49bc07a21eb778748, type: 3}

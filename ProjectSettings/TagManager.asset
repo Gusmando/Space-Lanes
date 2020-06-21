@@ -13,6 +13,7 @@ TagManager:
   - shadowUI
   - boxUI
   - shadowUIBar
+  - frame
   layers:
   - Default
   - TransparentFX

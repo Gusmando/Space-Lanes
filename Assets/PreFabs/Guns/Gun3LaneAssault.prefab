@@ -47,7 +47,7 @@ MonoBehaviour:
   bulletSpeed: 20
   delayTime: 0.1
   barrelLocation: {fileID: 0}
-  bullet: {fileID: 1705798171018837415, guid: 2b1e883b497b83c49bc07a21eb778748, type: 3}
+  bullet: {fileID: 477300971803395224, guid: f763328cc75fb64498214c62f5c59369, type: 3}
   gunSprite: {fileID: 21300000, guid: 588d3f8f39bd69d4eacbb511302af2db, type: 3}
   canShoot: 1
   clipSize: 30

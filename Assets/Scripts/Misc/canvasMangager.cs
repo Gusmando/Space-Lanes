@@ -8,7 +8,27 @@ public class canvasMangager : MonoBehaviour
     public GameObject[] coloredUI;
     public Color currentColor;
     public Image[] healthBar;
+    public Text ammoCount;
+    public Image unlimitedSign;
+    public int ammoCountInt;
     public int currentHealth;
+    public bool limited;
+    void Update() 
+    {
+        if(limited)
+        {
+            ammoCount.enabled = true;
+            unlimitedSign.enabled = false;
+        }
+
+        else
+        {
+            ammoCount.enabled = false;
+            unlimitedSign.enabled = true;
+        }
+
+        ammoCount.text = ammoCountInt.ToString();
+    }
     public void updateUIColors()
     {
         foreach(GameObject x in coloredUI)
@@ -26,8 +46,16 @@ public class canvasMangager : MonoBehaviour
             else if(x.tag.Equals("boxUI"))
             {
                 currentColor = new Color(currentColor.r,currentColor.g,currentColor.b,1);  
+                if(x.gameObject.GetComponent<Image>() != null)
+                {
+                    x.GetComponent<Image>().color = currentColor;
+                }
                 x.GetComponent<Outline>().effectColor = currentColor;
-                x.GetComponent<Image>().color = currentColor;
+            }
+            else if(x.tag.Equals("frame"))
+            {
+                currentColor = new Color(currentColor.r,currentColor.g,currentColor.b,1);  
+                x.GetComponent<Outline>().effectColor = currentColor;
             }
         }
     }
