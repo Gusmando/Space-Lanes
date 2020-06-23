@@ -786,11 +786,16 @@ MonoBehaviour:
     type: 3}
   lobEnemy: {fileID: 7798077258969684739, guid: 893a07fa4c93dd34ea7b5decfcd358be,
     type: 3}
+  healthPrefab: {fileID: 1580714627463188105, guid: cecca911ea28c8e4b9a3e282e2b93b8e,
+    type: 3}
+  lane3assaultPrefab: {fileID: 2636157864535493677, guid: 832277c5d68ec6e479d43d84992f7506,
+    type: 3}
   gameManager: {fileID: 0}
   player: {fileID: 0}
   shooterEnemies: 3
   minorEnemies: 9
   lobEnemies: 3
+  healthCount: 2
   waves: 3
   waveDelayTime: 3
   randMinMinor: 0.5
@@ -799,15 +804,19 @@ MonoBehaviour:
   randMaxShoot: 3
   randMinLob: 0
   randMaxLob: 1
+  randMinHealth: 20
+  randMaxHealth: 45
   range: 20
   distanceToPlayer: 0
   canSpawnShoot: 1
   canSpawnMinor: 1
   canSpawnLob: 1
+  canSpawnHealth: 1
   canWave: 1
   totalShooter: 3
   totalMinor: 5
   totalLob: 5
+  totalHealth: 2
   isActive: 0
 --- !u!1 &1637662266097810251
 GameObject:

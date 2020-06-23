@@ -6,6 +6,9 @@ public class healthPickup : Pickup
 {
     public override void action(GameObject player)
     {
-        player.GetComponent<MovementController>().health ++;
+        if(player.GetComponent<MovementController>().health < 5)
+        {
+            player.GetComponent<MovementController>().health ++;
+        }
     }
 }

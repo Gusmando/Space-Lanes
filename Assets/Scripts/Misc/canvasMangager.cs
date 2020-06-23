@@ -64,7 +64,7 @@ public class canvasMangager : MonoBehaviour
     {
         for(int i = 0;i < 5; i++)
         {
-            if(i< currentHealth - 1)
+            if(i< currentHealth)
             {
                 healthBar[i].enabled = true;
             }

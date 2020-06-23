@@ -7,11 +7,14 @@ public class EnemySpawner : MonoBehaviour
     public GameObject shooterEnemy;
     public GameObject minorEnemy;
     public GameObject lobEnemy;
+    public GameObject healthPrefab;
+    public GameObject lane3assaultPrefab;
     public GameManager gameManager;
     public MovementController player;
     public int shooterEnemies;
     public int minorEnemies;
     public int lobEnemies;
+    public int healthCount;
     public int waves;
     public float waveDelayTime;
     public float randMinMinor;
@@ -20,15 +23,19 @@ public class EnemySpawner : MonoBehaviour
     public float randMaxShoot;
     public float randMinLob;
     public float randMaxLob;
+    public float randMinHealth;
+    public float randMaxHealth;
     public float range;
     public float distanceToPlayer;
     public bool canSpawnShoot;
     public bool canSpawnMinor;
     public bool canSpawnLob;
+    public bool canSpawnHealth;
     public bool canWave;
     public int totalShooter;
     public int totalMinor;
     public int totalLob;
+    public int totalHealth;
     public bool isActive;
 
     // Start is called before the first frame update
@@ -38,6 +45,7 @@ public class EnemySpawner : MonoBehaviour
         totalShooter = shooterEnemies;
         totalMinor = minorEnemies;
         totalLob = lobEnemies;
+        totalHealth = healthCount;
         gameManager = GameObject.FindWithTag("GameManager").GetComponent<GameManager>();
         player = GameObject.FindWithTag("Player").GetComponent<MovementController>();
     }
@@ -68,14 +76,22 @@ public class EnemySpawner : MonoBehaviour
                     Instantiate(shooterEnemy,transform.position ,transform.rotation);
                     shooterEnemies --;
                     StartCoroutine(shooterDelay(Random.Range(randMinShoot,randMaxShoot))); 
-                } 
+                }
+
+                if(canSpawnHealth && healthCount!=0)
+                {
+                    Instantiate(healthPrefab,transform.position ,transform.rotation);
+                    healthCount --;
+                    StartCoroutine(healthDelay(Random.Range(randMinHealth,randMaxHealth))); 
+                }
 
                 if(canSpawnLob && lobEnemies !=0 && gameManager.totalLob < gameManager.currentLanes.Length)
                 {
                     Instantiate(lobEnemy,transform.position ,transform.rotation);
                     lobEnemies --;
                     StartCoroutine(lobDelay(Random.Range(randMinLob,randMaxLob))); 
-                } 
+                }
+
             }
             
             if(canWave && waves>= 0 && minorEnemies == 0 && shooterEnemies == 0 && lobEnemies == 0 && waves > 0)
@@ -129,6 +145,16 @@ public class EnemySpawner : MonoBehaviour
         yield return new WaitForSeconds(delayLength);
 
         canSpawnLob = true;
+
+        yield return null;
+    }
+    protected IEnumerator healthDelay(float delayLength)
+    {
+        canSpawnHealth = false;
+
+        yield return new WaitForSeconds(delayLength);
+
+        canSpawnHealth = true;
 
         yield return null;
     }

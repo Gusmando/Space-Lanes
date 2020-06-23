@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 2636157864535493677}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 521.7889, y: 46.736145, z: 25.801498}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 5, y: 5, z: 5}
   m_Children:
   - {fileID: 8021673308421173859}
   - {fileID: 1855783643449726788}
@@ -47,7 +47,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sprite: {fileID: 6053321637758155068}
-  angleSpeed: 10
+  angleSpeed: 5
+  gameManager: {fileID: 0}
+  minRand: 0
+  maxRand: 0
 --- !u!135 &8868198695342329432
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -56,7 +59,7 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2636157864535493677}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5

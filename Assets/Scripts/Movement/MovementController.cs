@@ -91,6 +91,7 @@ public class MovementController : MonoBehaviour
         canvas.ammoCountInt = currentCount;
         canvas.updateUIColors();
         canvas.currentHealth = health;
+        canvas.updateUIHealth();
         //If a left key press occurs and the left lane exists
         if(Input.GetKeyDown(KeyCode.A) && (currentLane - 1) >= 0)
         {
