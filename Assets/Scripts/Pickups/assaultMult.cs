@@ -6,6 +6,6 @@ public class assaultMult : Pickup
 {
     public override void action(GameObject player)
     {
-        player.GetComponent<GunController>().setGun(1);
+        player.GetComponent<MovementController>().weapon.setGun(1);
     }
 }

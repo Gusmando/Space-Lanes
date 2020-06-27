@@ -15,6 +15,7 @@ public class EnemySpawner : MonoBehaviour
     public int minorEnemies;
     public int lobEnemies;
     public int healthCount;
+    public int X3LaneCount;
     public int waves;
     public float waveDelayTime;
     public float randMinMinor;
@@ -25,17 +26,21 @@ public class EnemySpawner : MonoBehaviour
     public float randMaxLob;
     public float randMinHealth;
     public float randMaxHealth;
+    public float randMin3Lane;
+    public float randMax3Lane;
     public float range;
     public float distanceToPlayer;
     public bool canSpawnShoot;
     public bool canSpawnMinor;
     public bool canSpawnLob;
     public bool canSpawnHealth;
+    public bool canSpawn3Lane;
     public bool canWave;
     public int totalShooter;
     public int totalMinor;
     public int totalLob;
     public int totalHealth;
+    public int total3Lane;
     public bool isActive;
 
     // Start is called before the first frame update
@@ -85,6 +90,13 @@ public class EnemySpawner : MonoBehaviour
                     StartCoroutine(healthDelay(Random.Range(randMinHealth,randMaxHealth))); 
                 }
 
+                if(canSpawn3Lane && X3LaneCount!=0)
+                {
+                    Instantiate(lane3assaultPrefab,transform.position ,transform.rotation);
+                    X3LaneCount --;
+                    StartCoroutine(lane3Delay(Random.Range(randMin3Lane,randMax3Lane))); 
+                }
+
                 if(canSpawnLob && lobEnemies !=0 && gameManager.totalLob < gameManager.currentLanes.Length)
                 {
                     Instantiate(lobEnemy,transform.position ,transform.rotation);
@@ -99,6 +111,8 @@ public class EnemySpawner : MonoBehaviour
                 shooterEnemies = totalShooter;
                 minorEnemies = totalMinor;
                 lobEnemies = totalLob;
+                healthCount = totalHealth;
+                X3LaneCount = total3Lane;
                 waves--;
                 canWave = false;
                 StartCoroutine(waveDelay(waveDelayTime));
@@ -155,6 +169,16 @@ public class EnemySpawner : MonoBehaviour
         yield return new WaitForSeconds(delayLength);
 
         canSpawnHealth = true;
+
+        yield return null;
+    }
+    protected IEnumerator lane3Delay(float delayLength)
+    {
+        canSpawn3Lane = false;
+
+        yield return new WaitForSeconds(delayLength);
+
+        canSpawn3Lane= true;
 
         yield return null;
     }

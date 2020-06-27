@@ -796,6 +796,7 @@ MonoBehaviour:
   minorEnemies: 9
   lobEnemies: 3
   healthCount: 2
+  X3LaneCount: 2
   waves: 3
   waveDelayTime: 3
   randMinMinor: 0.5
@@ -806,17 +807,21 @@ MonoBehaviour:
   randMaxLob: 1
   randMinHealth: 20
   randMaxHealth: 45
+  randMin3Lane: 10
+  randMax3Lane: 60
   range: 20
   distanceToPlayer: 0
   canSpawnShoot: 1
   canSpawnMinor: 1
   canSpawnLob: 1
   canSpawnHealth: 1
+  canSpawn3Lane: 1
   canWave: 1
   totalShooter: 3
   totalMinor: 5
   totalLob: 5
   totalHealth: 2
+  total3Lane: 2
   isActive: 0
 --- !u!1 &1637662266097810251
 GameObject:
