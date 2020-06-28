@@ -101,7 +101,8 @@ public class minorEnemy : EnemyMovement
                 anim.speed = 0;
             } 
         }
-          //If a left or right dash should be happening, anim state vars change
+        
+        //If a left or right dash should be happening, anim state vars change
         if(!animOver)
         {
             if(!leftRight)

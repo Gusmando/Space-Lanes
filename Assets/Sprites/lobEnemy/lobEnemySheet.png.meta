@@ -17,6 +17,9 @@ TextureImporter:
   - first:
       213: 1009624202663695893
     second: lobEnemySheet_4
+  - first:
+      213: -2652273517332167578
+    second: lobEnemySheet_5
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -218,10 +221,31 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: lobEnemySheet_5
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6648d30d94b313bd0800000000000000
+      internalID: -2652273517332167578
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 02882d6e439112a419353a3ec29ac931
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 

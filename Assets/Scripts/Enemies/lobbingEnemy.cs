@@ -8,6 +8,9 @@ public class lobbingEnemy : EnemyMovement
     public float threatDistance;
     public bool sameLane;
     public bool inRange;
+    public bool changeStage;
+    public int shotStage;
+    public float timeDelay;
     override public void Start()
     {
         base.Start();
@@ -33,6 +36,7 @@ public class lobbingEnemy : EnemyMovement
             if(gunContr.input && gunContr.reloading)
             {
                 gunContr.input = false;
+                shotStage = 0;
             }
         }
 
@@ -47,6 +51,41 @@ public class lobbingEnemy : EnemyMovement
 
         base.Update();
         gameManager.currentLanes[currentLane].lobbingEnemyCount ++;
+
+        if(!gunContr.reloading && gunContr.input)
+        {
+            anim.SetBool("shooting",true);
+        }
+        else
+        {
+            anim.SetBool("shooting",false);
+        }
+
+        if(changeStage && anim.GetBool("shooting"))
+        {
+            shotStage ++;
+            StartCoroutine(shotNimDelay(timeDelay));
+        }
+
+        if(shotStage == 5)
+        {
+            shotStage = 0;
+        }
+
+        anim.SetInteger("lobStage",shotStage);
+
+        if(hurt)
+        {
+            anim.SetBool("hurt",true);
+            spotLight.color = red;
+        }
+        else
+        {
+            anim.SetBool("hurt",false);
+            spotLight.color = white;
+        }
+
+
     }
 
     private void OnDestroy() 
@@ -66,5 +105,13 @@ public class lobbingEnemy : EnemyMovement
         }
 
         return openLane;
+    }
+
+    protected IEnumerator shotNimDelay(float delayLength)
+    {
+        changeStage = false;
+        yield return new WaitForSeconds(delayLength);
+        changeStage = true;;
+        yield return null;
     }
 }
