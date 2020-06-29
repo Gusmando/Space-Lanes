@@ -4,9 +4,11 @@ using UnityEngine;
 
 public abstract class Pickup : MonoBehaviour
 {
+    public GameObject spriteBack;
     public GameObject sprite;
     public float angleSpeed;
     public GameManager gameManager;
+    public Vector3 scaled;
     public float minRand;
     public float maxRand;
     public abstract void action(GameObject Player);
@@ -25,7 +27,8 @@ public abstract class Pickup : MonoBehaviour
     }
     private void Update() 
     {
-        sprite.transform.RotateAround(sprite.transform.position,sprite.transform.up,angleSpeed);    
+        sprite.transform.RotateAround(sprite.transform.position,sprite.transform.up,angleSpeed);
+        spriteBack.transform.RotateAround(spriteBack.transform.position,spriteBack.transform.up,angleSpeed);
     }
     private void OnTriggerEnter(Collider other) 
     {
