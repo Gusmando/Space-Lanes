@@ -46,7 +46,7 @@ public class Section : MonoBehaviour
         {
             if(!fading)
             {
-                StartCoroutine(FadeTo(1,lightFadeSpeed));
+                StartCoroutine(FadeTo(2,lightFadeSpeed));
             }
 
             if(!fadingLast && startOff)
@@ -159,9 +159,10 @@ public class Section : MonoBehaviour
     {
         fading = true;
         float intensityLev = arches[fadingArch].GetComponent<Renderer>().material.GetColor("_EmissionColor").a;
-        for (float t = 0.0f; t < 1.0f; t += Time.deltaTime / aTime)
+        
+        for (float t = 0.0f; t < 1.0f;t += (Time.deltaTime / aTime))
         {
-            Color newColor = new Color(1, 1, 1, 1);
+            Color newColor = GameObject.FindWithTag("Player").GetComponent<MovementController>().weapon.currentGun.gunColor;
             arches[fadingArch].GetComponent<Renderer>().material.SetColor("_EmissionColor",newColor * Mathf.Lerp(intensityLev,aValue,t));
             yield return null;
         }

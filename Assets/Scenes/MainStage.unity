@@ -1977,6 +1977,11 @@ PrefabInstance:
       propertyPath: bulletSpeed
       value: 25
       objectReference: {fileID: 0}
+    - target: {fileID: 5579955635383192662, guid: 9d8075e9d7bf31249b48173e41228732,
+        type: 3}
+      propertyPath: m_Intensity
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 7210047008051742430, guid: 9d8075e9d7bf31249b48173e41228732, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 9d8075e9d7bf31249b48173e41228732, type: 3}

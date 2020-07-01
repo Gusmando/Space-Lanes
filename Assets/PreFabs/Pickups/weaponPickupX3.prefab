@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 93931100869745852}
   - component: {fileID: 2644215331490226058}
   - component: {fileID: 8868198695342329432}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: weaponPickupX3
-  m_TagString: Untagged
+  m_TagString: pickup
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -77,7 +77,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1855783643449726788}
   - component: {fileID: 8550844032159186919}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: gunSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -158,7 +158,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5883376369219111193}
   - component: {fileID: 1033624988998030380}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: gunSprite Back
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -239,7 +239,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8021673308421173859}
   - component: {fileID: 1388356623109654311}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Point Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -272,7 +272,7 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 1, g: 0.36320752, b: 1, a: 1}
-  m_Intensity: 1.12
+  m_Intensity: 4.5
   m_Range: 5
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -309,7 +309,7 @@ Light:
   m_RenderMode: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 2048
   m_RenderingLayerMask: 1
   m_Lightmapping: 4
   m_LightShadowCasterMode: 0
