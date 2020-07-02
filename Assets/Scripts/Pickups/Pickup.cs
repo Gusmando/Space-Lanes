@@ -8,7 +8,6 @@ public abstract class Pickup : MonoBehaviour
     public GameObject sprite;
     public float angleSpeed;
     public GameManager gameManager;
-    public Vector3 scaled;
     public float minRand;
     public float maxRand;
     public abstract void action(GameObject Player);

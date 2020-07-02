@@ -9,6 +9,7 @@ public class EnemySpawner : MonoBehaviour
     public GameObject lobEnemy;
     public GameObject healthPrefab;
     public GameObject lane3assaultPrefab;
+    public GameObject dubJumpPrefab;
     public GameManager gameManager;
     public MovementController player;
     public int shooterEnemies;
@@ -16,6 +17,7 @@ public class EnemySpawner : MonoBehaviour
     public int lobEnemies;
     public int healthCount;
     public int X3LaneCount;
+    public int dubJumpCount;
     public int waves;
     public float waveDelayTime;
     public float randMinMinor;
@@ -28,6 +30,8 @@ public class EnemySpawner : MonoBehaviour
     public float randMaxHealth;
     public float randMin3Lane;
     public float randMax3Lane;
+    public float randMinDubJump;
+    public float randMaxDubJump;
     public float range;
     public float distanceToPlayer;
     public bool canSpawnShoot;
@@ -35,12 +39,14 @@ public class EnemySpawner : MonoBehaviour
     public bool canSpawnLob;
     public bool canSpawnHealth;
     public bool canSpawn3Lane;
+    public bool canSpawnDubJump;
     public bool canWave;
     public int totalShooter;
     public int totalMinor;
     public int totalLob;
     public int totalHealth;
     public int total3Lane;
+    public int toaldubJump;
     public bool isActive;
 
     // Start is called before the first frame update
@@ -83,6 +89,13 @@ public class EnemySpawner : MonoBehaviour
                     StartCoroutine(shooterDelay(Random.Range(randMinShoot,randMaxShoot))); 
                 }
 
+                if(canSpawnLob && lobEnemies !=0 && gameManager.totalLob < gameManager.currentLanes.Length)
+                {
+                    Instantiate(lobEnemy,transform.position ,transform.rotation);
+                    lobEnemies --;
+                    StartCoroutine(lobDelay(Random.Range(randMinLob,randMaxLob))); 
+                }
+
                 if(canSpawnHealth && healthCount!=0)
                 {
                     Instantiate(healthPrefab,transform.position ,transform.rotation);
@@ -97,13 +110,12 @@ public class EnemySpawner : MonoBehaviour
                     StartCoroutine(lane3Delay(Random.Range(randMin3Lane,randMax3Lane))); 
                 }
 
-                if(canSpawnLob && lobEnemies !=0 && gameManager.totalLob < gameManager.currentLanes.Length)
+                if(canSpawnDubJump && dubJumpCount!=0)
                 {
-                    Instantiate(lobEnemy,transform.position ,transform.rotation);
-                    lobEnemies --;
-                    StartCoroutine(lobDelay(Random.Range(randMinLob,randMaxLob))); 
+                    Instantiate(dubJumpPrefab,transform.position ,transform.rotation);
+                    dubJumpCount --;
+                    StartCoroutine(dubJumpDelay(Random.Range(randMinDubJump,randMaxDubJump))); 
                 }
-
             }
             
             if(canWave && waves>= 0 && minorEnemies == 0 && shooterEnemies == 0 && lobEnemies == 0 && waves > 0)
@@ -183,4 +195,14 @@ public class EnemySpawner : MonoBehaviour
         yield return null;
     }
 
+    protected IEnumerator dubJumpDelay(float delayLength)
+    {
+        canSpawnDubJump = false;
+
+        yield return new WaitForSeconds(delayLength);
+
+        canSpawnDubJump = true;
+
+        yield return null;
+    }
 }

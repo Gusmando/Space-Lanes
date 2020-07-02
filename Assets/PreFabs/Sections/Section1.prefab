@@ -237,6 +237,8 @@ MonoBehaviour:
     type: 3}
   lane3assaultPrefab: {fileID: 2636157864535493677, guid: 832277c5d68ec6e479d43d84992f7506,
     type: 3}
+  dubJumpPrefab: {fileID: 5907560167379113068, guid: 14ae9add7f654294484949624af93a13,
+    type: 3}
   gameManager: {fileID: 0}
   player: {fileID: 0}
   shooterEnemies: 3
@@ -244,6 +246,7 @@ MonoBehaviour:
   lobEnemies: 3
   healthCount: 2
   X3LaneCount: 2
+  dubJumpCount: 2
   waves: 3
   waveDelayTime: 3
   randMinMinor: 0.5
@@ -256,6 +259,8 @@ MonoBehaviour:
   randMaxHealth: 45
   randMin3Lane: 10
   randMax3Lane: 60
+  randMinDubJump: 30
+  randMaxDubJump: 40
   range: 20
   distanceToPlayer: 0
   canSpawnShoot: 1
@@ -263,12 +268,14 @@ MonoBehaviour:
   canSpawnLob: 1
   canSpawnHealth: 1
   canSpawn3Lane: 1
+  canSpawnDubJump: 1
   canWave: 1
   totalShooter: 3
   totalMinor: 5
   totalLob: 5
   totalHealth: 2
   total3Lane: 2
+  toaldubJump: 2
   isActive: 0
 --- !u!1 &2308904833657558784
 GameObject:

@@ -29,6 +29,7 @@ public class MovementController : MonoBehaviour
     public float jumpMult;
     public float laneChangeSpeed;
     public float rayCastBelow;
+    public float dubJumpTime;
     public float colliderDelayTime;
     [Header("Force Vectors")]
     public Vector3 gravityForce;
@@ -127,6 +128,15 @@ public class MovementController : MonoBehaviour
         }
 
         jumpInput = Input.GetKeyDown(KeyCode.Space);
+
+        if(dubJumpTime <= 0)
+        {
+            dubJump = false;
+        }
+        else
+        {
+            dubJumpTime -= Time.deltaTime;
+        }
 
         if(jumpInput)
         {
@@ -317,7 +327,7 @@ public class MovementController : MonoBehaviour
             {
                 jumping = false;
             }
-            
+
             if(jumpCount !=0 )
             {
                 jumpCount = 0;
