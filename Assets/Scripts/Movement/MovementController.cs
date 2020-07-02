@@ -11,6 +11,7 @@ public class MovementController : MonoBehaviour
     public Rigidbody subjectRb;
     public int health;
     public int currentCount;
+    public int jumpCount;
     public GameManager gameManager;
     public canvasMangager canvas;
     //Array holding different lanes within the level
@@ -40,6 +41,7 @@ public class MovementController : MonoBehaviour
     public bool changed;
     public bool pushing;
     public bool jumping;
+    public bool jumpInput;
     public bool falling;
     public bool changing;
     public bool hurt;
@@ -47,6 +49,7 @@ public class MovementController : MonoBehaviour
     //An iterator keeping track of the current lane
     public int currentLane;
     public  bool jumpQueue;
+    public bool dubJump;
     //The rigid body of the object being controlled
     [Header("Animation Control")]
     public Animator anim;
@@ -122,15 +125,19 @@ public class MovementController : MonoBehaviour
         {
             pushing = false;
         }
-        if((Input.GetKeyDown(KeyCode.Space)))
+
+        jumpInput = Input.GetKeyDown(KeyCode.Space);
+
+        if(jumpInput)
         {
             jumpQueue = true;
         }
-        //This will handle a space or jump push
-        if(Input.GetKeyDown(KeyCode.Space) && !jumping && !falling || jumpQueue && !jumping && !falling)
+
+        if(jumpInput && !jumping && !falling || (jumpQueue && !jumping && !falling) || (jumpInput && dubJump && (jumping || falling) && jumpCount < 2))
         {
             jumping = true;
             falling = false;
+            jumpCount ++;
             subjectRb.AddForce(jumpForce,ForceMode.Impulse);
 
             if(jumpQueue)
@@ -138,7 +145,6 @@ public class MovementController : MonoBehaviour
                 jumpQueue = false;
             }
         }
-        
         //A lane change occurs and new positions are set
         if(changed || changing)
         {
@@ -310,6 +316,11 @@ public class MovementController : MonoBehaviour
             if(jumping)
             {
                 jumping = false;
+            }
+            
+            if(jumpCount !=0 )
+            {
+                jumpCount = 0;
             }
         }
         else if(!belowOpen && other.gameObject.tag.Contains("Floor") && subjectRb.velocity.y < -.05)

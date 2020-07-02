@@ -49,7 +49,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spriteBack: {fileID: 8292045274911359718}
   sprite: {fileID: 6053321637758155068}
-  angleSpeed: 1.5
+  angleSpeed: 0.8
   gameManager: {fileID: 0}
   scaled: {x: 0, y: 0, z: 0}
   minRand: 15
