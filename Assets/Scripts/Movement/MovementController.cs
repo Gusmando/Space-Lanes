@@ -96,6 +96,8 @@ public class MovementController : MonoBehaviour
         canvas.updateUIColors();
         canvas.currentHealth = health;
         canvas.updateUIHealth();
+        canvas.dubJumpTime = this.dubJumpTime;
+        canvas.dubJumpOn = this.dubJump;
         //If a left key press occurs and the left lane exists
         if(Input.GetKeyDown(KeyCode.A) && (currentLane - 1) >= 0)
         {

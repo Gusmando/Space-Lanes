@@ -10,6 +10,11 @@ public class canvasMangager : MonoBehaviour
     public Image[] healthBar;
     public Text ammoCount;
     public Image unlimitedSign;
+    public Image arrow;
+    public Image timesTwo;
+    public float dubJumpTime;
+    public float dubJumpTimeFull;
+    public bool dubJumpOn;
     public int ammoCountInt;
     public int currentHealth;
     public bool limited;
@@ -25,6 +30,23 @@ public class canvasMangager : MonoBehaviour
         {
             ammoCount.enabled = false;
             unlimitedSign.enabled = true;
+        }
+
+        if(dubJumpOn)
+        {
+            arrow.transform.Find("UpArrowShadow").GetComponent<Image>().enabled = true;
+            arrow.enabled = true;
+            timesTwo.enabled = true;
+            arrow.fillAmount = dubJumpTime/dubJumpTimeFull;
+            timesTwo.fillAmount = arrow.fillAmount;
+        }
+        else
+        {
+            arrow.transform.Find("UpArrowShadow").GetComponent<Image>().enabled = false;
+            arrow.enabled = false;
+            timesTwo.enabled = false;
+            arrow.fillAmount = 1;
+            timesTwo.fillAmount = 1;
         }
 
         ammoCount.text = ammoCountInt.ToString();
