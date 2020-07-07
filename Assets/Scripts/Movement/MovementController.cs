@@ -150,7 +150,7 @@ public class MovementController : MonoBehaviour
             jumping = true;
             falling = false;
             jumpCount ++;
-            subjectRb.AddForce(jumpForce,ForceMode.Impulse);
+            subjectRb.AddForce(subject.transform.up*jumpForce.y,ForceMode.Impulse);
 
             if(jumpQueue)
             {
@@ -247,7 +247,7 @@ public class MovementController : MonoBehaviour
             }
         }
         //The force of gravity is constantly acting on the object
-        subjectRb.AddForce(gravityForce,ForceMode.Acceleration);
+        subjectRb.AddForce(subject.transform.up*gravityForce.y,ForceMode.Acceleration);
 
         if(subjectRb.velocity.y < -.05 && !falling)
         {

@@ -339,8 +339,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   subject: {fileID: 10854956270901641}
   subjectRb: {fileID: 10854956270901640}
-  health: 100
+  health: 0
+  currentCount: 0
+  jumpCount: 0
   gameManager: {fileID: 0}
+  canvas: {fileID: 0}
   lanes: []
   laneDiff: 1.5
   speed: 9
@@ -350,18 +353,21 @@ MonoBehaviour:
   jumpMult: 10
   laneChangeSpeed: 60
   rayCastBelow: -20
+  dubJumpTime: 0
   colliderDelayTime: 0.5
   gravityForce: {x: 0, y: -20, z: 0}
   newPosition: {x: 0, y: 0, z: 0}
   changed: 0
   pushing: 0
   jumping: 0
+  jumpInput: 0
   falling: 0
   changing: 0
   hurt: 0
   belowOpen: 0
   currentLane: 0
   jumpQueue: 0
+  dubJump: 0
   anim: {fileID: 10854954754580604}
   animOver: 0
   laneChangeDelay: 0.3

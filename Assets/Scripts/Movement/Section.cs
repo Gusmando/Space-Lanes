@@ -42,7 +42,11 @@ public class Section : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(sectionActive)
+        if(!sectionActive)
+        {
+            deactivateSpawner();
+        }
+        if(sectionActive && arches.Length != 0)
         {
             if(!fading)
             {
@@ -118,6 +122,7 @@ public class Section : MonoBehaviour
                     x.GetComponent<Light>().color = offLight;
                 }
             }
+
             for( int i = 0; i < arches.Length; i++)
             {
                 arches[i].GetComponent<Renderer>().material.SetColor("_EmissionColor",new Color(1,1,1,1) * 0);
