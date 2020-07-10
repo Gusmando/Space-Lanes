@@ -2153,6 +2153,16 @@ PrefabInstance:
       propertyPath: dubJump
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 10854956270901635, guid: 9d8075e9d7bf31249b48173e41228732,
+        type: 3}
+      propertyPath: speed
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 10854956270901635, guid: 9d8075e9d7bf31249b48173e41228732,
+        type: 3}
+      propertyPath: maxSpeed
+      value: 38
+      objectReference: {fileID: 0}
     - target: {fileID: 10854956270901641, guid: 9d8075e9d7bf31249b48173e41228732,
         type: 3}
       propertyPath: m_Name
@@ -2276,7 +2286,7 @@ PrefabInstance:
     - target: {fileID: 3438543757305703674, guid: 67b3be9d968ad7845857d76faf9acdbf,
         type: 3}
       propertyPath: sections.Array.size
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 3438543757305703674, guid: 67b3be9d968ad7845857d76faf9acdbf,
         type: 3}
@@ -2304,7 +2314,7 @@ PrefabInstance:
         type: 3}
       propertyPath: sections.Array.data[3]
       value: 
-      objectReference: {fileID: 4206135150306808528, guid: b856f4b0005f23948877a68330f771ae,
+      objectReference: {fileID: 7737553697767961061, guid: 2ec448f885cdf3a4da06f1592cf770c3,
         type: 3}
     - target: {fileID: 3438543757305703674, guid: 67b3be9d968ad7845857d76faf9acdbf,
         type: 3}

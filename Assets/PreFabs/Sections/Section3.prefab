@@ -156,7 +156,7 @@ GameObject:
   - component: {fileID: 8961142881308390388}
   m_Layer: 0
   m_Name: Sides Inner
-  m_TagString: FloorFast
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -922,7 +922,7 @@ GameObject:
   - component: {fileID: 2490815344015260093}
   m_Layer: 0
   m_Name: Top Outer
-  m_TagString: FloorFast
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1904,7 +1904,7 @@ GameObject:
   - component: {fileID: 5380618962706490047}
   m_Layer: 0
   m_Name: Sides Outer
-  m_TagString: FloorFast
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2091,7 +2091,7 @@ GameObject:
   - component: {fileID: 6561350009806798594}
   m_Layer: 0
   m_Name: Collider (4)
-  m_TagString: FloorFast
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2321,6 +2321,7 @@ MonoBehaviour:
   alt: 0
   altLast: 0
   startOff: 0
+  limited: 0
   startOffInt: 7
   onLight: {r: 0.1764706, g: 0.8, b: 0.40392157, a: 1}
   offLight: {r: 1, g: 0, b: 0, a: 1}
@@ -2353,7 +2354,7 @@ GameObject:
   - component: {fileID: 1814297473181631953}
   m_Layer: 0
   m_Name: Platform with Separate Outer (2)
-  m_TagString: FloorFast
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2389,7 +2390,7 @@ GameObject:
   - component: {fileID: 8869417722425889644}
   m_Layer: 0
   m_Name: Top Inside
-  m_TagString: FloorFast
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
