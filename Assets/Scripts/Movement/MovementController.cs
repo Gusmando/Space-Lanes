@@ -17,6 +17,7 @@ public class MovementController : MonoBehaviour
     //Array holding different lanes within the level
     [Header("Lane Assignment (Left to Right)")]
     public Lane[] lanes;
+    public Lane[] fullLanes;
     public float laneDiff;
     //The Force of gravity on the object
     //will have to be changed depending
@@ -49,6 +50,8 @@ public class MovementController : MonoBehaviour
     public bool belowOpen;
     //An iterator keeping track of the current lane
     public int currentLane;
+    public int laneTrack;
+    public int currentLaneTrue;
     public  bool jumpQueue;
     public bool dubJump;
     //The rigid body of the object being controlled
@@ -66,7 +69,9 @@ public class MovementController : MonoBehaviour
        //will change this to be set in editor
        changed = false; 
        lanes = GameObject.FindWithTag("GameManager").GetComponent<GameManager>().currentLanes;
+       currentLaneTrue = (fullLanes.Length/2);
        currentLane = (lanes.Length/2);
+       laneTrack = 0;
        subjectRb = subject.GetComponent<Rigidbody>();
        animOver = true;
     }
@@ -99,9 +104,10 @@ public class MovementController : MonoBehaviour
         canvas.dubJumpTime = this.dubJumpTime;
         canvas.dubJumpOn = this.dubJump;
         //If a left key press occurs and the left lane exists
-        if(Input.GetKeyDown(KeyCode.A) && (currentLane - 1) >= 0)
+        if(Input.GetKeyDown(KeyCode.A) && (currentLaneTrue - 1) >= 0)
         {
-            currentLane--;
+            currentLaneTrue--;
+            laneTrack--;
             //Creates an animation delay so that animation plays clearly 
             StartCoroutine(animDelay(laneChangeDelay));
             //Setting to left move
@@ -110,9 +116,10 @@ public class MovementController : MonoBehaviour
         }
 
         //If a right keypress occurs and the right lane exists
-        if(Input.GetKeyDown(KeyCode.D) && (currentLane + 1) <= (lanes.Length-1))
+        if(Input.GetKeyDown(KeyCode.D) && (currentLaneTrue + 1) <= (fullLanes.Length-1))
         {
-            currentLane++;
+            currentLaneTrue++;
+            laneTrack++;
             leftRight = true;
             StartCoroutine(animDelay(laneChangeDelay));
             changed = true;
@@ -162,15 +169,15 @@ public class MovementController : MonoBehaviour
         {
             //Z position is the only nonchanging value as it show progress through each lane
             //also checks if current height is less than another lane
-            if((!jumping && !falling) || (jumping && !falling) || (falling && lanes[currentLane].position.y - subject.transform.position.y < laneDiff))
+            if((!jumping && !falling) || (jumping && !falling) || (falling && fullLanes[currentLaneTrue].position.y - subject.transform.position.y < laneDiff))
             {
-                newPosition = new Vector3(lanes[currentLane].position.x,lanes[currentLane].position.y,subject.transform.position.z);
+                newPosition = new Vector3(fullLanes[currentLaneTrue].position.x,fullLanes[currentLaneTrue].position.y,subject.transform.position.z);
 
             }
 
             else
             {
-                newPosition = new Vector3(lanes[currentLane].position.x,subject.transform.position.y,subject.transform.position.z);
+                newPosition = new Vector3(fullLanes[currentLaneTrue].position.x,subject.transform.position.y,subject.transform.position.z);
             }
 
             //Setting the new position and rotation of the object
@@ -187,12 +194,13 @@ public class MovementController : MonoBehaviour
         if(subject.transform.position != newPosition && changing)
         {
             float step = Time.deltaTime * laneChangeSpeed;
-            subject.transform.rotation = Quaternion.RotateTowards(subject.transform.rotation,lanes[currentLane].rotation,step);
+            subject.transform.rotation = Quaternion.RotateTowards(subject.transform.rotation,fullLanes[currentLaneTrue].rotation,step);
             subject.transform.position = Vector3.MoveTowards(subject.transform.position,newPosition,step);
         }
         else
         {
             changing = false;
+            currentLane = laneTrack + (lanes.Length/2);
         }
     }
 

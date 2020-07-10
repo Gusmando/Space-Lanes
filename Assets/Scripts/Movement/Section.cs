@@ -24,6 +24,7 @@ public class Section : MonoBehaviour
     public bool alt;
     public bool altLast;
     public bool startOff;
+    public bool limited;
     public int startOffInt;
     public Color onLight;
     public Color offLight;

@@ -6,6 +6,7 @@ public class GameManager : MonoBehaviour
 {
     public GameObject[] sections;
     public Lane[] currentLanes;
+    public Lane[] largestLanes;
     public  int lowActiveLane;
     public bool  laneChange;
     public bool spawning;
@@ -18,7 +19,6 @@ public class GameManager : MonoBehaviour
     public int totalMinor;
     public int totalShooting;
     public int totalLob;
-    
     public GameObject spawned;
     public GameObject initSpawnPoint;
     public GameObject endSpawn;
@@ -36,6 +36,7 @@ public class GameManager : MonoBehaviour
         spawned.tag = "activeSection";
         currentActive = GameObject.FindWithTag("activeSection").GetComponent<Section>();
         currentLanes = currentActive.lanes;
+        largestLanes = currentLanes;
         currentActive.sectionActive = true;
         currentActive.activateSpawner();
         currentActive.first = true;
@@ -48,11 +49,17 @@ public class GameManager : MonoBehaviour
         {
             for(int i = 0; i < maxSections - 1; i++)
             {
-                activeSection = Random.Range(0,sections.Length);
                 Vector3 newEndSpawnPoint = endSpawn.transform.position + new Vector3 (0,0,spawnOffset);
-                spawned = Instantiate(sections[activeSection],newEndSpawnPoint,initSpawnPoint.transform.rotation);
+                spawned = Instantiate(sections[Random.Range(0,sections.Length)],newEndSpawnPoint,initSpawnPoint.transform.rotation);
                 this.endSpawn = spawned.GetComponent<Section>().endSpawn;
+                if(spawned.GetComponent<Section>().lanes.Length > largestLanes.Length)
+                {
+                    largestLanes = spawned.GetComponent<Section>().lanes;
+                }
             }
+
+            player.fullLanes = largestLanes;
+            player.currentLaneTrue = (largestLanes.Length/2);
             spawning = false;
         }
         
