@@ -339,7 +339,7 @@ MonoBehaviour:
   jumpMult: 15
   rayCastOffset: -2
   jumpCastOffset: -8
-  laneChangeSpeed: 30
+  laneChangeSpeed: 40
   leftRightOffset: 2.5
   gravityForce: {x: 0, y: -20, z: 0}
   newPosition: {x: 0, y: 0, z: 0}
@@ -368,8 +368,8 @@ MonoBehaviour:
   reloadTime: 4
   sameLaneShotDelay: 0.2
   sameLaneReloadTime: 2
-  rayCastLeftOffset: 2.5
-  rayCastRightOffset: -2.5
+  rayCastLeftOffset: 2.7
+  rayCastRightOffset: -2.7
   leftOpen: 0
   rightOpen: 0
   sameLane: 0
@@ -388,12 +388,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: 0
+  barrel: {fileID: 0}
   currentGun: {fileID: 7946315118320078771}
+  gunObj: {fileID: 0}
+  currentGunIndex: 0
+  guns: []
   reloading: 0
   reloadTime: 3
   shooting: 0
   shotAnim: 0
   reload: 0
+  gunChange: 0
   animDelayTime: 0.3
   camFunc: {fileID: 0}
   input: 0
@@ -482,3 +487,4 @@ MonoBehaviour:
   shakeIntensity: 0.1
   shakeDelay: 0.05
   damage: 5
+  gunColor: {r: 0, g: 0, b: 0, a: 0}
