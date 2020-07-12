@@ -2163,6 +2163,11 @@ PrefabInstance:
       propertyPath: maxSpeed
       value: 38
       objectReference: {fileID: 0}
+    - target: {fileID: 10854956270901635, guid: 9d8075e9d7bf31249b48173e41228732,
+        type: 3}
+      propertyPath: laneChangeSpeed
+      value: 75
+      objectReference: {fileID: 0}
     - target: {fileID: 10854956270901641, guid: 9d8075e9d7bf31249b48173e41228732,
         type: 3}
       propertyPath: m_Name
@@ -2286,7 +2291,7 @@ PrefabInstance:
     - target: {fileID: 3438543757305703674, guid: 67b3be9d968ad7845857d76faf9acdbf,
         type: 3}
       propertyPath: sections.Array.size
-      value: 6
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 3438543757305703674, guid: 67b3be9d968ad7845857d76faf9acdbf,
         type: 3}
@@ -2325,7 +2330,7 @@ PrefabInstance:
     - target: {fileID: 3438543757305703674, guid: 67b3be9d968ad7845857d76faf9acdbf,
         type: 3}
       propertyPath: maxSections
-      value: 150
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 3438543757305703674, guid: 67b3be9d968ad7845857d76faf9acdbf,
         type: 3}
@@ -2337,6 +2342,12 @@ PrefabInstance:
       propertyPath: sections.Array.data[5]
       value: 
       objectReference: {fileID: 505975681529136337, guid: b83c3a5f0d2da8a409338c784e3bb493,
+        type: 3}
+    - target: {fileID: 3438543757305703674, guid: 67b3be9d968ad7845857d76faf9acdbf,
+        type: 3}
+      propertyPath: sections.Array.data[6]
+      value: 
+      objectReference: {fileID: 6136409997325474266, guid: 26b3924bc6a2c4649b9ad1815be88137,
         type: 3}
     - target: {fileID: 3438543757305703675, guid: 67b3be9d968ad7845857d76faf9acdbf,
         type: 3}
