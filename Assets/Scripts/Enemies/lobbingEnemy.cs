@@ -11,16 +11,35 @@ public class lobbingEnemy : EnemyMovement
     public bool changeStage;
     public int shotStage;
     public float timeDelay;
+    public bool manualPos;
+    public int initLane;
     override public void Start()
     {
         base.Start();
-        currentLane = openLane(); 
-        gameManager.currentLanes[currentLane].lobbingEnemyCount ++;
+        if(manualPos)
+        {
+            currentLane = initLane;
+        }
+
+        else
+        {
+            currentLane = openLane(); 
+            gameManager.currentLanes[currentLane].lobbingEnemyCount ++;
+        }
+        
     }
 
     override public void Update()
     {
-        gameManager.currentLanes[currentLane].lobbingEnemyCount --;
+        if(!manualPos)
+        {
+            gameManager.currentLanes[currentLane].lobbingEnemyCount --;
+        }
+        else
+        {
+            lanes = gameManager.largestLanes;
+            changed = true;
+        }
         sameLane = GameObject.FindWithTag("Player").GetComponent<MovementController>().currentLane == currentLane;
         inRange = distanceToPlayer <= threatDistance;
         if(sameLane && inRange)
@@ -50,8 +69,11 @@ public class lobbingEnemy : EnemyMovement
         }
 
         base.Update();
-        gameManager.currentLanes[currentLane].lobbingEnemyCount ++;
 
+        if(!manualPos)
+        {
+            gameManager.currentLanes[currentLane].lobbingEnemyCount ++;
+        }
         if(!gunContr.reloading && gunContr.input)
         {
             anim.SetBool("shooting",true);
@@ -90,9 +112,11 @@ public class lobbingEnemy : EnemyMovement
 
     private void OnDestroy() 
     {
-        lanes[currentLane].lobbingEnemyCount --;
+        if(!manualPos)
+        {
+            lanes[currentLane].lobbingEnemyCount --;
+        }
     } 
-
     private int openLane()
     {
         int openLane = 0;
