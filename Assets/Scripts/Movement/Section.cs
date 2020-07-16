@@ -19,6 +19,7 @@ public class Section : MonoBehaviour
     public MultiDimensionalInt[] lights;
     public bool sectionActive;
     public bool first;
+    public bool notFirst;
     public bool fading;
     public bool fadingLast;
     public bool alt;

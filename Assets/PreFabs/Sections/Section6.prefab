@@ -254,6 +254,7 @@ MonoBehaviour:
     - {fileID: 5214838747703359713}
   sectionActive: 0
   first: 0
+  notFirst: 1
   fading: 0
   fadingLast: 0
   alt: 0
