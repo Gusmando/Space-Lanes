@@ -334,8 +334,8 @@ MonoBehaviour:
   red: {r: 1, g: 0, b: 0, a: 1}
   lanes: []
   laneDiff: 0.05
-  speed: -5
-  maxSpeed: -17
+  speed: -7
+  maxSpeed: -20
   jumpMult: 15
   rayCastOffset: -2.5
   jumpCastOffset: -8
@@ -367,10 +367,10 @@ MonoBehaviour:
   threatDistance: 30
   canChange: 1
   changeDelayTime: 0.5
-  shotDelayTime: 0.3
-  reloadTime: 4
-  sameLaneShotDelay: 0.2
-  sameLaneReloadTime: 2
+  shotDelayTime: 0.2
+  reloadTime: 2
+  sameLaneShotDelay: 0.1
+  sameLaneReloadTime: 1.5
   sameLane: 0
   laneSkip: 0
   shifting: 0
@@ -393,7 +393,7 @@ MonoBehaviour:
   currentGunIndex: 0
   guns: []
   reloading: 0
-  reloadTime: 3
+  reloadTime: 2
   shooting: 0
   shotAnim: 0
   reload: 0
@@ -474,14 +474,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   auto: 1
-  bulletSpeed: -15
-  delayTime: 5
+  bulletSpeed: -18
+  delayTime: 0.25
   barrelLocation: {fileID: 8202607085008894384}
   bullet: {fileID: 2630340232886679178, guid: f00df4f5ba56dad43bf22b9e1b565123, type: 3}
   gunSprite: {fileID: 0}
   canShoot: 1
-  clipSize: 10
-  fullClip: 10
+  clipSize: 12
+  fullClip: 12
   clipCount: 5
   shakeIntensity: 0.1
   shakeDelay: 0.05
