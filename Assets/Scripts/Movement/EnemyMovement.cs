@@ -48,6 +48,9 @@ public class EnemyMovement : MonoBehaviour
     public bool choice;
     public bool changing;
     public bool noGap;
+    public bool leftOpens;
+    public bool rightOpens;
+    public bool jumpable;
     //An iterator keeping track of the current lane
     public int currentLane;
     //The rigid body of the object being controlled
@@ -141,27 +144,26 @@ public class EnemyMovement : MonoBehaviour
         if(pushing && !stopped)
         {
             RaycastHit hit;
-            Vector3 highObject = subject.transform.position + new Vector3(0,5,0);
-            Vector3 inFront = subject.transform.position + new Vector3(0,lanes[currentLane].position.y,rayCastOffset);
+            Vector3 highObject = subject.transform.position + new Vector3(0,8,0);
+            Vector3 inFront = subject.transform.position + new Vector3(0,0,rayCastOffset);
             Vector3 direction = inFront - highObject;
 
             RaycastHit leftHit;
-            Vector3 leftVec = subject.transform.position + new Vector3(-1*leftRightOffset,lanes[currentLane].position.y,0);
+            Vector3 leftVec = subject.transform.position + new Vector3(-1*leftRightOffset,0,0);
             Vector3 leftDirections = leftVec - highObject;
 
             RaycastHit rightHit;
-            Vector3 rightVec = subject.transform.position + new Vector3(leftRightOffset,lanes[currentLane].position.y,0);
+            Vector3 rightVec = subject.transform.position + new Vector3(leftRightOffset,0,0);
             Vector3 rightDirections = rightVec - highObject;
 
             RaycastHit jumpHit;
-            Vector3 jumpVec = subject.transform.position + new Vector3(0,lanes[currentLane].position.y,jumpCastOffset);
+            Vector3 jumpVec = subject.transform.position + new Vector3(0,0,jumpCastOffset);
             Vector3 jumpDirections = jumpVec - highObject;
 
-            bool leftOpens = Physics.Raycast(highObject,leftDirections,out leftHit);
-            bool rightOpens = Physics.Raycast(highObject,rightDirections,out rightHit);
-            bool jumpable = Physics.Raycast(highObject,jumpDirections,out jumpHit);
-
-            noGap = Physics.Raycast(highObject,direction,out hit,25);
+            leftOpens = Physics.Raycast(highObject,leftDirections,out leftHit,10);
+            rightOpens = Physics.Raycast(highObject,rightDirections,out rightHit,10);
+            jumpable = Physics.Raycast(highObject,jumpDirections,out jumpHit,25);
+            noGap = Physics.Raycast(highObject,direction,out hit,20);
 
             Debug.DrawRay(highObject, direction, Color.green);
             Debug.DrawRay(highObject, rightDirections, Color.blue);
@@ -198,8 +200,6 @@ public class EnemyMovement : MonoBehaviour
             {
                 jump = true;
             }
-
-            noGap = true;
             //Accelerate as long as top speed is not hit
             if(subjectRb.velocity.z > maxSpeed)
             {

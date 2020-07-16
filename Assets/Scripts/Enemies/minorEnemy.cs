@@ -13,8 +13,6 @@ public class minorEnemy : EnemyMovement
     public float rayCastRightOffset;
     public float changeDelayTime;
     public bool stoppedOnce;
-    public bool leftOpen;
-    public bool rightOpen;
     public bool canChange;
 
     override public void Start()
@@ -34,31 +32,19 @@ public class minorEnemy : EnemyMovement
                 pushing = true;
             }
 
-            if(distanceToPlayer <= threatDistance && canChange && !changing)
+            if(distanceToPlayer <= threatDistance && canChange && !changing && !jumping)
             {
-                RaycastHit hitLeft;
-                Vector3 highObjectleftRight = subject.transform.position + new Vector3(0,5,0);
-                Vector3 left = subject.transform.position + new Vector3(rayCastLeftOffset,lanes[currentLane].position.y,0);
-                Vector3 leftDirection = left - highObjectleftRight;
-
-                RaycastHit hitRight;
-                Vector3 right = subject.transform.position + new Vector3(rayCastRightOffset,lanes[currentLane].position.y,0);
-                Vector3 rightDirection = right - highObjectleftRight;
-
-                leftOpen = Physics.Raycast(highObjectleftRight,leftDirection,out hitLeft);
-                rightOpen = Physics.Raycast(highObjectleftRight,rightDirection,out hitRight);
-
                 if(!changing)
                 {
                     int shifting = Random.Range(0,2);
                     
-                    if(shifting == 0 && rightOpen)
+                    if(shifting == 0)
                     {
                         changeLane(shifting);
                         StartCoroutine(changeDelay(changeDelayTime));  
                     }
 
-                    if(shifting == 1 && leftOpen)
+                    if(shifting == 1)
                     {
                         changeLane(shifting);
                         StartCoroutine(changeDelay(changeDelayTime));  

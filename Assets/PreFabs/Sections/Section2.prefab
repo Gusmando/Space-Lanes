@@ -957,7 +957,7 @@ GameObject:
   - component: {fileID: 8523371533249312688}
   - component: {fileID: 5002487640103784425}
   - component: {fileID: 2528373189312567328}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Plane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1104,7 +1104,7 @@ GameObject:
   - component: {fileID: 3812273933841020362}
   - component: {fileID: 7720505491676974803}
   - component: {fileID: 2147297328484796664}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Section2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1235,6 +1235,7 @@ MonoBehaviour:
   alt: 0
   altLast: 0
   startOff: 0
+  limited: 0
   startOffInt: 7
   onLight: {r: 0.1764706, g: 0.8, b: 0.40392157, a: 1}
   offLight: {r: 1, g: 0, b: 0, a: 1}

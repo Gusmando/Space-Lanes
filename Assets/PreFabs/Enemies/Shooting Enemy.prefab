@@ -337,10 +337,10 @@ MonoBehaviour:
   speed: -5
   maxSpeed: -17
   jumpMult: 15
-  rayCastOffset: -2
+  rayCastOffset: -2.5
   jumpCastOffset: -8
   laneChangeSpeed: 40
-  leftRightOffset: 2.5
+  leftRightOffset: 3
   gravityForce: {x: 0, y: -20, z: 0}
   newPosition: {x: 0, y: 0, z: 0}
   changed: 1
@@ -353,7 +353,10 @@ MonoBehaviour:
   hurt: 0
   choice: 0
   changing: 0
-  noGap: 0
+  noGap: 1
+  leftOpens: 0
+  rightOpens: 0
+  jumpable: 0
   currentLane: 0
   anim: {fileID: 1151305440420827168}
   animOver: 1
@@ -368,10 +371,6 @@ MonoBehaviour:
   reloadTime: 4
   sameLaneShotDelay: 0.2
   sameLaneReloadTime: 2
-  rayCastLeftOffset: 2.7
-  rayCastRightOffset: -2.7
-  leftOpen: 0
-  rightOpen: 0
   sameLane: 0
   laneSkip: 0
   shifting: 0
