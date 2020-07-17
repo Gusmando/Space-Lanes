@@ -79,6 +79,8 @@ public class Bullet : MonoBehaviour
                 if(!other.gameObject.GetComponent<MovementController>().hurt)
                 {
                     other.gameObject.GetComponent<MovementController>().health --;
+                    other.gameObject.GetComponent<MovementController>().hurt = true;
+                    other.gameObject.GetComponent<MovementController>().hurtTime = false;
                 }
                 if(other.gameObject != null)
                 {

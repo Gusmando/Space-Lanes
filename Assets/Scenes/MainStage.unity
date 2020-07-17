@@ -1058,36 +1058,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 16.032001, y: -179.007, z: -159.567}
---- !u!1 &785618434
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 785618435}
-  m_Layer: 0
-  m_Name: Section9
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &785618435
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 785618434}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 13
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &888323504
 GameObject:
   m_ObjectHideFlags: 0
@@ -2198,6 +2168,11 @@ PrefabInstance:
       propertyPath: laneChangeSpeed
       value: 75
       objectReference: {fileID: 0}
+    - target: {fileID: 10854956270901635, guid: 9d8075e9d7bf31249b48173e41228732,
+        type: 3}
+      propertyPath: hurtDelayTime
+      value: 0.8
+      objectReference: {fileID: 0}
     - target: {fileID: 10854956270901641, guid: 9d8075e9d7bf31249b48173e41228732,
         type: 3}
       propertyPath: m_Name
@@ -2321,7 +2296,7 @@ PrefabInstance:
     - target: {fileID: 3438543757305703674, guid: 67b3be9d968ad7845857d76faf9acdbf,
         type: 3}
       propertyPath: sections.Array.size
-      value: 8
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 3438543757305703674, guid: 67b3be9d968ad7845857d76faf9acdbf,
         type: 3}
@@ -2384,6 +2359,12 @@ PrefabInstance:
       propertyPath: sections.Array.data[7]
       value: 
       objectReference: {fileID: 4167900076203004996, guid: 61cda5072f2822a4593fae11a05e5137,
+        type: 3}
+    - target: {fileID: 3438543757305703674, guid: 67b3be9d968ad7845857d76faf9acdbf,
+        type: 3}
+      propertyPath: sections.Array.data[8]
+      value: 
+      objectReference: {fileID: 8344703303775633011, guid: e7d3b36cb5568f74c81e6dac81e51add,
         type: 3}
     - target: {fileID: 3438543757305703675, guid: 67b3be9d968ad7845857d76faf9acdbf,
         type: 3}

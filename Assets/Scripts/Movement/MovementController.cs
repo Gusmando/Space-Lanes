@@ -58,6 +58,7 @@ public class MovementController : MonoBehaviour
     [Header("Animation Control")]
     public Animator anim;
     public bool animOver;
+    public bool hurtTime;
     public float laneChangeDelay;
     public bool leftRight;
     public int animStateDisp;
@@ -206,9 +207,10 @@ public class MovementController : MonoBehaviour
 
     void FixedUpdate() 
     {
-        if(subjectRb.velocity.z < -.01 && !hurt)
+        if(hurt && !hurtTime)
         {
             StartCoroutine(hurtDelay(hurtDelayTime));
+            hurtTime = true;
         }
         //Push and jump force set in inspector
         pushForce = new Vector3(0,0,10*speed*speedBoost);
