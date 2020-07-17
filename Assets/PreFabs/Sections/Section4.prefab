@@ -153,7 +153,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2941044229169379285}
-  m_RootOrder: 3
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 5, y: 0, z: 0}
 --- !u!108 &901504056214791174
 Light:
@@ -613,7 +613,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2941044229169379285}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 5, y: 0, z: -15}
 --- !u!108 &6741754385131866047
 Light:
@@ -1802,9 +1802,9 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4101570730593069088}
+  - {fileID: 6754244151286076032}
   - {fileID: 3962712119298246643}
   - {fileID: 5028838075213347006}
-  - {fileID: 6754244151286076032}
   - {fileID: 4396110849107804846}
   - {fileID: 2927676433030655945}
   - {fileID: 3048515610047993432}
@@ -1883,13 +1883,14 @@ MonoBehaviour:
     - {fileID: 6025120151176097862}
   lights:
   - platforms:
+    - {fileID: 1173178925152250150}
+  - platforms:
     - {fileID: 8941072135889401954}
   - platforms:
     - {fileID: 2941674945037161678}
-  - platforms:
-    - {fileID: 1173178925152250150}
   sectionActive: 0
   first: 0
+  notFirst: 0
   fading: 0
   fadingLast: 0
   alt: 0
@@ -2179,7 +2180,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2941044229169379285}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 5, y: 0, z: 0}
 --- !u!108 &982951865162173437
 Light:
