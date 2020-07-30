@@ -47,9 +47,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 158a778ea7f1eba41916cefa4e64335f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lHand: {fileID: 0}
-  rHand: {fileID: 0}
-  head: {fileID: 0}
+  lHand: {fileID: 760297544490413569}
+  rHand: {fileID: 8197046889628390992}
+  head: {fileID: 1375761118412995016}
   lanes: []
   leftShoot: 0
   headShoot: 0
