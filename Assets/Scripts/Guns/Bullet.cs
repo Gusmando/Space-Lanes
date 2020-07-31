@@ -71,6 +71,22 @@ public class Bullet : MonoBehaviour
                     bullet.GetComponent<Rigidbody>().AddForce(0,0,speed,ForceMode.Impulse);
                 }
             }
+
+            if(other.gameObject.CompareTag("Boss") && other.gameObject.GetComponent<bossComponent>().vulnerable)
+            {
+                other.gameObject.GetComponent<bossComponent>().health -= (damage * damageMod);
+
+                if(other.gameObject != null && !other.gameObject.GetComponent<bossComponent>().hurt)
+                {
+                    if(!other.gameObject.GetComponent<EnemyMovement>().hurt)
+                    {
+                        other.gameObject.GetComponent<bossComponent>().hurtDelayStart();
+                    }
+                    durability--;
+                    StartCoroutine(colliderDelay(invHitTime));
+                    bullet.GetComponent<Rigidbody>().AddForce(0,0,speed,ForceMode.Impulse);
+                }
+            }
         }
         else
         {

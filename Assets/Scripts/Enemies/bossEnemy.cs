@@ -35,7 +35,13 @@ public class bossEnemy : MonoBehaviour
     //Update is called once per frame
     void Update()
     {
-        if(!deciding && ! attacking)
+        if(fleeing)
+        {
+            attacking = false;
+            deciding = false;
+        }
+        
+        if(!deciding && !attacking && !fleeing)
         {
             StartCoroutine(decisionDelay(decisionTime));            
         }
@@ -87,9 +93,6 @@ public class bossEnemy : MonoBehaviour
                     break;
             }
         }
-        
-
-
 
     }
 
