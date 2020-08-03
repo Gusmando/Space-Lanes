@@ -12,7 +12,7 @@ public class bossComponent : MonoBehaviour
     public Light compLight;
     public Color hurtColor;
     public Color normColor;
-    // Update is called onsce per frame
+    // Update is called once per frame
     void Update()
     {
         if(hurt)
@@ -28,6 +28,7 @@ public class bossComponent : MonoBehaviour
         {
             Destroy(this.gameObject);
             main.fleeing = true;
+            main.compCount --;
         }
 
     }

@@ -15,6 +15,7 @@ TagManager:
   - shadowUIBar
   - frame
   - pickup
+  - Boss
   layers:
   - Default
   - TransparentFX

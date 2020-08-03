@@ -78,7 +78,7 @@ public class Bullet : MonoBehaviour
 
                 if(other.gameObject != null && !other.gameObject.GetComponent<bossComponent>().hurt)
                 {
-                    if(!other.gameObject.GetComponent<EnemyMovement>().hurt)
+                    if(!other.gameObject.GetComponent<bossComponent>().hurt)
                     {
                         other.gameObject.GetComponent<bossComponent>().hurtDelayStart();
                     }
