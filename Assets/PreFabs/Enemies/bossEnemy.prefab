@@ -55,17 +55,21 @@ MonoBehaviour:
   fleeing: 0
   attacking: 0
   deciding: 0
+  decided: 0
   paused: 0
   animating: 0
+  returning: 0
   compCount: 3
   shootingMode: 0
-  decisionTime: 20
-  attackTime: 5
+  decisionTime: 10
+  attackTime: 15
+  attackDelayTime: 3
   animDelayTime: 0.5
   circAngle: 0
   circSpeedMult: 1
-  offsetLength: 1.5
+  offsetLength: 1.8
   positionOffset: 10
+  returnSpeed: 0.8
 --- !u!1 &760297544490413569
 GameObject:
   m_ObjectHideFlags: 0

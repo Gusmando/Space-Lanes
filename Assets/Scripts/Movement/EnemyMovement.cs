@@ -98,9 +98,9 @@ public class EnemyMovement : MonoBehaviour
                 newPosition = new Vector3(lanes[currentLane].position.x,subject.transform.position.y,subject.transform.position.z);
             }
 
-            //Setting the new position and rotation of the object
-            //subject.transform.position = newPosition;
-            //subject.transform.eulerAngles = lanes[currentLane].LaneReferenceObject.transform.eulerAngles;
+                //Setting the new position and rotation of the object
+                //subject.transform.position = newPosition;
+                //subject.transform.eulerAngles = lanes[currentLane].LaneReferenceObject.transform.eulerAngles;
             
             //Keeping movement in the y and z axis, x is frozen as no strafe movement
             subjectRb.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionX;

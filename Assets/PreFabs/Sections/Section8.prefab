@@ -2651,16 +2651,6 @@ PrefabInstance:
       propertyPath: lanes.Array.data[2]
       value: 
       objectReference: {fileID: 8867272224101243554}
-    - target: {fileID: 7716643741471462620, guid: da1208b5fa353e14186b5d3f78d9df1f,
-        type: 3}
-      propertyPath: decisionTime
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 7716643741471462620, guid: da1208b5fa353e14186b5d3f78d9df1f,
-        type: 3}
-      propertyPath: compCount
-      value: 3
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: da1208b5fa353e14186b5d3f78d9df1f, type: 3}
 --- !u!4 &1804117851943024345 stripped

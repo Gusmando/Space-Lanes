@@ -7,7 +7,10 @@ public class bossEnemy : MonoBehaviour
     public GameObject lHand;
     public GameObject rHand;
     public GameObject head;
+
     public Lane[] lanes;
+    public Lane[] lanes2;
+    public Lane[] lanes3;
 
     public Vector3 ogPosL;
     public Vector3 ogPosR;
@@ -15,14 +18,17 @@ public class bossEnemy : MonoBehaviour
     public bool fleeing;
     public bool attacking;
     public bool deciding;
+    public bool decided;
     public bool paused;
     public bool animating;
+    public bool returning;
 
     public int compCount;
     public int shootingMode;
 
     public float decisionTime;
     public float attackTime;
+    public float attackDelayTime;
     public float animDelayTime;
 
     private Animator lHandAnim;
@@ -34,8 +40,13 @@ public class bossEnemy : MonoBehaviour
     public float offsetLength;
 
     public float positionOffset;
+    public float returnSpeed;
+    private float circSpeed;
 
-    private float speed;
+    private Vector3 newPositionLeft;
+    private Vector3 newPositionRight;
+    private Vector3 fleePosition;
+
 
     //Start is called before the first frame update
     void Start()
@@ -43,33 +54,34 @@ public class bossEnemy : MonoBehaviour
         head.transform.position = new Vector3(lanes[lanes.Length/2].position.x,lanes[lanes.Length/2].position.y + positionOffset,head.transform.position.z);
         lHand.transform.position = new Vector3(lanes[lanes.Length/2 + 1].position.x,lanes[lanes.Length/2 + 1].position.y + positionOffset,lHand.transform.position.z);
         rHand.transform.position = new Vector3(lanes[lanes.Length/2 - 1].position.x,lanes[lanes.Length/2 - 1].position.y + positionOffset,rHand.transform.position.z);
+
         lHandAnim = lHand.GetComponent<Animator>();
         rHandAnim = rHand.GetComponent<Animator>();
         headAnim = head.GetComponent<Animator>();
+
         ogPosL = lHand.transform.position;
         ogPosR = rHand.transform.position;
+        
+        circSpeed = (2*Mathf.PI)/circSpeedMult;
+        newPositionLeft = new Vector3(lanes[lanes.Length/2 + 1].position.x,lanes[lanes.Length/2 + 1].position.y + positionOffset,lHand.transform.position.z);
+        newPositionRight = new Vector3(lanes[lanes.Length/2 - 1].position.x,lanes[lanes.Length/2 - 1].position.y + positionOffset,rHand.transform.position.z);
+        
         compCount = 3;
-        speed = (2*Mathf.PI)/circSpeedMult;
     }
 
     //Update is called once per frame
     void Update()
-    {
-        if(fleeing)
+    {   
+        if(!fleeing && !deciding && decided && !attacking)
         {
-            attacking = false;
-            deciding = false;
-        }
-        
-        if(!deciding && !attacking && !fleeing && !paused)
-        {
-            StartCoroutine(decisionDelay(decisionTime));            
+            StartCoroutine(attackingDelay(attackDelayTime));
+            paused = true;   
         }
 
-        if(!fleeing && !deciding)
+        if(!deciding && !attacking && !fleeing && !paused)
         {
-            StartCoroutine(attackingDelay(attackTime));
-            paused = true;   
+            StartCoroutine(decisionDuration(decisionTime));
+            decided = true;            
         }
 
         if(deciding)
@@ -78,7 +90,7 @@ public class bossEnemy : MonoBehaviour
             lHand.GetComponent<bossComponent>().vulnerable = false;
             rHand.GetComponent<bossComponent>().vulnerable = false;
             lHandAnim.SetBool("shooting",false);
-            lHandAnim.SetBool("shooting",false);
+            rHandAnim.SetBool("shooting",false);
 
             if(!animating)
             {
@@ -86,7 +98,7 @@ public class bossEnemy : MonoBehaviour
                 StartCoroutine(animationDelay(animDelayTime));
             }
 
-            circAngle += speed* Time.deltaTime;
+            circAngle += circSpeed* Time.deltaTime;
 
             float tempXL = Mathf.Cos(circAngle)*offsetLength + ogPosL.x;
             float tempYL = Mathf.Sin(circAngle)*offsetLength + ogPosL.y;
@@ -117,22 +129,56 @@ public class bossEnemy : MonoBehaviour
         
         if(!attacking && paused)
         {
-            //Return Components to original position
+            returning = true;
         }
 
-        if(!deciding && attacking && !fleeing)
+        if(lHand.transform.position != newPositionLeft && returning)
         {
+            float step = Time.deltaTime * returnSpeed;
+            lHand.transform.rotation = Quaternion.RotateTowards(lHand.transform.rotation,lanes[lanes.Length/2 + 1].rotation,step);
+            lHand.transform.position = Vector3.MoveTowards(lHand.transform.position,newPositionLeft,step);
+        }
+
+        else
+        {
+            returning = false;
+        }
+
+        if(rHand.transform.position != newPositionRight && returning)
+        {
+            float step = Time.deltaTime * returnSpeed;
+            rHand.transform.rotation = Quaternion.RotateTowards(rHand.transform.rotation,lanes[lanes.Length/2 - 1].rotation,step);
+            rHand.transform.position = Vector3.MoveTowards(rHand.transform.position,newPositionRight,step);
+        }
+
+        else
+        {
+            returning = false;
+        }
+
+        if(!deciding && !fleeing && attacking)
+        {
+            if(paused)
+            {
+                StartCoroutine(attackingDuration(attackTime));
+            }
+
             if(paused)
             {
                 paused = false;
             }
 
+            if(decided)
+            {
+                decided = false;
+            }
+
             switch (shootingMode) 
             {
                 case 1:
-                    lHandAnim.SetBool("shooting",true);
+                    lHandAnim.SetBool("shooting",false);
                     headAnim.SetInteger("animState",010);
-                    rHandAnim.SetBool("shooting",false);
+                    rHandAnim.SetBool("shooting",true);
                     lHand.GetComponent<bossComponent>().vulnerable = false;
                     head.GetComponent<bossComponent>().vulnerable = false;
                     rHand.GetComponent<bossComponent>().vulnerable = true;
@@ -146,9 +192,9 @@ public class bossEnemy : MonoBehaviour
                     rHand.GetComponent<bossComponent>().vulnerable = false;
                     break;
                 case 3:
-                    lHandAnim.SetBool("shooting",false);
+                    lHandAnim.SetBool("shooting",true);
                     headAnim.SetInteger("animState",010);
-                    rHandAnim.SetBool("shooting",true); 
+                    rHandAnim.SetBool("shooting",false); 
                     lHand.GetComponent<bossComponent>().vulnerable = true;
                     head.GetComponent<bossComponent>().vulnerable = false;
                     rHand.GetComponent<bossComponent>().vulnerable = false;
@@ -160,7 +206,7 @@ public class bossEnemy : MonoBehaviour
 
     }
 
-    private IEnumerator decisionDelay(float delayLength)
+    private IEnumerator decisionDuration(float delayLength)
     {
         deciding = true;
 
@@ -170,6 +216,18 @@ public class bossEnemy : MonoBehaviour
 
         yield return null;
     }
+
+    private IEnumerator attackingDuration(float delayLength)
+    {
+        attacking = true;
+
+        yield return new WaitForSeconds(delayLength);
+
+        attacking = false;
+
+        yield return null;
+    }
+
     private IEnumerator animationDelay(float delayLength)
     {
         animating = true;
