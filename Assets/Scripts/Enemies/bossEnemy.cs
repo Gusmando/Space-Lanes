@@ -8,12 +8,16 @@ public class bossEnemy : MonoBehaviour
     public GameObject rHand;
     public GameObject head;
 
-    public Lane[] lanes;
-    public Lane[] lanes2;
-    public Lane[] lanes3;
+    public GameObject[] path1;
+    public GameObject[] path2;
+    public GameObject[] path3;
 
+    public Lane[] lanes;
     public Vector3 ogPosL;
     public Vector3 ogPosR;
+
+    public Transform stage2Trans;
+    public Transform stage3Trans;
 
     public bool fleeing;
     public bool attacking;
@@ -41,12 +45,15 @@ public class bossEnemy : MonoBehaviour
 
     public float positionOffset;
     public float returnSpeed;
+    public float fleeSpeed;
+    public float handSpeed;
     private float circSpeed;
 
     private Vector3 newPositionLeft;
     private Vector3 newPositionRight;
     private Vector3 fleePosition;
-
+    public Vector3 stage2;
+    public Vector3 stage3;
 
     //Start is called before the first frame update
     void Start()
@@ -67,11 +74,73 @@ public class bossEnemy : MonoBehaviour
         newPositionRight = new Vector3(lanes[lanes.Length/2 - 1].position.x,lanes[lanes.Length/2 - 1].position.y + positionOffset,rHand.transform.position.z);
         
         compCount = 3;
+
+        stage2 = stage2Trans.position;
+        stage3 = stage3Trans.position;
     }
 
     //Update is called once per frame
     void Update()
     {   
+        switch (compCount)
+        {
+            case 0:
+                break;
+            case 1:
+                fleePosition = stage3;
+                showPlat(path2);
+                break;
+            case 2:
+                fleePosition = stage2;
+                showPlat(path1);
+                break;
+            case 3:
+                break;
+            default:
+                break;
+        }
+
+        if(fleeing && transform.position != fleePosition)
+        {
+            float step = Time.deltaTime * fleeSpeed;
+            float stepHand = Time.deltaTime * handSpeed;
+            Quaternion targetRot = new Quaternion();
+            targetRot.eulerAngles = new Vector3(0,0,180);
+
+            if(head != null)
+            {
+                head.GetComponent<bossComponent>().vulnerable = false;
+                headAnim.SetInteger("animState",110);
+            }
+            if(lHand != null)
+            {
+                lHand.GetComponent<bossComponent>().vulnerable = false;    
+                lHandAnim.SetBool("shooting",false);
+                lHand.transform.rotation = Quaternion.RotateTowards(lHand.transform.rotation,targetRot,stepHand);
+            }
+            if(rHand != null)
+            {
+                rHand.GetComponent<bossComponent>().vulnerable = false;
+                rHandAnim.SetBool("shooting",false);
+                rHand.transform.rotation = Quaternion.RotateTowards(rHand.transform.rotation,targetRot,stepHand);
+            }
+
+            transform.position = Vector3.MoveTowards(transform.position,fleePosition,step);
+        }
+
+        else
+        {
+            fleeing = false;
+            if(lHand != null)
+            {
+                lHand.transform.eulerAngles = new Vector3(0,0,0);
+            }
+            if(rHand != null)
+            {
+                rHand.transform.eulerAngles = new Vector3(0,0,0);
+            }
+        }
+
         if(!fleeing && !deciding && decided && !attacking)
         {
             StartCoroutine(attackingDelay(attackDelayTime));
@@ -86,18 +155,6 @@ public class bossEnemy : MonoBehaviour
 
         if(deciding)
         {
-            head.GetComponent<bossComponent>().vulnerable = false;
-            lHand.GetComponent<bossComponent>().vulnerable = false;
-            rHand.GetComponent<bossComponent>().vulnerable = false;
-            lHandAnim.SetBool("shooting",false);
-            rHandAnim.SetBool("shooting",false);
-
-            if(!animating)
-            {
-                shootingMode = Random.Range(1,4);
-                StartCoroutine(animationDelay(animDelayTime));
-            }
-
             circAngle += circSpeed* Time.deltaTime;
 
             float tempXL = Mathf.Cos(circAngle)*offsetLength + ogPosL.x;
@@ -106,22 +163,47 @@ public class bossEnemy : MonoBehaviour
             float tempXR = Mathf.Cos(-1*circAngle)*offsetLength + ogPosR.x;
             float tempYR = Mathf.Sin(-1*circAngle)*offsetLength + ogPosR.y;
 
-            lHand.transform.position = new Vector3(tempXL,tempYL,lHand.transform.position.z);
-            rHand.transform.position = new Vector3(tempXR,tempYR,rHand.transform.position.z);
-
-            switch (shootingMode) 
+            if(head != null)
             {
-                case 1:
-                    headAnim.SetInteger("animState",100);
-                    break;
-                case 2: 
-                    headAnim.SetInteger("animState",000);
-                    break;
-                case 3:
-                    headAnim.SetInteger("animState",001); 
-                    break;
-                default:
-                    break;
+                head.GetComponent<bossComponent>().vulnerable = false;
+            }
+
+            if(lHand != null)
+            {
+                lHand.GetComponent<bossComponent>().vulnerable = false;
+                lHandAnim.SetBool("shooting",false);
+                lHand.transform.position = new Vector3(tempXL,tempYL,lHand.transform.position.z);
+            }
+
+            if(rHand != null)
+            {
+                rHand.GetComponent<bossComponent>().vulnerable = false;
+                rHandAnim.SetBool("shooting",false);
+                rHand.transform.position = new Vector3(tempXR,tempYR,rHand.transform.position.z);
+            }
+            
+            if(!animating)
+            {
+                shootingMode = Random.Range(1,4);
+                StartCoroutine(animationDelay(animDelayTime));
+            }
+            
+            if(head != null)
+            {
+                switch (shootingMode) 
+                {
+                    case 1:
+                        headAnim.SetInteger("animState",100);
+                        break;
+                    case 2: 
+                        headAnim.SetInteger("animState",000);
+                        break;
+                    case 3:
+                        headAnim.SetInteger("animState",001); 
+                        break;
+                    default:
+                        break;
+                }
             }
         }
 
@@ -132,28 +214,32 @@ public class bossEnemy : MonoBehaviour
             returning = true;
         }
 
-        if(lHand.transform.position != newPositionLeft && returning)
+        if(lHand != null)
         {
-            float step = Time.deltaTime * returnSpeed;
-            lHand.transform.rotation = Quaternion.RotateTowards(lHand.transform.rotation,lanes[lanes.Length/2 + 1].rotation,step);
-            lHand.transform.position = Vector3.MoveTowards(lHand.transform.position,newPositionLeft,step);
+            if(lHand.transform.position != newPositionLeft && returning)
+            {
+                float step = Time.deltaTime * returnSpeed;
+                lHand.transform.rotation = Quaternion.RotateTowards(lHand.transform.rotation,lanes[lanes.Length/2 + 1].rotation,step);
+                lHand.transform.position = Vector3.MoveTowards(lHand.transform.position,newPositionLeft,step);
+            }
+            else
+            {
+                returning = false;
+            }
         }
 
-        else
+        if(rHand != null)
         {
-            returning = false;
-        }
-
-        if(rHand.transform.position != newPositionRight && returning)
-        {
-            float step = Time.deltaTime * returnSpeed;
-            rHand.transform.rotation = Quaternion.RotateTowards(rHand.transform.rotation,lanes[lanes.Length/2 - 1].rotation,step);
-            rHand.transform.position = Vector3.MoveTowards(rHand.transform.position,newPositionRight,step);
-        }
-
-        else
-        {
-            returning = false;
+            if(rHand.transform.position != newPositionRight && returning)
+            {
+                float step = Time.deltaTime * returnSpeed;
+                rHand.transform.rotation = Quaternion.RotateTowards(rHand.transform.rotation,lanes[lanes.Length/2 - 1].rotation,step);
+                rHand.transform.position = Vector3.MoveTowards(rHand.transform.position,newPositionRight,step);
+            }
+            else
+            {
+                returning = false;
+            }
         }
 
         if(!deciding && !fleeing && attacking)
@@ -176,28 +262,63 @@ public class bossEnemy : MonoBehaviour
             switch (shootingMode) 
             {
                 case 1:
-                    lHandAnim.SetBool("shooting",false);
-                    headAnim.SetInteger("animState",010);
-                    rHandAnim.SetBool("shooting",true);
-                    lHand.GetComponent<bossComponent>().vulnerable = false;
-                    head.GetComponent<bossComponent>().vulnerable = false;
-                    rHand.GetComponent<bossComponent>().vulnerable = true;
+                    if(lHand != null)
+                    {
+                        lHandAnim.SetBool("shooting",false);
+                        lHand.GetComponent<bossComponent>().vulnerable = true;
+                    }
+
+                    if(rHand != null)
+                    {
+                        rHandAnim.SetBool("shooting",true);
+                        rHand.GetComponent<bossComponent>().vulnerable = false;
+                    }
+
+                    if(head != null)
+                    {
+                        headAnim.SetInteger("animState",010);
+                        head.GetComponent<bossComponent>().vulnerable = false;
+                    }
                     break;
-                case 2: 
-                    lHandAnim.SetBool("shooting",true);
-                    headAnim.SetInteger("animState",000);
-                    rHandAnim.SetBool("shooting",true);
-                    lHand.GetComponent<bossComponent>().vulnerable = false;
-                    head.GetComponent<bossComponent>().vulnerable = true;
-                    rHand.GetComponent<bossComponent>().vulnerable = false;
+
+                case 2:
+                    if(lHand != null)
+                    {
+                        lHandAnim.SetBool("shooting",true);
+                        lHand.GetComponent<bossComponent>().vulnerable = false;
+                    }
+
+                    if(rHand != null)
+                    {
+                        rHandAnim.SetBool("shooting",true);
+                        rHand.GetComponent<bossComponent>().vulnerable = false;
+                    }
+
+                    if(head != null)
+                    {
+                        headAnim.SetInteger("animState",000);
+                        head.GetComponent<bossComponent>().vulnerable = true;
+                    }
                     break;
+
                 case 3:
-                    lHandAnim.SetBool("shooting",true);
-                    headAnim.SetInteger("animState",010);
-                    rHandAnim.SetBool("shooting",false); 
-                    lHand.GetComponent<bossComponent>().vulnerable = true;
-                    head.GetComponent<bossComponent>().vulnerable = false;
-                    rHand.GetComponent<bossComponent>().vulnerable = false;
+                    if(lHand != null)
+                    {
+                        lHandAnim.SetBool("shooting",true);
+                        lHand.GetComponent<bossComponent>().vulnerable = false;
+                    }
+
+                    if(rHand != null)
+                    {
+                        rHandAnim.SetBool("shooting",false);
+                        rHand.GetComponent<bossComponent>().vulnerable = true;
+                    }
+
+                    if(head != null)
+                    {
+                        headAnim.SetInteger("animState",010);
+                        head.GetComponent<bossComponent>().vulnerable = false;
+                    }
                     break;
                 default:
                     break;
@@ -247,5 +368,13 @@ public class bossEnemy : MonoBehaviour
         attacking = true;
 
         yield return null;
+    }
+
+    private void showPlat(GameObject[] hiddenPlats)
+    {
+        foreach (GameObject x in hiddenPlats)
+        {
+            x.SetActive(true);
+        }
     }
 }

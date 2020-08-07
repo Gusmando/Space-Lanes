@@ -72,7 +72,7 @@ public class Bullet : MonoBehaviour
                 }
             }
 
-            if(other.gameObject.CompareTag("Boss") && other.gameObject.GetComponent<bossComponent>().vulnerable)
+            if(other.gameObject.CompareTag("Boss") && other.gameObject.GetComponent<bossComponent>().vulnerable && !other.gameObject.GetComponent<bossComponent>().hurt)
             {
                 other.gameObject.GetComponent<bossComponent>().health -= (damage * damageMod);
 

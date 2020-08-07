@@ -49,9 +49,17 @@ MonoBehaviour:
   lHand: {fileID: 760297544490413569}
   rHand: {fileID: 8197046889628390992}
   head: {fileID: 1375761118412995016}
-  lanes: []
+  path1: []
+  path2: []
+  path3: []
+  lanes:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   ogPosL: {x: 0, y: 0, z: 0}
   ogPosR: {x: 0, y: 0, z: 0}
+  stage2Trans: {fileID: 0}
+  stage3Trans: {fileID: 0}
   fleeing: 0
   attacking: 0
   deciding: 0
@@ -68,8 +76,12 @@ MonoBehaviour:
   circAngle: 0
   circSpeedMult: 1
   offsetLength: 1.8
-  positionOffset: 10
+  positionOffset: 6.5
   returnSpeed: 0.8
+  fleeSpeed: 15
+  handSpeed: 60
+  stage2: {x: 0, y: 0, z: 0}
+  stage3: {x: 0, y: 0, z: 0}
 --- !u!1 &760297544490413569
 GameObject:
   m_ObjectHideFlags: 0
@@ -82,6 +94,7 @@ GameObject:
   - component: {fileID: 4050492526267490207}
   - component: {fileID: 7293286077079236154}
   - component: {fileID: 5374240350789223763}
+  - component: {fileID: 6877609740602672330}
   m_Layer: 9
   m_Name: lHand
   m_TagString: Boss
@@ -96,7 +109,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 760297544490413569}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 2.353, y: -0.651, z: -0.822}
   m_LocalScale: {x: 3.5, y: 3.5, z: 1}
   m_Children:
@@ -186,13 +199,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   main: {fileID: 7716643741471462620}
-  health: 25
+  health: 60
   hurt: 0
   vulnerable: 0
-  hurtTime: 1.2
+  hurtTime: 0.8
   compLight: {fileID: 8041708917723231752}
   hurtColor: {r: 1, g: 0, b: 0, a: 1}
   normColor: {r: 1, g: 1, b: 1, a: 1}
+--- !u!65 &6877609740602672330
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 760297544490413569}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.7122612, y: 0.6285915, z: 0.2}
+  m_Center: {x: 0.018164389, y: -0.13426596, z: 0}
 --- !u!1 &1375761118412995016
 GameObject:
   m_ObjectHideFlags: 0
@@ -205,6 +231,7 @@ GameObject:
   - component: {fileID: 1101856372269071888}
   - component: {fileID: 7872870639881106562}
   - component: {fileID: 2056328868007004240}
+  - component: {fileID: 7106361217365767941}
   m_Layer: 9
   m_Name: head
   m_TagString: Boss
@@ -291,10 +318,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   main: {fileID: 7716643741471462620}
-  health: 100
+  health: 120
   hurt: 0
   vulnerable: 0
-  hurtTime: 1.2
+  hurtTime: 0.8
   compLight: {fileID: 1379847603174266510}
   hurtColor: {r: 1, g: 0, b: 0, a: 1}
   normColor: {r: 1, g: 1, b: 1, a: 1}
@@ -317,6 +344,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!65 &7106361217365767941
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1375761118412995016}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.96, y: 1.1213822, z: 0.60454935}
+  m_Center: {x: 0, y: 0.020925686, z: 0.001981449}
 --- !u!1 &7757339030118648408
 GameObject:
   m_ObjectHideFlags: 0
@@ -513,6 +553,7 @@ GameObject:
   - component: {fileID: 4066136537890240296}
   - component: {fileID: 4971528214385617452}
   - component: {fileID: 7272471710995372389}
+  - component: {fileID: 7211071990921986367}
   m_Layer: 9
   m_Name: rHand
   m_TagString: Boss
@@ -618,13 +659,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   main: {fileID: 7716643741471462620}
-  health: 25
+  health: 60
   hurt: 0
   vulnerable: 0
-  hurtTime: 1.2
+  hurtTime: 0.8
   compLight: {fileID: 7709382426082607477}
   hurtColor: {r: 1, g: 0, b: 0, a: 1}
   normColor: {r: 1, g: 1, b: 1, a: 1}
+--- !u!65 &7211071990921986367
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8197046889628390992}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.5183333, y: 0.6269013, z: 0.2}
+  m_Center: {x: 0.023873847, y: -0.15412298, z: 0}
 --- !u!1 &9026389357419767338
 GameObject:
   m_ObjectHideFlags: 0
