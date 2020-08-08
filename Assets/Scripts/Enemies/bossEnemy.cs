@@ -331,7 +331,8 @@ public class bossEnemy : MonoBehaviour
 
             //This switch statement wll change the hands and head
             //to their appropriate shooting states based on the
-            //previously determined shooting mode
+            //previously determined shooting mode. Helper method here
+            //Would help bring down repeated code
             switch (shootingMode) 
             {
                 //Left Hand is vulnerable, other comps shoot
