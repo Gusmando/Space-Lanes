@@ -12,6 +12,11 @@ public class bossEnemy : MonoBehaviour
     public GameObject[] path2;
     public GameObject[] path3;
 
+    public GunController hGun;
+    public GunController lGun;
+    public GunController rGun;
+
+
     public Lane[] lanes;
     public Vector3 ogPosL;
     public Vector3 ogPosR;
@@ -85,6 +90,7 @@ public class bossEnemy : MonoBehaviour
         switch (compCount)
         {
             case 0:
+                showPlat(path3);
                 break;
             case 1:
                 fleePosition = stage3;
@@ -111,20 +117,22 @@ public class bossEnemy : MonoBehaviour
             {
                 head.GetComponent<bossComponent>().vulnerable = false;
                 headAnim.SetInteger("animState",110);
+                hGun.input = false;
             }
             if(lHand != null)
             {
                 lHand.GetComponent<bossComponent>().vulnerable = false;    
                 lHandAnim.SetBool("shooting",false);
                 lHand.transform.rotation = Quaternion.RotateTowards(lHand.transform.rotation,targetRot,stepHand);
+                lGun.input = false;
             }
             if(rHand != null)
             {
                 rHand.GetComponent<bossComponent>().vulnerable = false;
                 rHandAnim.SetBool("shooting",false);
                 rHand.transform.rotation = Quaternion.RotateTowards(rHand.transform.rotation,targetRot,stepHand);
+                rGun.input = false;
             }
-
             transform.position = Vector3.MoveTowards(transform.position,fleePosition,step);
         }
 
@@ -166,6 +174,7 @@ public class bossEnemy : MonoBehaviour
             if(head != null)
             {
                 head.GetComponent<bossComponent>().vulnerable = false;
+                hGun.input = false;
             }
 
             if(lHand != null)
@@ -173,6 +182,7 @@ public class bossEnemy : MonoBehaviour
                 lHand.GetComponent<bossComponent>().vulnerable = false;
                 lHandAnim.SetBool("shooting",false);
                 lHand.transform.position = new Vector3(tempXL,tempYL,lHand.transform.position.z);
+                lGun.input = false;
             }
 
             if(rHand != null)
@@ -180,6 +190,7 @@ public class bossEnemy : MonoBehaviour
                 rHand.GetComponent<bossComponent>().vulnerable = false;
                 rHandAnim.SetBool("shooting",false);
                 rHand.transform.position = new Vector3(tempXR,tempYR,rHand.transform.position.z);
+                rGun.input = false;
             }
             
             if(!animating)
@@ -266,18 +277,21 @@ public class bossEnemy : MonoBehaviour
                     {
                         lHandAnim.SetBool("shooting",false);
                         lHand.GetComponent<bossComponent>().vulnerable = true;
+                        lGun.input = false;
                     }
 
                     if(rHand != null)
                     {
                         rHandAnim.SetBool("shooting",true);
                         rHand.GetComponent<bossComponent>().vulnerable = false;
+                        rGun.input = true;
                     }
 
                     if(head != null)
                     {
                         headAnim.SetInteger("animState",010);
                         head.GetComponent<bossComponent>().vulnerable = false;
+                        hGun.input = true;
                     }
                     break;
 
@@ -286,18 +300,21 @@ public class bossEnemy : MonoBehaviour
                     {
                         lHandAnim.SetBool("shooting",true);
                         lHand.GetComponent<bossComponent>().vulnerable = false;
+                        lGun.input = true;
                     }
 
                     if(rHand != null)
                     {
                         rHandAnim.SetBool("shooting",true);
                         rHand.GetComponent<bossComponent>().vulnerable = false;
+                        rGun.input = true;
                     }
 
                     if(head != null)
                     {
                         headAnim.SetInteger("animState",000);
                         head.GetComponent<bossComponent>().vulnerable = true;
+                        hGun.input = false;
                     }
                     break;
 
@@ -306,18 +323,21 @@ public class bossEnemy : MonoBehaviour
                     {
                         lHandAnim.SetBool("shooting",true);
                         lHand.GetComponent<bossComponent>().vulnerable = false;
+                        lGun.input = true;
                     }
 
                     if(rHand != null)
                     {
                         rHandAnim.SetBool("shooting",false);
                         rHand.GetComponent<bossComponent>().vulnerable = true;
+                        rGun.input = false;
                     }
 
                     if(head != null)
                     {
                         headAnim.SetInteger("animState",010);
                         head.GetComponent<bossComponent>().vulnerable = false;
+                        hGun.input = true;
                     }
                     break;
                 default:
