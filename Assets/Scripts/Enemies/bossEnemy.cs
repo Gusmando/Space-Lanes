@@ -4,26 +4,31 @@ using UnityEngine;
 
 public class bossEnemy : MonoBehaviour
 {
+    [Header("Boss Components")]
     public GameObject lHand;
     public GameObject rHand;
     public GameObject head;
 
+    [Header("Invisible Platforms")]
     public GameObject[] path1;
     public GameObject[] path2;
     public GameObject[] path3;
 
+    [Header("Gun Controllers")]
     public GunController hGun;
     public GunController lGun;
     public GunController rGun;
 
-
+    [Header("Gun Controllers")]
     public Lane[] lanes;
     public Vector3 ogPosL;
     public Vector3 ogPosR;
 
+    [Header("Future Boss Positions")]
     public Transform stage2Trans;
     public Transform stage3Trans;
 
+    [Header("State Variables")]
     public bool fleeing;
     public bool attacking;
     public bool deciding;
@@ -31,55 +36,67 @@ public class bossEnemy : MonoBehaviour
     public bool paused;
     public bool animating;
     public bool returning;
-
-    public int compCount;
     public int shootingMode;
 
+    [Header("Component Count")]
+    public int compCount;
+
+    [Header("Delay Time Settings")]
     public float decisionTime;
     public float attackTime;
     public float attackDelayTime;
     public float animDelayTime;
 
+    [Header("Component Animators")]
     private Animator lHandAnim;
     private Animator rHandAnim;
     private Animator headAnim; 
 
+    [Header("Circular Movement")]
     public float circAngle;
     public float circSpeedMult;
     public float offsetLength;
-
+    
+    [Header("Movement Speeds")]
     public float positionOffset;
     public float returnSpeed;
     public float fleeSpeed;
     public float handSpeed;
-    private float circSpeed;
 
+    //Variables below used to calculate position based on 
+    //current state of boss
+    private float circSpeed;
     private Vector3 newPositionLeft;
     private Vector3 newPositionRight;
     private Vector3 fleePosition;
-    public Vector3 stage2;
-    public Vector3 stage3;
+    private Vector3 stage2;
+    private Vector3 stage3;
 
     //Start is called before the first frame update
     void Start()
     {
+        //Inital position of each component is based on three lane system, while offsetting the
+        //y position to a more visible in-game placement.
         head.transform.position = new Vector3(lanes[lanes.Length/2].position.x,lanes[lanes.Length/2].position.y + positionOffset,head.transform.position.z);
         lHand.transform.position = new Vector3(lanes[lanes.Length/2 + 1].position.x,lanes[lanes.Length/2 + 1].position.y + positionOffset,lHand.transform.position.z);
         rHand.transform.position = new Vector3(lanes[lanes.Length/2 - 1].position.x,lanes[lanes.Length/2 - 1].position.y + positionOffset,rHand.transform.position.z);
 
+        //Setting the animator component using the main Object
         lHandAnim = lHand.GetComponent<Animator>();
         rHandAnim = rHand.GetComponent<Animator>();
         headAnim = head.GetComponent<Animator>();
 
+        //Saving the Original Position for later use when returning to neutral position
         ogPosL = lHand.transform.position;
         ogPosR = rHand.transform.position;
         
         circSpeed = (2*Mathf.PI)/circSpeedMult;
+
+        //Setting these variables now, but changed constantly in runtime
         newPositionLeft = new Vector3(lanes[lanes.Length/2 + 1].position.x,lanes[lanes.Length/2 + 1].position.y + positionOffset,lHand.transform.position.z);
         newPositionRight = new Vector3(lanes[lanes.Length/2 - 1].position.x,lanes[lanes.Length/2 - 1].position.y + positionOffset,rHand.transform.position.z);
-        
-        compCount = 3;
 
+        //Setting Stage2 and Stage3 Vectors to the position variables
         stage2 = stage2Trans.position;
         stage3 = stage3Trans.position;
     }
@@ -87,32 +104,46 @@ public class bossEnemy : MonoBehaviour
     //Update is called once per frame
     void Update()
     {   
+        //Based on current component count, different flee positions are set
+        //and platforms are revealed after the death of each component
         switch (compCount)
         {
+            //Complete Boss Death
             case 0:
                 showPlat(path3);
                 break;
+            //Stage 3 -- 1 Component Left
             case 1:
                 fleePosition = stage3;
                 showPlat(path2);
                 break;
+            //Stage 2 -- 2 Components Left
             case 2:
                 fleePosition = stage2;
                 showPlat(path1);
                 break;
+            //Stage 1 -- Full Capacity
             case 3:
                 break;
             default:
                 break;
         }
 
+        //While fleeing and not at the next stage position
         if(fleeing && transform.position != fleePosition)
         {
+            //Calculating steps for movement of Boss
             float step = Time.deltaTime * fleeSpeed;
             float stepHand = Time.deltaTime * handSpeed;
+
+            //Will be used as a target for flipping
+            //the hands to 180 degrees
             Quaternion targetRot = new Quaternion();
             targetRot.eulerAngles = new Vector3(0,0,180);
-
+            
+            //Settings state variables to the fleeing setting
+            //which constitutes a backwards head and rotated
+            //hands; no shooting.
             if(head != null)
             {
                 head.GetComponent<bossComponent>().vulnerable = false;
@@ -133,12 +164,17 @@ public class bossEnemy : MonoBehaviour
                 rHand.transform.rotation = Quaternion.RotateTowards(rHand.transform.rotation,targetRot,stepHand);
                 rGun.input = false;
             }
+
+            //Inching the entire Object to the new position baserd on step calculation
             transform.position = Vector3.MoveTowards(transform.position,fleePosition,step);
         }
 
+        //If not fleeing and at stage position
         else
         {
             fleeing = false;
+
+            //Setting the hands to original rotation
             if(lHand != null)
             {
                 lHand.transform.eulerAngles = new Vector3(0,0,0);
@@ -149,12 +185,17 @@ public class bossEnemy : MonoBehaviour
             }
         }
 
+        //If the next shooting pattern has been <decided>
+        //then the attack delay will start giving the player
+        //time to react
         if(!fleeing && !deciding && decided && !attacking)
         {
             StartCoroutine(attackingDelay(attackDelayTime));
             paused = true;   
         }
 
+        //If the next shooting pattern has not been determined,
+        //then the decision coroutines will begin
         if(!deciding && !attacking && !fleeing && !paused)
         {
             StartCoroutine(decisionDuration(decisionTime));
@@ -163,20 +204,25 @@ public class bossEnemy : MonoBehaviour
 
         if(deciding)
         {
+            //The angle of the circular motion will be constantly increasing
             circAngle += circSpeed* Time.deltaTime;
-
+            
+            //Setting the left and right hand x and y positions using
+            //using circular motion formulas
             float tempXL = Mathf.Cos(circAngle)*offsetLength + ogPosL.x;
             float tempYL = Mathf.Sin(circAngle)*offsetLength + ogPosL.y;
 
             float tempXR = Mathf.Cos(-1*circAngle)*offsetLength + ogPosR.x;
             float tempYR = Mathf.Sin(-1*circAngle)*offsetLength + ogPosR.y;
 
+            //Setting the individual state variables and shooting to off
+            //during the decision state fo each component
             if(head != null)
             {
                 head.GetComponent<bossComponent>().vulnerable = false;
                 hGun.input = false;
             }
-
+            
             if(lHand != null)
             {
                 lHand.GetComponent<bossComponent>().vulnerable = false;
@@ -193,12 +239,16 @@ public class bossEnemy : MonoBehaviour
                 rGun.input = false;
             }
             
+            //Cycling through shooting options with a coroutine
+            //delay set up on animation start
             if(!animating)
             {
                 shootingMode = Random.Range(1,4);
                 StartCoroutine(animationDelay(animDelayTime));
             }
             
+            //The head position animation will change based on the current
+            //random shooting mode state
             if(head != null)
             {
                 switch (shootingMode) 
@@ -220,11 +270,16 @@ public class bossEnemy : MonoBehaviour
 
         else { circAngle = 0;}
         
+        //Fluidly returning hands to normal position
+        //after decision routines 
         if(!attacking && paused)
         {
             returning = true;
         }
 
+        //Moving the left and right hand based on the step
+        //calculation in order to return from circular motion loop
+        //Similar logic to the fleeing behavior
         if(lHand != null)
         {
             if(lHand.transform.position != newPositionLeft && returning)
@@ -253,13 +308,17 @@ public class bossEnemy : MonoBehaviour
             }
         }
 
+        //The attacking state is defined below, changing the
+        //animations of each component and their shooting modes
         if(!deciding && !fleeing && attacking)
         {
+            //Begins the coroutine which keeps attack state active
             if(paused)
             {
                 StartCoroutine(attackingDuration(attackTime));
             }
 
+            //These variables must be reset before the next behavior loop
             if(paused)
             {
                 paused = false;
@@ -270,8 +329,12 @@ public class bossEnemy : MonoBehaviour
                 decided = false;
             }
 
+            //This switch statement wll change the hands and head
+            //to their appropriate shooting states based on the
+            //previously determined shooting mode
             switch (shootingMode) 
             {
+                //Left Hand is vulnerable, other comps shoot
                 case 1:
                     if(lHand != null)
                     {
@@ -294,7 +357,7 @@ public class bossEnemy : MonoBehaviour
                         hGun.input = true;
                     }
                     break;
-
+                //Head is vulnerable, other comps shoot
                 case 2:
                     if(lHand != null)
                     {
@@ -317,7 +380,7 @@ public class bossEnemy : MonoBehaviour
                         hGun.input = false;
                     }
                     break;
-
+                //Right hand is vulnerable, other comps shoot
                 case 3:
                     if(lHand != null)
                     {
@@ -347,6 +410,9 @@ public class bossEnemy : MonoBehaviour
 
     }
 
+    //Below are various delays which can be called as coroutines
+    //to ensure that the boss ai is constantly cycling between
+    //states 
     private IEnumerator decisionDuration(float delayLength)
     {
         deciding = true;
