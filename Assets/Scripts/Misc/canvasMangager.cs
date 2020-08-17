@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class canvasMangager : MonoBehaviour
 {
+    [Header("Assignments")]
     public GameObject[] coloredUI;
     public Color currentColor;
     public Image[] healthBar;

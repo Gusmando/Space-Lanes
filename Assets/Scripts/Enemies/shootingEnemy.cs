@@ -4,26 +4,33 @@ using UnityEngine;
 
 public class shootingEnemy : EnemyMovement
 {
+    [Header("Assignments")]
     public GunController gunContr; 
     public float threatDistance;
-    public bool canChange;
     public float changeDelayTime;
-    public float shotDelayTime;
-    public float reloadTime;
     public float sameLaneShotDelay;
     public float sameLaneReloadTime;
+    
+    [Header("State Variables")]
+    public bool canChange;
     public bool sameLane;
-    public bool laneSkip;
     public int shifting;
+
     override public void Start()
     {
+        //Calling base enemy movement start function and
+        //assigning a random lane and adding to enemy count
         base.Start();
         currentLane = Random.Range(0,lanes.Length); 
         gameManager.currentLanes[currentLane].shootingEnemyCount ++;
     }
     override public void Update()
     {
+        //Enemy Count Update
         gameManager.currentLanes[currentLane].shootingEnemyCount --;
+        
+        //Shooting enemies are always shooting unless they are
+        //in the hurt state or currently reloading
         if(!gunContr.input && !hurt)
         {
             gunContr.input = true;
@@ -41,8 +48,13 @@ public class shootingEnemy : EnemyMovement
         {
             gunContr.reload = false;
         }
+
+        //Player and enemy relationship will change ai states
         sameLane = GameObject.FindWithTag("Player").GetComponent<MovementController>().currentLane == currentLane;
         bool inRange = distanceToPlayer <= threatDistance;
+
+        //When not in range shooting enemies will always
+        //work to move forward
         if(!inRange)
         {
             if(!pushing)
@@ -60,12 +72,16 @@ public class shootingEnemy : EnemyMovement
             }
         }
 
+        //When in the same lane the shooting enemies fire 
+        //rate will speed up due to the situation
         if(sameLane)
         {
             gunContr.reloadTime = sameLaneReloadTime;
             gunContr.currentGun.delayTime = sameLaneShotDelay;
         }
 
+        //Otherwise the shooting enemy is constantly lane
+        //switching to find the player
         else
         {
             if(canChange && !noGap && !changing && !jumping)
@@ -88,7 +104,10 @@ public class shootingEnemy : EnemyMovement
             }
         }
         base.Update();
+
+        //Enemy Count Update
         gameManager.currentLanes[currentLane].shootingEnemyCount ++;
+
         //Depending on the velocity, the run speed is set
         if(pushing && !jumping && !(subjectRb.velocity.z/maxSpeed<0))
         {
@@ -109,7 +128,8 @@ public class shootingEnemy : EnemyMovement
                 anim.speed = 0;
             } 
         }
-          //If a left or right dash should be happening, anim state vars change
+
+        //If a left or right dash should be happening, anim state vars change
         if(!animOver)
         {
             if(!leftRight)
@@ -162,27 +182,6 @@ public class shootingEnemy : EnemyMovement
 
     }
     
-    protected IEnumerator stopDelay(float delayLength)
-    {
-        stopped = true;
-
-        yield return new WaitForSeconds(delayLength);
-
-        stopped = false;
-
-        yield return null;
-    }
-
-    protected IEnumerator pushingLength(float delayLength)
-    {
-        pushing = true;
-
-        yield return new WaitForSeconds(delayLength);
-
-        pushing = false;
-
-        yield return null;
-    }
     protected IEnumerator changeDelay(float delayLength)
     {
         canChange = false;

@@ -4,25 +4,35 @@ using UnityEngine;
 
 public class GunController : MonoBehaviour
 {
+    [Header("Assignments")]
     public bool player;
     public Transform barrel;
-    public Gun currentGun;
     public GameObject gunObj;
-    public int currentGunIndex;
+    public CameraController camFunc;
     public GameObject[] guns;
+    public float animDelayTime;
+
+    [Header("Current Gun")]
+    public Gun currentGun;
+    public int currentGunIndex;
+    public float reloadTime;
+
+    [Header("State Variables")]
     public bool reloading;
-    public float reloadTime; 
     public bool shooting;
     public bool shotAnim;
     public bool reload;
     public bool gunChange;
-    public float animDelayTime;
-    public CameraController camFunc;
     public bool input;
+
     void Start()
     {
+        //Whether or not gun controller is used for player
+        //object is specified within inspector
         if(player)
         {
+            //Instantiating current gun from full gun array
+            //and making apt assignments
             gunObj = Instantiate(guns[currentGunIndex]);
             currentGun = gunObj.GetComponent<Gun>();
             currentGun.barrelLocation = this.barrel;
@@ -31,6 +41,8 @@ public class GunController : MonoBehaviour
     }
     void Update()
     {
+        //Gun change boolean trigger will cause instantiation
+        //of the newly assigned gun; apt assignments follow
         if(gunChange)
         {
             gunObj = Instantiate(guns[currentGunIndex]);
@@ -39,6 +51,9 @@ public class GunController : MonoBehaviour
             gunChange = false; 
         }
 
+        //Input is handled by mouse button when gun controller
+        //assigned to player object ; automatic weapons handled
+        //differently as well
         if(player)
         {
             if(currentGun.auto)
@@ -56,6 +71,7 @@ public class GunController : MonoBehaviour
             }
         }
         
+        //If the weapon is being shot start animation timers and vars set
         if(currentGun.canShoot && currentGun.clipSize!= 0 && input && !reloading)
         {
             if(!currentGun.auto)
@@ -69,6 +85,8 @@ public class GunController : MonoBehaviour
             shooting = true;
         }
 
+        //Player will reload automatically when the current
+        //clip count reaches 0
         if(player)
         {
             if(currentGun.clipSize == 0 && currentGun.clipCount > 0 && !reload)
@@ -81,6 +99,7 @@ public class GunController : MonoBehaviour
             }
         }
 
+        //Reloading timers start and clip is filled
         if(reload && !reloading)
         {
             StartCoroutine(reloadDelay(reloadTime));
@@ -88,11 +107,14 @@ public class GunController : MonoBehaviour
             currentGun.clipCount--;
         }
 
+        //When gun runs out of ammo, default gun is 
+        //set
         if(currentGun.clipSize== 0 && currentGun.clipCount==0)
         {
             setGun(0);
         }
 
+        //Setting screen shake settings
         if(player)
         {
             camFunc.setShakeIntensity(currentGun.shakeIntensity);
@@ -104,6 +126,8 @@ public class GunController : MonoBehaviour
 
     void FixedUpdate() 
     {
+        //When weapon is shooting, fire weapon 
+        //and shake camera function implementation
         if(shooting)
         {
             currentGun.shoot();
@@ -114,6 +138,8 @@ public class GunController : MonoBehaviour
             shooting = false;
         }
     }
+
+    //Method used to set a new weapon
     public void setGun(int gunNum) 
     {
         if(currentGunIndex != gunNum)
@@ -123,6 +149,8 @@ public class GunController : MonoBehaviour
         }
     }
 
+    //Delays used to create animation state
+    //pauses and reload timer for weapon
     private IEnumerator shotAnimDelay(float delayLength)
     {
         shotAnim = true;

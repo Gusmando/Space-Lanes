@@ -4,19 +4,17 @@ using UnityEngine;
 
 public class minorEnemy : EnemyMovement
 {
+    [Header("Assignments")]
     public float threatDistance;
-    public float rangePushMin;
-    public float rangePushMax;
-    public float rangeStopMin;
-    public float rangeStopMax;
-    public float rayCastLeftOffset;
-    public float rayCastRightOffset;
     public float changeDelayTime;
-    public bool stoppedOnce;
+
+    [Header("State Vars")]
     public bool canChange;
 
     override public void Start()
     {
+        //Calling base enemy movement start function and
+        //assigning a random lane and adding to enemy count
         base.Start();
         currentLane = Random.Range(0,lanes.Length); 
         gameManager.currentLanes[currentLane].minorEnemyCount ++;
@@ -24,14 +22,19 @@ public class minorEnemy : EnemyMovement
     }
     override public void Update()
     {   
+        //Enemy Count update
         gameManager.currentLanes[currentLane].minorEnemyCount --;
+
+        //Behavior for being in the same lane as player
         if(player.GetComponent<MovementController>().currentLane == currentLane)
         {
             if(!pushing)
             {
                 pushing = true;
             }
-
+            
+            //Since Minor Enemies really only affect score, they will attempt to 
+            //avoid being in the player's lane - they do not attack 
             if(distanceToPlayer <= threatDistance && canChange && !changing && !jumping)
             {
                 if(!changing)
@@ -53,6 +56,7 @@ public class minorEnemy : EnemyMovement
             }
         }
 
+        //Otherwise they are always set to push forward
         else
         {
             if(!pushing)
@@ -101,7 +105,7 @@ public class minorEnemy : EnemyMovement
             }
         }
 
-        //Otherwise depending on the y veloicty an another animation state is determined
+        //Otherwise depending on the y velocity another animation state is determined
         else
         {
             if((subjectRb.velocity.y == 0 || pushing) && !jumping)
@@ -119,6 +123,7 @@ public class minorEnemy : EnemyMovement
             }
         }
 
+        //Hurt animatyion controls
         if(hurt)
         {
             anim.SetBool("hurt",true);
@@ -130,16 +135,7 @@ public class minorEnemy : EnemyMovement
             spotLight.color = white;
         }
     }
-    protected IEnumerator stopDelay(float delayLength)
-    {
-        stopped = true;
-
-        yield return new WaitForSeconds(delayLength);
-
-        stopped = false;
-
-        yield return null;
-    }
+    //Delay for being able to change lanes
     protected IEnumerator changeDelay(float delayLength)
     {
         canChange = false;
