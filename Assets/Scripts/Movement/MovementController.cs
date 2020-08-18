@@ -1,27 +1,39 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
 //This class will be used as a movement controller
-//for player objects, changing its position as changes 
-//between lanes occur
+//for player objects, handling lane changes.
 public class MovementController : MonoBehaviour
 {
-    [Header("Object Being Moved")]
+    [Header("Assignments")]
     public GameObject subject;
     public Rigidbody subjectRb;
-    public int health;
-    public int currentCount;
-    public int jumpCount;
-    public GameManager gameManager;
     public canvasMangager canvas;
-    //Array holding different lanes within the level
+
+    [Header("State Vars")]
+    public int health;
+    public int jumpCount;
+    public int currentCount;
+    public bool changed;
+    public bool pushing;
+    public bool jumping;
+    public bool jumpInput;
+    public bool falling;
+    public bool changing;
+    public bool hurt;
+    public bool belowOpen;
+    public int currentLane;
+    public int laneTrack;
+    public int currentLaneTrue;
+    public bool jumpQueue;
+    public bool dubJump;
+
     [Header("Lane Assignment (Left to Right)")]
     public Lane[] lanes;
     public Lane[] fullLanes;
     public float laneDiff;
-    //The Force of gravity on the object
-    //will have to be changed depending
-    //on which lane is on
+    
     [Header("Physic Scalars")]
     public float speed;
     public float speedBoost;
@@ -32,29 +44,13 @@ public class MovementController : MonoBehaviour
     public float rayCastBelow;
     public float dubJumpTime;
     public float colliderDelayTime;
+
     [Header("Force Vectors")]
     public Vector3 gravityForce;
     private Vector3 pushForce;
     private Vector3 jumpForce;
-
     public Vector3 newPosition;
-    //Whether on not a change has occured
-    [Header("State Vars")]
-    public bool changed;
-    public bool pushing;
-    public bool jumping;
-    public bool jumpInput;
-    public bool falling;
-    public bool changing;
-    public bool hurt;
-    public bool belowOpen;
-    //An iterator keeping track of the current lane
-    public int currentLane;
-    public int laneTrack;
-    public int currentLaneTrue;
-    public  bool jumpQueue;
-    public bool dubJump;
-    //The rigid body of the object being controlled
+
     [Header("Animation Control")]
     public Animator anim;
     public bool animOver;
@@ -64,10 +60,11 @@ public class MovementController : MonoBehaviour
     public int animStateDisp;
     public GunController weapon;
     public float hurtDelayTime;
+
     void Start() 
     {
-       //Initial placement will be set in middle
-       //will change this to be set in editor
+       //Initial placement will be middle lane
+       //Initial conditions for other state vars
        changed = false; 
        lanes = GameObject.FindWithTag("GameManager").GetComponent<GameManager>().currentLanes;
        currentLaneTrue = (fullLanes.Length/2);
@@ -81,6 +78,8 @@ public class MovementController : MonoBehaviour
     {
         //Display for the animation state for debug
         animStateDisp = anim.GetInteger("animState");
+
+        //The only weapon with limited ammo is the base weapon
         if(weapon.currentGunIndex != 0)
         {
             canvas.limited = true;
@@ -89,7 +88,11 @@ public class MovementController : MonoBehaviour
         {
             canvas.limited = false;
         }
+
+        //Updating Canvas current weapon color
         canvas.currentColor = weapon.currentGun.gunColor;
+
+        //Ammo count displaying on canvas
         if(weapon.currentGun.clipCount!= 0)
         {
             currentCount = weapon.currentGun.clipSize + (weapon.currentGun.fullClip * (weapon.currentGun.clipCount));
@@ -98,32 +101,39 @@ public class MovementController : MonoBehaviour
         {
             currentCount = weapon.currentGun.clipSize;
         }
+
+        //Updating canvas variables
         canvas.ammoCountInt = currentCount;
         canvas.updateUIColors();
         canvas.currentHealth = health;
         canvas.updateUIHealth();
         canvas.dubJumpTime = this.dubJumpTime;
         canvas.dubJumpOn = this.dubJump;
+
         //If a left key press occurs and the left lane exists
         if(Input.GetKeyDown(KeyCode.A) && (currentLaneTrue - 1) >= 0)
         {
-            currentLaneTrue--;
-            laneTrack--;
             //Creates an animation delay so that animation plays clearly 
             StartCoroutine(animDelay(laneChangeDelay));
+
             //Setting to left move
             leftRight = false;;
             changed = true;
+            currentLaneTrue--;
+            laneTrack--;
         }
 
         //If a right keypress occurs and the right lane exists
         if(Input.GetKeyDown(KeyCode.D) && (currentLaneTrue + 1) <= (fullLanes.Length-1))
         {
+            //Creates an animation delay so that animation plays clearly 
+            StartCoroutine(animDelay(laneChangeDelay));
+
+            //Setting to right move
+            leftRight = true;
+            changed = true;
             currentLaneTrue++;
             laneTrack++;
-            leftRight = true;
-            StartCoroutine(animDelay(laneChangeDelay));
-            changed = true;
         }
 
         //This means that the player is pushing forward
@@ -131,14 +141,17 @@ public class MovementController : MonoBehaviour
         {
             pushing = true;     
         }
+
         //If button isn't held, then not pushing 
         else
         {
             pushing = false;
         }
 
+        //Jump Input true if the player has pressed the space key
         jumpInput = Input.GetKeyDown(KeyCode.Space);
 
+        //If the double jump has run out
         if(dubJumpTime <= 0)
         {
             dubJump = false;
@@ -148,16 +161,20 @@ public class MovementController : MonoBehaviour
             dubJumpTime -= Time.deltaTime;
         }
 
+        //Jump Queue is set when there is input
         if(jumpInput)
         {
             jumpQueue = true;
         }
 
+        //Jump behavior and force is only applied in specific scenarios,
+        //such as double ans single jump
         if(jumpInput && !jumping && !falling || (jumpQueue && !jumping && !falling) || (jumpInput && dubJump && (jumping || falling) && jumpCount < 2))
         {
             jumping = true;
             falling = false;
             jumpCount ++;
+
             subjectRb.AddForce(subject.transform.up*jumpForce.y,ForceMode.Impulse);
 
             if(jumpQueue)
@@ -165,26 +182,21 @@ public class MovementController : MonoBehaviour
                 jumpQueue = false;
             }
         }
+
         //A lane change occurs and new positions are set
         if(changed || changing)
         {
-            //Z position is the only nonchanging value as it show progress through each lane
-            //also checks if current height is less than another lane
+            //If within a certain y range, then new position auto
+            //sets to the y position of the next lane
             if((!jumping && !falling) || (jumping && !falling) || (falling && fullLanes[currentLaneTrue].position.y - subject.transform.position.y < laneDiff))
             {
                 newPosition = new Vector3(fullLanes[currentLaneTrue].position.x,fullLanes[currentLaneTrue].position.y,subject.transform.position.z);
 
             }
-
             else
             {
                 newPosition = new Vector3(fullLanes[currentLaneTrue].position.x,subject.transform.position.y,subject.transform.position.z);
             }
-
-            //Setting the new position and rotation of the object
-
-            //subject.transform.position = newPosition;
-            //subject.transform.eulerAngles = lanes[currentLane].rotation;
             
             //Keeping movement in the y and z axis, x is frozen as no strafe movement
             subjectRb.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionX;
@@ -192,8 +204,10 @@ public class MovementController : MonoBehaviour
             changing = true;
         }
 
+        //IF the player is changing position and has not arrived
         if(subject.transform.position != newPosition && changing)
         {
+            //Inch closer to new position based on a step
             float step = Time.deltaTime * laneChangeSpeed;
             subject.transform.rotation = Quaternion.RotateTowards(subject.transform.rotation,fullLanes[currentLaneTrue].rotation,step);
             subject.transform.position = Vector3.MoveTowards(subject.transform.position,newPosition,step);
@@ -207,11 +221,13 @@ public class MovementController : MonoBehaviour
 
     void FixedUpdate() 
     {
+        //Start hurt timer
         if(hurt && !hurtTime)
         {
             StartCoroutine(hurtDelay(hurtDelayTime));
             hurtTime = true;
         }
+
         //Push and jump force set in inspector
         pushForce = new Vector3(0,0,10*speed*speedBoost);
         jumpForce = new Vector3(0,jumpMult,0);
@@ -256,9 +272,11 @@ public class MovementController : MonoBehaviour
                 } 
             }
         }
+
         //The force of gravity is constantly acting on the object
         subjectRb.AddForce(subject.transform.up*gravityForce.y,ForceMode.Acceleration);
 
+        //Falling if past a threshold in the y axis
         if(subjectRb.velocity.y < -.05 && !falling)
         {
             falling = true;
@@ -268,7 +286,7 @@ public class MovementController : MonoBehaviour
             falling = false;
         }
 
-         //If a left or right dash should be happening, anim state vars change
+        //If a left or right dash should be happening, anim state vars change
         if(!animOver)
         {
             if(!leftRight)
@@ -281,7 +299,7 @@ public class MovementController : MonoBehaviour
             }
         }
 
-        //Otherwise depending on the y veloicty an another animation state is determined
+        //Otherwise depending on the y velocity, another animation state is determined
         else
         {
             if((subjectRb.velocity.y == 0 || pushing) && !jumping)
@@ -299,6 +317,7 @@ public class MovementController : MonoBehaviour
             }
         }
 
+        //Set animation state variables
         if(weapon.shotAnim)
         {
             anim.SetBool("shooting",true);
@@ -318,16 +337,20 @@ public class MovementController : MonoBehaviour
         }
     }
 
-    //Essentially an onGround check
     private void OnCollisionEnter(Collision other)
     {
+        //raycast done to ensure that ground is directly
+        //below the player
         RaycastHit hit;
         Vector3 highObject = subject.transform.position + new Vector3(0,5,0);
         Vector3 below = subject.transform.position + new Vector3(0,rayCastBelow,0);
-        Vector3 direction = below - highObject; 
+        Vector3 direction = below - highObject;
+
+        //Setting raycast boolean
         belowOpen = Physics.Raycast(highObject, direction,out hit);
         Debug.DrawRay(highObject, direction, Color.green);
 
+        //If the Collision is with the floor
         if(other.gameObject.tag.Contains("Floor") && belowOpen)
         {
             if(falling)
@@ -345,6 +368,8 @@ public class MovementController : MonoBehaviour
                 jumpCount = 0;
             }
         }
+
+        //Otherwise the player is in a falling state
         else if(!belowOpen && other.gameObject.tag.Contains("Floor") && subjectRb.velocity.y < -.05)
         {
             falling = true;
@@ -352,6 +377,8 @@ public class MovementController : MonoBehaviour
             StartCoroutine(colliderDelay(colliderDelayTime));
         }
 
+        //The floor may be a speed pad, increasing 
+        //the max speed of the player
         if(other.gameObject.tag.Contains("Fast"))
         {
             speedBoost = 2;
@@ -363,6 +390,7 @@ public class MovementController : MonoBehaviour
             maxSpeedBoost = 1;
         }
     }
+
     //To check for falls
     private void OnCollisionExit(Collision other)
     {
@@ -379,7 +407,8 @@ public class MovementController : MonoBehaviour
             Destroy(other.gameObject);
         }    
     }
-    //Aniamtion delay waits a few secondas for animation to finish
+
+    //Animation delay waits a few secondas for animation to finish
     private IEnumerator animDelay(float delayLength)
     {
         animOver = false;

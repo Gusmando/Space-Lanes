@@ -7,11 +7,14 @@ public class RenderFilter : MonoBehaviour
 {
     [Header("Intensity Level (0-3)")]
     public int intensityLevel;
+
     [Header("Camera")]
     public Camera playerCam;
+
     [Header("Render Texture")]
     public RawImage currentResolution;
-    [Header("Reso Options")]
+    
+    [Header("Resolution Options")]
     public RenderTexture full;
     public RenderTexture high;
     public RenderTexture mid;

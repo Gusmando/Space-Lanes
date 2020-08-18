@@ -7,32 +7,38 @@ public class canvasMangager : MonoBehaviour
 {
     [Header("Assignments")]
     public GameObject[] coloredUI;
-    public Color currentColor;
     public Image[] healthBar;
-    public Text ammoCount;
     public Image unlimitedSign;
     public Image arrow;
     public Image timesTwo;
-    public float dubJumpTime;
+    public Text ammoCount;
     public float dubJumpTimeFull;
+
+    [Header("Current State Vars")]
+    public Color currentColor;
+    public float dubJumpTime;
     public bool dubJumpOn;
     public int ammoCountInt;
     public int currentHealth;
     public bool limited;
+
     void Update() 
     {
+        //Weapons with limited ammo counts will need to display an
+        //ammo count and hide the infinity sign
         if(limited)
         {
             ammoCount.enabled = true;
             unlimitedSign.enabled = false;
         }
-
         else
         {
             ammoCount.enabled = false;
             unlimitedSign.enabled = true;
         }
 
+        //When double jump is enabled, associated UI elements will be 
+        //enabled and updated, otherwise disable arrow UI entirely
         if(dubJumpOn)
         {
             arrow.transform.Find("UpArrowShadow").GetComponent<Image>().enabled = true;
@@ -52,8 +58,11 @@ public class canvasMangager : MonoBehaviour
 
         ammoCount.text = ammoCountInt.ToString();
     }
+
     public void updateUIColors()
     {
+        //Changing the color of UI based on tag, colors will be 
+        //set based upon the current weapon choice
         foreach(GameObject x in coloredUI)
         {
             if(x.tag.Contains("Bar"))
@@ -85,6 +94,8 @@ public class canvasMangager : MonoBehaviour
 
     public void updateUIHealth()
     {
+        //Enabling and disabling health bars
+        //based on current health count
         for(int i = 0;i < 5; i++)
         {
             if(i< currentHealth)

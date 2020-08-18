@@ -540,9 +540,6 @@ MonoBehaviour:
   minorEnemyCount: 0
   shootingEnemyCount: 0
   lobbingEnemyCount: 0
-  enemyLimit: 0
-  Platforms: []
-  Colliders: []
 --- !u!1 &870016030697749635
 GameObject:
   m_ObjectHideFlags: 0
@@ -1135,15 +1132,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74c4c92bf8b77054298d8dfb0d80a9ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  endSpawn: {fileID: 7698035409416181536}
+  gameManager: {fileID: 0}
   lanes:
   - {fileID: 5953619088233435072}
   - {fileID: 8956748705146868314}
   - {fileID: 5985517896026398900}
-  fadingArch: 0
-  lastFade: 0
-  lightFadeSpeed: 0
-  spawners: []
-  arches: []
+  first: 0
+  notFirst: 1
+  sectionActive: 0
   lanePlats:
   - platforms:
     - {fileID: 7788356555067692470}
@@ -1160,6 +1157,20 @@ MonoBehaviour:
     - {fileID: 3092567018629319414}
     - {fileID: 228581805785729778}
     - {fileID: 7666894941310462999}
+  offColor: {fileID: 2100000, guid: 26d2142918e32d444b72d45b25d8c724, type: 2}
+  onColor: {fileID: 2100000, guid: 26d2142918e32d444b72d45b25d8c724, type: 2}
+  speedColor: {fileID: 2100000, guid: 26d2142918e32d444b72d45b25d8c724, type: 2}
+  arches: []
+  fadingArch: 0
+  lastFade: 0
+  lightFadeSpeed: 0
+  fading: 0
+  fadingLast: 0
+  alt: 0
+  altLast: 0
+  startOff: 0
+  startOffInt: 0
+  spawners: []
   lights:
   - platforms:
     - {fileID: 3022190750599497827}
@@ -1167,23 +1178,8 @@ MonoBehaviour:
     - {fileID: 7245290617861132140}
   - platforms:
     - {fileID: 3750120277833045948}
-  sectionActive: 0
-  first: 0
-  notFirst: 0
-  fading: 0
-  fadingLast: 0
-  alt: 0
-  altLast: 0
-  startOff: 0
-  limited: 0
-  startOffInt: 0
   onLight: {r: 0.39038008, g: 0, b: 0.62352943, a: 1}
   offLight: {r: 0.39215687, g: 0, b: 0.62352943, a: 1}
-  offColor: {fileID: 2100000, guid: 26d2142918e32d444b72d45b25d8c724, type: 2}
-  onColor: {fileID: 2100000, guid: 26d2142918e32d444b72d45b25d8c724, type: 2}
-  speedColor: {fileID: 2100000, guid: 26d2142918e32d444b72d45b25d8c724, type: 2}
-  endSpawn: {fileID: 7698035409416181536}
-  gameManager: {fileID: 0}
 --- !u!1 &2873562743094013156
 GameObject:
   m_ObjectHideFlags: 0
@@ -2281,9 +2277,6 @@ MonoBehaviour:
   minorEnemyCount: 0
   shootingEnemyCount: 0
   lobbingEnemyCount: 0
-  enemyLimit: 0
-  Platforms: []
-  Colliders: []
 --- !u!1 &4796907051275846646
 GameObject:
   m_ObjectHideFlags: 0
@@ -4335,6 +4328,7 @@ MonoBehaviour:
   randMaxDubJump: 40
   range: 20
   distanceToPlayer: 0
+  isActive: 0
   canSpawnShoot: 1
   canSpawnMinor: 1
   canSpawnLob: 1
@@ -4348,7 +4342,6 @@ MonoBehaviour:
   totalHealth: 2
   total3Lane: 2
   toaldubJump: 2
-  isActive: 0
 --- !u!1 &8337485893192810780
 GameObject:
   m_ObjectHideFlags: 0
@@ -4452,9 +4445,6 @@ MonoBehaviour:
   minorEnemyCount: 0
   shootingEnemyCount: 0
   lobbingEnemyCount: 0
-  enemyLimit: 0
-  Platforms: []
-  Colliders: []
 --- !u!1 &8405003406405851063
 GameObject:
   m_ObjectHideFlags: 0
