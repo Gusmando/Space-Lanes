@@ -1,6 +1,9 @@
 # Space Lanes
 
-Space Lanes is a bullet-hell, lane-based shooter developed in the unity engine as a personal project in order to learn the ins and outs of game development within the engine and to gain experience within the Unity Scripting language, C#, as well as the variety of creation tools for asset creation.
+Space Lanes is a bullet-hell, lane-based shooter developed in the unity engine as a personal project and avenue for learning Unity's various systems. Moreover, I used the opportunity to further my experience with C# scripting, game programming, and asset creation.
+
+## Demo
+![](https://github.com/Gusmando/PC-BLDR/edit/master/demo.gif)
 
 ### Tools
 
